@@ -1,0 +1,32 @@
+
+Running: /Users/zgold/Documents/PMEL/bioinformatics/unikseq/unikseq.pl v2.0.0
+	-k 25
+	-r pyncos_reference.fasta
+	-i fasta_ingroup_NEP_seastars.fasta
+	-o echinoderms_outgroup.fasta
+	-t 25
+	-c 0
+	-s 100
+	-p 25
+	-l 1
+	-u 90
+	-m 0
+	-v 1
+done.
+Reading outgroup echinoderms_outgroup.fasta ...
+done.
+Reading ingroup fasta_ingroup_NEP_seastars.fasta ...
+done.
+Beginning kmer analysis (k25), sliding base by base on pyncos_reference.fasta ...
+done.
+------------------------------
+Output unique reference sequence regions >= 100 bp in:
+unikseq_v2.0.0-r_pyncos_reference.fasta-i_fasta_ingroup_NEP_seastars.fasta-o_echinoderms_outgroup.fasta-k25-c0-s100-p25-l1-u90-m0-unique.fa
+
+Output unique 25-mers (for butterfly plot):
+unikseq_v2.0.0-r_pyncos_reference.fasta-i_fasta_ingroup_NEP_seastars.fasta-o_echinoderms_outgroup.fasta-k25-uniqueKmers.tsv
+done.
+
+NOTE1: The unique (and/or hypervariable) reference regions identified by unikseq are RELATIVE to the sequences provided in the outgroup file. Please ensure COMPLETENESS* of outgroup sequences to help interpretability of results or for use in downstream applications.
+
+NOTE2*: An incomplete outgroup sequence (or sequences) may be used, but the reference regions identified by unikseq would help characterize missing stretches in the former instead, for instance.
