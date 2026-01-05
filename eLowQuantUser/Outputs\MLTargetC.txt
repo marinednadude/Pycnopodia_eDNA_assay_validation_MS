@@ -1,0 +1,10 @@
+
+ TargetC 
+Convergence= 0 
+      Estimate  Std.Err Z value  Pr(>z)    
+alpha 2.90e-09 5.40e-02    0.00       1    
+beta  6.66e-01 1.58e-01    4.21 2.6e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 5.634289 , df=  3 , p-value= 0.1308237 
+

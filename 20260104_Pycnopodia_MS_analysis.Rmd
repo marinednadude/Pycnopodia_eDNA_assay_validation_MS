@@ -69,10 +69,10 @@ Target_name = "Pycno"
 ### Load Data
 
 ```{r}
-sample_set_up <- read_excel(here("2025-12-23_161523_Pycno_5_v3.xls"), sheet="Sample Setup", skip = 46)
+sample_set_up <- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Sample Setup", skip = 46)
 
-amplification_data<- read_excel(here("2025-12-23_161523_Pycno_5_v3.xls"), sheet="Amplification Data",  skip = 46)
-results_data<- read_excel(here("2025-12-23_161523_Pycno_5_v3.xls"), sheet="Results",  skip = 46)
+amplification_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Amplification Data",  skip = 46)
+results_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Results",  skip = 46)
 
 ```
 
@@ -322,7 +322,7 @@ pycno_standard_threshold %>%
   count() %>% 
   pivot_wider(names_from = Threshold, values_from = n, values_fill=0) %>% 
   mutate(., Perc = Above/(Above+Below)) %>% 
-  arrange(desc(Quantity)) %>% kable()
+  arrange(desc(Quantity)) %>% kable(digits=2)
 
 # LoD is 2.5 copies/µL
 ```
@@ -346,7 +346,7 @@ pycno_results_standard %>%
   count() %>% 
   pivot_wider(names_from = detection, values_from = n, values_fill=0) %>% 
   mutate(., Perc = Detection/(Detection+`Non-detection`)) %>% 
-  arrange(desc(Quantity)) %>%  kable()
+  arrange(desc(Quantity)) %>%  kable(digits=2)
 
 # LoD is 2.5 copies/µL
 ```
@@ -368,7 +368,7 @@ pycno_results_standard %>%
  mutate(., Observed_Quantity= if_else(detection=="Detection",10^((CT -`Y-Intercept`)/Slope), 0 )) %>%
   mutate(., Concentration_L = Observed_Quantity*100/2 * 1) %>% 
   group_by(`Sample Name`,Quantity) %>% 
-   dplyr::summarise(., mean_conc = round(mean(Concentration_L),2), sd_conc = round(sd(Concentration_L),2), n()) %>% mutate(., perc_sd_conc = round(sd_conc/mean_conc*100,2))%>%  arrange(Quantity) %>%  kable()
+   dplyr::summarise(., mean_conc = round(mean(Concentration_L),2), sd_conc = round(sd(Concentration_L),2), n()) %>% mutate(., perc_sd_conc = round(sd_conc/mean_conc*100,2))%>%  arrange(Quantity) %>%  kable(digits=2)
 
 ```
 
@@ -451,7 +451,7 @@ results_data_cleaned %>%
   dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) -> DAT
 
 ## Create an analysis log file:
-write(paste0("Analysis started: ",date(),"\n\n"),file="Outputs\\Analysis Log.txt")
+write(paste0("Analysis started: ",date(),"\n\n"),file=here("eLowQuant_output","Outputs\\Analysis Log.txt"))
 
 ## Check the data:
 if(sum(colnames(DAT)=="Target")!=1) { #Is there a "Target" column?
@@ -499,7 +499,7 @@ DAT$SQ <- suppressWarnings(as.numeric(as.character(DAT$SQ))) #Non-numerical valu
 
 ## ML assume SQs == NA are zero - negative controls
 DAT$SQ[is.na(DAT$SQ)] <- 0
-summary(DAT) %>% kable()
+summary(DAT) %>% kable(digits=2)
 DAT.df <- data.frame(DAT)
 
 ```
@@ -524,7 +524,7 @@ DAT.Tar.SQ <-  DAT.df %>%
             Lab=Lab[1] )
 DAT.Tar.SQ <- droplevels(data.frame(DAT.Tar.SQ))
 dim(DAT.Tar.SQ); cat('dim, before negative controls added')
-summary(DAT.Tar.SQ) %>% kable()
+summary(DAT.Tar.SQ) %>% kable(digits=2)
 
 uLabs <- unique(DAT.Tar.SQ$Lab) #unique labs
 
@@ -588,7 +588,7 @@ uLabsTargets.names <- apply(uLabsTargets, 1, paste, collapse=', ')
 ## Print summary tables.  If sink.indicator set to TRUE, writes tables to file.
 {
 if(sink.indicator){
-  sink(file='Outputs\\Summaries.txt', split=TRUE)}
+  sink(file=here("eLowQuant_output",'Outputs\\Summaries.txt'), split=TRUE)}
 for(i in uLabs){
   print(knitr::kable(DAT.Tar.SQ[DAT.Tar.SQ$Lab==i, c(1:4, 12)], format="pandoc", digits=3, caption=i),
         results="asis")
@@ -784,7 +784,7 @@ cat('\n\n\n')
 
 ## If desired, set sink.indicator to TRUE to write results to file.  
   if(sink.indicator){
-    sink(file(paste("Outputs\\MLNoInter",uTargets[i],".txt", sep=""), 
+    sink(file(here("eLowQuant_output",paste("Outputs\\MLNoInter",uTargets[i],".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   }
   cat("\n", as.character(uTargets[i]), "\n")
@@ -845,8 +845,8 @@ The standard errors are obtained from the Hessian matrix
   colnames(cmat) <- c("Estimate", "Std.Err", "Z value", "Pr(>z)")
 
   cat('\n\n','ML estimate of SQ for nd0 number of detects and nn0 replicates', '\n')
-  if(sink.indicator) sink(file(paste("Outputs\\MLNoInterSQ",uTargets[i],
-            ".txt", sep=""), 
+  if(sink.indicator) sink(file(here("eLowQuant_output",paste("Outputs\\MLNoInterSQ",uTargets[i],
+            ".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   cat(as.character(uTargets[i]), 'y0=', nd0, 'n0=' , nn0, "\n\n")
   printCoefmat(cmat, digits=3)
@@ -902,8 +902,8 @@ The standard errors are obtained from the Hessian matrix
   
   cat("\n",as.character(uTargets[i]), "\n")
   cat(' ML estimate of SQ for numbers of detects and', nn0, 'replicates', '\n')
-  if(sink.indicator) sink(file(paste("Outputs\\MLNoInterSQ0",uTargets[i],
-            ".txt", sep=""), 
+  if(sink.indicator) sink(file(here("eLowQuant_output",paste("Outputs\\MLNoInterSQ0",uTargets[i],
+            ".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   print(knitr::kable(cbind(NumDetects=0:(nn0-1), SQS0.fit0[,3:4]), 
                      format="pandoc", digits=3),results="asis")
@@ -1007,7 +1007,7 @@ cat("\n\n\n")
 
 ## If desired, write results to file.
   if(sink.indicator){
-    sink(file(paste("Outputs\\ML",uTargets[i],".txt", sep=""), 
+    sink(file(here("eLowQuant_output",paste("Outputs\\ML",uTargets[i],".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   }
   cat("\n", as.character(uTargets[i]), "\n")
@@ -1066,7 +1066,7 @@ par(mfrow=c(1,1))
   colnames(cmat) <- c("Estimate", "Std.Err", "Z value", "Pr(>z)")
 
   cat('\n\n','ML estimate of SQ for nd0 number of detects and nn0 replicates', '\n')
-  if(sink.indicator) sink(file(paste("Outputs\\MLSQ",uTargets[i],".txt", sep=""), 
+  if(sink.indicator) sink(file(here("eLowQuant_output",paste("Outputs\\MLSQ",uTargets[i],".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   cat(as.character(uTargets[i]), 'y0=', nd0, 'n0=' , nn0, "\n\n")
   printCoefmat(cmat, digits=3)
@@ -1141,7 +1141,7 @@ The standard errors are obtained from the Hessian matrix
   cat("\n",as.character(uTargets[i]), "\n")
   cat(' ML estimate of SQ for numbers of detects and', nn0, 'replicates', '\n')
   if(sink.indicator) {
-    sink(file(paste("Outputs\\MLSQ0",uTargets[i],".txt", sep=""), 
+    sink(file(here("eLowQuant_output",paste("Outputs\\MLSQ0",uTargets[i],".txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   }
   print(knitr::kable(cbind(NumDetects=0:(nn0-1), SQS0.fit[,5:6]), 
@@ -1447,7 +1447,7 @@ Manusink <- TRUE
 # Intercept table
 {
 if(Manusink){ 
-      sink(file(paste("Outputs\\LimitsAll.txt", sep=""), 
+      sink(file(here("eLowQuant_output",paste("Outputs\\LimitsAll.txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
 }
 xdxq.all.PR <- cbind(alphabeta.se, xdxq.all)
@@ -1465,7 +1465,7 @@ if(Manusink){ sink()}
 # No Intercept table
 {
 if(Manusink){ 
-      sink(file(paste("Outputs\\LimitsAll0.txt", sep=""), 
+      sink(file(here("eLowQuant_output",paste("Outputs\\LimitsAll0.txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
 }
 xdxq.all0.PR <- cbind(alphabeta0.se, xdxq.all0)
@@ -1485,7 +1485,7 @@ if(Manusink){ sink()}
 
 {
 if(Manusink){ 
-      sink(file(paste("Outputs\\Limits.txt", sep=""), 
+      sink(file(here("eLowQuant_output",paste("Outputs\\Limits.txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
 }
 xdxq.choice.PR <- xdxq.choice[nrowTarget>2, -1, drop=FALSE]
@@ -1501,7 +1501,7 @@ if(Manusink){ sink()}
 
 {
 if(Manusink){
-  sink(file("Outputs\\Data.txt", encoding="UTF-8"),
+  sink(file(here("eLowQuant_output","Outputs\\Data.txt"), encoding="UTF-8"),
        split=TRUE)
   }
 for(Targeti in ManuTargets){
@@ -1519,7 +1519,7 @@ if(Manusink){ sink()}
 #V20220912 printed all output results
 {
  if(Manusink){
-    sink(file(paste("Outputs\\ResultsAll.txt", sep=""), 
+    sink(file(here("eLowQuant_output",paste("Outputs\\ResultsAll.txt", sep="")), 
             encoding="UTF-8"), split=TRUE)
   }
 # Print regression outputs
@@ -1711,9 +1711,9 @@ par(mfrow=c(1,1))
 ### Load Data
 
 ```{r}
-sample_set_up_run1 <- read_excel(here("2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Sample Setup", skip = 44)
+sample_set_up_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Sample Setup", skip = 44)
 
-amplification_data_run1 <- read_excel(here("2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Amplification Data",  skip = 43)
+amplification_data_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Amplification Data",  skip = 43)
 
 ```
 
@@ -1921,7 +1921,7 @@ r_squared_value_run1 <- grob_data_run1$r.squared
 ## Merge Sample Metadata
 ```{r}
 
-sample_metadata<- read_excel(here("ElectronicArchive_CruiseSampleMetadata_20250516_FHL.xlsx"), sheet="Electronic Archive")
+sample_metadata<- read_excel(here("qPCR_raw_data","ElectronicArchive_CruiseSampleMetadata_20250516_FHL.xlsx"), sheet="Electronic Archive")
 
 combined_qPCR_data_run1 %>% 
    filter(.,`Target Name`=="Pycno") %>% 
@@ -2084,7 +2084,7 @@ pycno_sample_data_4_plotting %>%
                   TRUE~"Passive Filtration"            )) %>% 
   group_by(Field_collection_method, Method) %>% 
   dplyr::summarize(Max=max(Concentration_L), Min=min(Concentration_L), Mean=mean(Concentration_L), median = median(Concentration_L),
-    IQR = IQR(Concentration_L)) %>% left_join(cld_tibble_optionA) %>% kable()
+    IQR = IQR(Concentration_L)) %>% left_join(cld_tibble_optionA) %>% kable(digits=2)
 
 ```
 

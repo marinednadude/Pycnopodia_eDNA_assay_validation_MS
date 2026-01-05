@@ -1,0 +1,76 @@
+
+ TargetA 
+Convergence= 0 
+      Estimate  Std.Err Z value  Pr(>z)    
+alpha 1.86e-08 5.46e-02    0.00       1    
+beta  3.87e-01 6.69e-02    5.79 7.1e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 6.803394 , df=  5 , p-value= 0.2356775 
+
+
+ TargetA 
+Convergence= 0 
+     Estimate Std.Err Z value  Pr(>z)    
+beta    0.394   0.054    7.29 3.1e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 6.787625 , df=  6 , p-value= 0.340935 
+
+
+ TargetB 
+Convergence= 0 
+      Estimate  Std.Err Z value  Pr(>z)    
+alpha 2.64e-09 4.38e-02    0.00       1    
+beta  4.66e-01 1.10e-01    4.25 2.2e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 4.058386 , df=  3 , p-value= 0.2552281 
+
+
+ TargetB 
+Convergence= 0 
+     Estimate Std.Err Z value  Pr(>z)    
+beta   0.4842  0.0933    5.19 2.1e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 4.017301 , df=  4 , p-value= 0.4036694 
+
+
+ TargetC 
+Convergence= 0 
+      Estimate  Std.Err Z value  Pr(>z)    
+alpha 2.90e-09 5.40e-02    0.00       1    
+beta  6.66e-01 1.58e-01    4.21 2.6e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 5.634289 , df=  3 , p-value= 0.1308237 
+
+
+ TargetC 
+Convergence= 0 
+     Estimate Std.Err Z value  Pr(>z)    
+beta    0.767   0.147    5.22 1.8e-07 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 5.106559 , df=  4 , p-value= 0.2765376 
+
+
+ TargetD 
+Convergence= 0 
+      Estimate Std.Err Z value  Pr(>z)    
+alpha   0.0749  0.0486    1.54    0.12    
+beta    0.6939  0.1601    4.33 1.5e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 7.671079 , df=  3 , p-value= 0.05332185 
+
+
+ TargetD 
+Convergence= 0 
+     Estimate Std.Err Z value  Pr(>z)    
+beta    0.872   0.157    5.54 2.9e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+LLR test stat= 11.91839 , df=  4 , p-value= 0.01796854 
+

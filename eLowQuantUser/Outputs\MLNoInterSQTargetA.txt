@@ -1,0 +1,7 @@
+TargetA y0= 3 n0= 8 
+
+     Estimate Std.Err Z value  Pr(>z)    
+beta    0.394   0.054    7.29 3.1e-13 ***
+SQ0     1.193   0.714    1.67   0.095 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
