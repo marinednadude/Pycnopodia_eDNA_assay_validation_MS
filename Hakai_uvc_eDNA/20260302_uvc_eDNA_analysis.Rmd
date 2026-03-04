@@ -1,0 +1,308 @@
+---
+title: "Hakai UVC vs. eDNA"
+author: "Zack Gold"
+date: "2026-02-27"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(tidyverse)
+library(here)
+library(lubridate)
+library(measurements)
+library(sp)
+library(readr)
+library(sf)
+library("rnaturalearth")
+library("rnaturalearthdata")
+library(cmocean)
+library(ggpubr)
+library(ggpmisc)
+library(patchwork)
+library(nationalparkcolors)
+```
+
+
+```{r}
+
+uvc_edna_df <- read.csv(here("Hakai_uvc_eDNA/PycnovBiomass_ToShare.csv")) %>% mutate(., Habitat=LocationType) %>% mutate(., Region = str_c(SurveyType, " ",LocationType))
+
+uvc_edna_df
+
+
+uvc_edna_df$biomass_density_sum <- as.numeric(uvc_edna_df$biomass_density_sum)
+uvc_edna_df$site_latitude <- as.numeric(uvc_edna_df$site_latitude)
+uvc_edna_df$site_longitude <- as.numeric(uvc_edna_df$site_longitude)
+```
+
+
+```{r}
+pal <- park_palette("ChannelIslands")[2:3]
+pal2 <- park_palette("ChannelIslands")[5:6]
+
+
+```
+# Site Means
+```{r}
+desired_order <- c("intertidal Quadra", "intertidal OuterIslands", "subtidal OuterIslands", "subtidal Fjord")
+
+uvc_edna_df$Region <- factor(uvc_edna_df$Region, levels = desired_order)
+
+uvc_edna_df %>% 
+  ggplot(., aes(x=site_id, y=log10(copies_L+1), fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region, scales = "free_x")  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) + ylim(0,6) +scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Site") -> a1
+
+a1
+```
+
+```{r}
+uvc_edna_df %>% 
+  group_by(Region, site_id) %>% 
+  dplyr::summarize(mean_copies=mean(copies_L), sd_copies =sd(copies_L), cv_length = (sd_copies / mean_copies)) %>% 
+  ggplot(., aes(x=site_id, y=cv_length, fill=Region)) +geom_col() +theme_pubr() +facet_grid(~Region, scales = "free_x")  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) + scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) + ylab("Coefficient of Variation") + xlab("Site")
+  
+
+```
+
+```{r}
+library(multcompView)
+uvc_edna_df %>% 
+  group_by(Region, site_id) %>% 
+  dplyr::summarize(mean_copies=mean(copies_L), sd_copies =sd(copies_L), cv_length = (sd_copies / mean_copies) * 100) -> cv_abundance_region
+
+# Perform ANOVA
+anova_model <- aov(cv_length ~ Region, data = cv_abundance_region)
+
+# Perform Tukey's HSD post-hoc test
+tukey_hsd <- TukeyHSD(anova_model)
+
+# Extract p-values and generate letters
+tukey_levels <- tukey_hsd$Region[, 4]
+cld_data <- multcompLetters(tukey_levels)
+
+# Create a data frame for labels
+labels_df <- as.data.frame(cld_data$Letters)
+labels_df$Region <- rownames(labels_df)
+labels_df <- rename(labels_df, labels = `cld_data$Letters`)
+# Calculate the max value for each species to position labels
+max_values <- cv_abundance_region %>%
+  group_by(Region) %>%
+  summarise(max_val = max(cv_length)*1.2)
+
+# Merge labels with their y-positions
+plot_labels <- merge(labels_df, max_values, by = "Region")
+
+cv_abundance_region %>% 
+  ungroup() %>% 
+  group_by(Region) %>% 
+  ggplot(., aes(x=Region, y=cv_length, fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region, scales = "free_x")  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) + scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) + ylab("Coefficient of Variation") + xlab("Site") +  geom_text(data = plot_labels, aes(x = Region, y = max_val + 0.2, label = labels)) -> a2
+
+  a2
+```
+
+```{r}
+
+a1 +a2 + plot_layout(axis_titles = "collect", guides="collect" ,axes = "collect", ncol = 2) & theme(legend.position = "bottom")
+
+```
+
+
+
+# B1. Bottle Specific
+
+```{r}
+
+
+
+
+uvc_edna_df %>% 
+  filter(., Habitat!= "Quadra") %>% 
+  ggplot(aes(x=biomass_density_sum, y=log10(copies_L))) + stat_poly_line(color = "black",fill="grey80")+ geom_point(aes(color=Habitat)) + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggtitle("Bottle Specific") + ylim(0,log10(250000)) + xlim(0,2) +theme_pubr()  +
+  stat_poly_eq(use_label(c("eq")),label.x = "right",
+label.y = 0.2) +
+   stat_poly_eq(use_label(c("P")),label.x = "right",
+label.y = 0.12) +
+   stat_poly_eq(use_label(c("R2")),label.x = "right",
+label.y = 0.04) +scale_color_manual(values=pal) +theme(legend.position = "none")-> b1
+
+
+b1
+
+```
+
+# Map 
+## Station Map
+
+```{r}
+
+
+min_lat <- min(uvc_edna_df$site_latitude, na.rm = T)
+max_lat <- max(uvc_edna_df$site_latitude, na.rm = T)
+
+min_lon <- min(uvc_edna_df$site_longitude, na.rm = T)-0.5
+max_lon <- max(uvc_edna_df$site_longitude, na.rm = T)
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+uvc_edna_df %>% 
+  ungroup() %>% 
+  mutate(., lat_r=round(site_latitude,1),
+         lon_r=round(site_longitude,1)) %>% 
+  dplyr::select(site_id, lat_r, lon_r, Habitat, SurveyType) %>% 
+  distinct() -> stations_to_plot
+
+library(ggrepel)
+ggplot(data = world) +
+    geom_sf() +
+    geom_point(data = stations_to_plot, aes(x = lon_r, y = lat_r, colour=Habitat, shape=SurveyType ),size=2)  +
+    coord_sf(xlim = c(min_lon-1, max_lon+1), ylim = c(min_lat-1, max_lat+1), expand = FALSE) +theme_bw()+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +xlab("Longitude") +ylab("Latitude")   +theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.text=element_text(size=14),
+        axis.title=element_text(size=20,face="bold"),legend.title = element_text( size=12, face="bold"),legend.text = element_text(size=10, 
+                                     face="bold"), title = element_text(size=20, face="bold") ) + theme(legend.text=element_text(size=16), legend.title=element_text(size=20)) 
+
+
+```
+
+
+
+# Habitat
+```{r}
+
+
+standard_error <- function(x, na.rm = FALSE) {
+  if (na.rm) {
+    x <- na.omit(x)
+  }
+  sd(x) / sqrt(length(x))
+}
+
+uvc_edna_df %>% 
+  mutate(biomass_density_sum = as.numeric(biomass_density_sum)) %>% 
+  filter(., !is.na(biomass_density_sum)) -> subtidal_compare
+
+subtidal_compare %>% 
+  group_by(Habitat, SurveyType) %>% 
+  dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
+ mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> habitat_sum
+
+habitat_sum %>% 
+  ggplot(., aes(x=mean_biomass_density_sum, y=log10(mean_copies_L), color=Habitat)) +geom_point(size=5) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L)), width = 0) +geom_errorbarh(aes(xmin = mean_biomass_density_sum-se_biomass_density_sum, xmax = mean_biomass_density_sum+se_biomass_density_sum), width = 0) +theme_pubr() + ylab("Mean Pycnopodia eDNA Copies per L") + xlab("Mean Pycnopodia Biomass Density") +
+  ggtitle("Region Averaged")  + ylim(0,log10(250000)) + xlim(0,1) +theme_pubr() +stat_poly_line() +
+  stat_poly_eq(use_label(c("eq")),label.x = "right",
+label.y = 0.2) +
+   stat_poly_eq(use_label(c("P")),label.x = "right",
+label.y = 0.12) +
+   stat_poly_eq(use_label(c("R2")),label.x = "right",
+label.y = 0.04)-> b4
+
+b4
+```
+# Bin Spatially
+```{r}
+
+# Example using geosphere and dplyr
+#install.packages(c("geosphere", "dplyr"))
+library(geosphere)
+library(dplyr)
+
+
+# 1. Calculate distance matrix in kilometers
+dmat <- distm(subtidal_compare[, c('site_longitude', 'site_latitude')], fun = distHaversine) / 1000
+
+# 2. Perform hierarchical clustering
+clustered <- hclust(as.dist(dmat), method = "complete")
+
+# 3. Cut the tree to find groups with max distance (e.g., 50 km radius)
+# Note: the 'h' parameter is the maximum distance for a cluster
+subtidal_compare$cluster_id_5km <- cutree(clustered, h = 5) 
+subtidal_compare$cluster_id_20km <- cutree(clustered, h = 20) 
+subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5) 
+
+```
+
+# B2. 100m Bin
+```{r}
+subtidal_compare %>% 
+    group_by(Habitat, SurveyType,site_id) %>% 
+  dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
+ mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> station
+
+
+station %>% 
+  ggplot(., aes(x=mean_biomass_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_biomass_density_sum-se_biomass_density_sum, xmax = mean_biomass_density_sum+se_biomass_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggtitle("Site Averaged") + ylim(0,log10(250000)) + xlim(0,1) +theme_pubr()  +
+  stat_poly_eq(use_label(c("eq")),label.x = "right",
+label.y = 0.2) +
+   stat_poly_eq(use_label(c("P")),label.x = "right",
+label.y = 0.12) +
+   stat_poly_eq(use_label(c("R2")),label.x = "right",
+label.y = 0.04) +scale_color_manual(values=pal) +theme(legend.position = "none")-> b2
+
+b2
+```
+
+# B3. 5km Bin
+```{r}
+subtidal_compare %>% 
+    group_by(Habitat, SurveyType,cluster_id_5km) %>% 
+  dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
+ mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> sc_cluster_id_5km
+
+
+sc_cluster_id_5km %>% 
+  ggplot(., aes(x=mean_biomass_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_biomass_density_sum-se_biomass_density_sum, xmax = mean_biomass_density_sum+se_biomass_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggtitle("5 Km Averaged") + ylim(0,log10(250000)) + xlim(0,1) +theme_pubr() +
+  stat_poly_eq(use_label(c("eq")),label.x = "right",
+label.y = 0.2) +
+   stat_poly_eq(use_label(c("P")),label.x = "right",
+label.y = 0.12) +
+   stat_poly_eq(use_label(c("R2")),label.x = "right",
+label.y = 0.04)+scale_color_manual(values=pal) +theme(legend.position = "none")-> b3
+
+b3
+```
+
+# B4. Regional Average
+```{r}
+subtidal_compare %>% 
+    group_by(Habitat, SurveyType,cluster_id_20km) %>% 
+  dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
+ mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> sc_cluster_id_20km
+
+
+sc_cluster_id_20km %>% 
+  ggplot(., aes(x=mean_biomass_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L),color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_biomass_density_sum-se_biomass_density_sum, xmax = mean_biomass_density_sum+se_biomass_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggtitle("Region Averaged")+ ylim(0,log10(250000)) + xlim(0,1) +theme_pubr()  +
+  stat_poly_eq(use_label(c("eq")),label.x = "right",
+label.y = 0.2) +
+   stat_poly_eq(use_label(c("P")),label.x = "right",
+label.y = 0.12) +
+   stat_poly_eq(use_label(c("R2")),label.x = "right",
+label.y = 0.04) +scale_color_manual(values=pal) -> b4
+
+b4
+```
+
+
+
+
+# Combined Figure
+
+```{r}
+
+b1+b2+b3+b4  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4)
+
+
+ggsave(filename = here("Figures","ecological_integration_scale.png"),
+       width=14,
+       height = 8,
+       dpi = 400,
+      units = c("in"))
+```
+
+
+
