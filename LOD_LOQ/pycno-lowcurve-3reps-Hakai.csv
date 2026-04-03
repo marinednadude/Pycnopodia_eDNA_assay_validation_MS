@@ -1,0 +1,25 @@
+Target,Sample description 1,Sample description 2,TemplateVolume,ReactionVolume,TargetConcentration,MeasuredConcentration,TotalDroplets,PositiveDroplets,NegativeDroplets
+PYCNO,gBlock_20,3-replicates,2,20,20,2.187839746,17263,30,17233
+PYCNO,gBlock_20,3-replicates,2,20,20,1.890782356,16644,25,16619
+PYCNO,gBlock_20,3-replicates,2,20,20,1.470514536,15406,18,15388
+PYCNO,gBlock_10,3-replicates,2,20,10,1.374712348,12817,14,12803
+PYCNO,gBlock_10,3-replicates,2,20,10,0.845517933,16370,11,16359
+PYCNO,gBlock_10,3-replicates,2,20,10,1.777226686,10624,15,10609
+PYCNO,gBlock_8,3-replicates,2,20,8,0.64673394,17509,9,17500
+PYCNO,gBlock_8,3-replicates,2,20,8,0.776601613,16202,10,16192
+PYCNO,gBlock_8,3-replicates,2,20,8,0.880239069,17154,12,17142
+PYCNO,gBlock_6,3-replicates,2,20,6,0.513068855,17165,7,17158
+PYCNO,gBlock_6,3-replicates,2,20,6,0.705408871,16053,9,16044
+PYCNO,gBlock_6,3-replicates,2,20,6,0.079038717,15915,1,15914
+PYCNO,gBlock_4,3-replicates,2,20,4,0.604269087,16657,8,16649
+PYCNO,gBlock_4,3-replicates,2,20,4,0.689974427,16412,9,16403
+PYCNO,gBlock_4,3-replicates,2,20,4,0.323482484,15556,4,15552
+PYCNO,gBlock_2,3-replicates,2,20,2,0.299812108,16784,4,16780
+PYCNO,gBlock_2,3-replicates,2,20,2,0.30945608,16261,4,16257
+PYCNO,gBlock_2,3-replicates,2,20,2,0.071801901,17519,1,17518
+PYCNO,gBlock_1,3-replicates,2,20,1,0,16789,0,16789
+PYCNO,gBlock_1,3-replicates,2,20,1,0.166758791,15087,2,15085
+PYCNO,gBlock_1,3-replicates,2,20,1,0,16600,0,16600
+PYCNO,NTC,3-replicates,2,20,0,0,15493,0,15493
+PYCNO,NTC,3-replicates,2,20,0,0,15693,0,15693
+PYCNO,NTC,3-replicates,2,20,0,0,9400,0,9400

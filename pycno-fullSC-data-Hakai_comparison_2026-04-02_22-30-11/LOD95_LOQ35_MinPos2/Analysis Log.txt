@@ -1,0 +1,43 @@
+Analysis started: Thu Apr  2 22:30:18 2026
+
+LOD Threshold: 95%
+
+LOQ CV Threshold: 0.35
+
+Minimum Positive Droplets: 2
+
+
+INFO: 3 data points set to 0 concentration due to having fewer than 2 positive droplets.
+
+
+Data Summary:
+"Standards"	"Target"	"Reps"	"Detects"	"Copy.CV"	"Conc.mean"	"Conc.sd"	"Rate"	"CV_metric"
+62500	"PYCNO"	5	5	0.0194559091611808	68492.44	1332.58269086763	1	0.0194559091611808
+12500	"PYCNO"	5	5	0.01893601631984	11552.52	218.758707255278	1	0.01893601631984
+2500	"PYCNO"	5	5	0.0497296553613424	2609.72	129.780476189603	1	0.0497296553613424
+500	"PYCNO"	5	5	0.103903352739164	549.64	57.109438799554	1	0.103903352739164
+100	"PYCNO"	5	5	0.058598490381769	106.6	6.24659907469657	1	0.058598490381769
+20	"PYCNO"	5	5	0.297672657267428	18.72	5.57243214404626	1	0.297672657267428
+4	"PYCNO"	5	3	1.02793026271241	3.2	3.2893768406797	0.6	1.02793026271241
+0.8	"PYCNO"	5	2	1.38793524130506	1.56	2.1651789764359	0.4	1.38793524130506
+
+
+For PYCNO, the lowest standard with 95% or greater detection is: 20 copies/reaction.
+
+Assay summary:
+
+R.squared: The R-squared value of linear regression of all standards Cq-values vs log10 of the starting quantities.
+Slope: The slope of the linear regression.
+Intercept: The y-intercept of the linear regression.
+
+LOD.discrete: The lowest standard with at least 95% positive detection.
+LOD: The 95% limit of detection as determined by dose-response modeling.
+LOQ: The limit of quantification as determined by decay modeling, using the user-selected CV threshold of: 0.35
+
+rep2.LOD: The effective limit of detection if analyzing in 2 replicates.
+rep3.LOD: The effective limit of detection if analyzing in 3 replicates.
+rep4.LOD: The effective limit of detection if analyzing in 4 replicates.
+rep5.LOD: The effective limit of detection if analyzing in 5 replicates.
+rep8.LOD: The effective limit of detection if analyzing in 8 replicates.
+
+

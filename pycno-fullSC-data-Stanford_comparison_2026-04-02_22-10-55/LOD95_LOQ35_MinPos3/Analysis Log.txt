@@ -1,0 +1,56 @@
+Analysis started: Thu Apr  2 22:11:05 2026
+
+LOD Threshold: 95%
+
+LOQ CV Threshold: 0.35
+
+Minimum Positive Droplets: 3
+
+
+INFO: 15 data points set to 0 concentration due to having fewer than 3 positive droplets.
+
+
+WARNING: 8 data points excluded without a valid starting quantity (SQ)!
+Here is a sample of the data being excluded:
+
+"Target"	"Sample_ID"	"TemplateVolume"	"ReactionVolume"	"SQ"	"Concentration"	"TotalDroplets"	"PositiveDroplets"	"NegativeDroplets"
+"PYCNO"	"NTC"	5	20	NA	0	19460	0	19460
+"PYCNO"	"NTC"	5	20	NA	0	20744	0	20744
+"PYCNO"	"NTC"	5	20	NA	0	19415	0	19415
+"PYCNO"	"NTC"	5	20	NA	0	19651	0	19651
+"PYCNO"	"NTC"	5	20	NA	0	18801	0	18801
+"PYCNO"	"NTC"	5	20	NA	0	19199	0	19199
+
+
+Data Summary:
+"Standards"	"Target"	"Reps"	"Detects"	"Copy.CV"	"Conc.mean"	"Conc.sd"	"Rate"	"CV_metric"
+50000	"PYCNO"	8	8	0.0141297405898104	64171.65283	906.72880770727	1	0.0141297405898104
+5000	"PYCNO"	8	8	0.0689811755294166	5603.37863925	386.527645471888	1	0.0689811755294166
+500	"PYCNO"	8	8	0.0380894089818791	552.7915573	21.0555037077296	1	0.0380894089818791
+50	"PYCNO"	8	8	0.205453884155702	50.9547150125	10.468844115365	1	0.205453884155702
+25	"PYCNO"	8	8	0.24088929133911	26.3871444775	6.3563805336477	1	0.24088929133911
+5	"PYCNO"	8	4	1.10503374302211	3.782333435	4.17960607303574	0.5	1.10503374302211
+4	"PYCNO"	8	2	1.85188143819901	0.962861925	1.78310612645606	0.25	1.85188143819901
+2	"PYCNO"	8	1	2.82842712474619	0.778090805	2.2007731383776	0.125	2.82842712474619
+1	"PYCNO"	8	0	NA	0	0	0	NA
+
+
+For PYCNO, the lowest standard with 95% or greater detection is: 25 copies/reaction.
+
+Assay summary:
+
+R.squared: The R-squared value of linear regression of all standards Cq-values vs log10 of the starting quantities.
+Slope: The slope of the linear regression.
+Intercept: The y-intercept of the linear regression.
+
+LOD.discrete: The lowest standard with at least 95% positive detection.
+LOD: The 95% limit of detection as determined by dose-response modeling.
+LOQ: The limit of quantification as determined by decay modeling, using the user-selected CV threshold of: 0.35
+
+rep2.LOD: The effective limit of detection if analyzing in 2 replicates.
+rep3.LOD: The effective limit of detection if analyzing in 3 replicates.
+rep4.LOD: The effective limit of detection if analyzing in 4 replicates.
+rep5.LOD: The effective limit of detection if analyzing in 5 replicates.
+rep8.LOD: The effective limit of detection if analyzing in 8 replicates.
+
+
