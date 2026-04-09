@@ -210,7 +210,7 @@ cv_abundance_SurveyType %>%
   ungroup() %>% 
   group_by(SurveyType) %>% 
   ggplot(., aes(x=SurveyType, y=cv_length, fill=SurveyType)) +geom_boxplot() +theme_pubr() +facet_grid(~SurveyType, scales = "free_x")  +
-  theme(axis.text.x = element_blank(), axis.title = element_text(face = "bold", size=16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold")) + scale_fill_manual(values=c(pal4[1],pal4[3])) + ylab("Coefficient of Variation") + xlab("Survey Type") +  geom_text(data = plot_labels, aes(x = SurveyType, y = max_val + 0.2, label = labels)) -> a3
+  theme(axis.text.x = element_blank(), axis.title = element_text(face = "bold", size=16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold")) + scale_fill_manual(values=c(pal4[1],pal4[3])) + ylab("Coefficient of Variation") + xlab("Site Type") +  geom_text(data = plot_labels, aes(x = SurveyType, y = max_val + 0.2, label = labels)) -> a3
 
   
 a3

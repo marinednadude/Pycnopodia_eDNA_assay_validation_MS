@@ -65,13 +65,13 @@ Target_name = "Pycno"
 
 ```
 
-# LoD + LoQ Analysis - Pycno Plate Run 5 
-### Load Data
+# Load Data Pycno Plate Run 5 
 
 ```{r}
 sample_set_up <- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Sample Setup", skip = 46)
 
 amplification_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Amplification Data",  skip = 46)
+
 results_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Results",  skip = 46)
 
 ```
@@ -306,7 +306,7 @@ results_data_cleaned %>%
   label.y = "top") +theme_bw() +ylab("Ct")
  
 ```
-## Klymus et al. 2020 LoD + LoQ
+# Klymus et al. 2020 LoD + LoQ
 
 ### LoD
 LOD was defined as the lowest concentration at which 95% of the technical replicates exhibited positive amplification.
@@ -1193,6 +1193,8 @@ results_data_cleaned %>%
   filter(., Task!="UNKNOWN") %>% 
    mutate(., CT=as.numeric(CT))  %>% 
   mutate(., Lab="NOAA PMEL OME") %>% 
+  mutate(., TemplateVolume =2,
+         ReactionVolume= 10) %>% 
   dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) -> DAT
 
 write.csv(DAT, file = here("LOD_LOQ/qPCR_Pycno_5_v3_standards.csv"), row.names = F)
@@ -2453,14 +2455,15 @@ for(Targeti in ManuTargets){
 par(mfrow=c(1,1))
 ```
 
-# FHL Analysis Transplanted Individual Detection
 
-### Load Data
+# Load Data Pycno qPCR Plate 1
 
 ```{r}
-sample_set_up_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Sample Setup", skip = 44)
+sample_set_up_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Sample Setup", skip = 46)
 
-amplification_data_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xlsx"), sheet="Amplification Data",  skip = 43)
+amplification_data_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Amplification Data",  skip = 46)
+
+results_data_run1<- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Results",  skip = 46)
 
 ```
 
@@ -2584,7 +2587,13 @@ moa_standard_c40_run1 %>%
 combined_qPCR_data_run1 %>% 
   filter(., `Well Position` != moa_outliers_to_drop_run1$`Well Position`) -> combined_qPCR_data_cleaned_run1
 
+
+results_data_run1 %>% 
+    filter(., `Well Position` != moa_outliers_to_drop$`Well Position`) -> results_data_cleaned_run1
 ```
+
+
+
 
 ## Pycno Rn
 ```{r}
@@ -2592,7 +2601,7 @@ combined_qPCR_data_run1 %>%
 filter(., str_detect(`Sample Name`,"Pycno_STANDARD")) -> pycno_standard_run1
 
 pycno_standard_run1$Rn %>%  max() -> max_Rn_run1
-h_run1= max_Rn_run1*0.25
+h_run1= 0.8
 
 pycno_standard_run1 %>% 
 ggplot(., aes(y=Rn, x=Cycle, color=`Sample Name`)) +geom_point(alpha=0.4) + geom_hline(yintercept =h_run1) +
@@ -2663,6 +2672,43 @@ r_squared_value_run1 <- grob_data_run1$r.squared
 
 ```
 
+```{r}
+results_data_cleaned_run1 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task=="STANDARD") %>% 
+   mutate(., CT=as.numeric(CT)) -> pycno_results_standard_run1
+
+
+ pycno_results_standard_run1 %>% 
+  ggplot(., aes(x=`Quantity`, y = CT)) +geom_point()  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct")
+ 
+```
+
+
+
+```{r}
+results_data_cleaned_run1 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task!="UNKNOWN") %>% 
+   mutate(., CT=as.numeric(CT))  %>% 
+  mutate(., Lab="NOAA PMEL OME") %>% 
+  mutate(., TemplateVolume =2,
+         ReactionVolume= 10) %>% 
+  dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) -> DAT2
+
+write.csv(DAT2, file = here("LOD_LOQ/qPCR_Pycno_1_standards.csv"), row.names = F)
+```
+
+# FHL Analysis Transplanted Individual Detection
 
 
 ## Merge Sample Metadata

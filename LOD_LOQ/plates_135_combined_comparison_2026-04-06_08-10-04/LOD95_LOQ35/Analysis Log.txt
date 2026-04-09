@@ -1,0 +1,76 @@
+Analysis started: Mon Apr  6 08:10:06 2026
+
+LOD Threshold: 95%
+
+LOQ CV Threshold: 0.35
+
+
+
+WARNING: 36 data points excluded without a valid starting quantity (SQ)!
+Here is a sample of the data being excluded:
+
+"Target"	"Lab"	"Cq"	"SQ"	"TemplateVolume"	"ReactionVolume"
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+"Pycno"	"NOAA PMEL OME"	NA	NA	2	10
+
+
+Potential outliers have been detected. Please review the data exported as
+Potential-Outliers.csv, and determine if any data points need to be excluded
+or adjusted due to false positives or poorly normalized baselines.
+
+
+These standards not included in Pycno standard curve regression for copy estimate calculations, because they detected below 50%: NA
+
+
+Data Summary:
+"Standards"	"Target"	"Reps"	"Detects"	"Copy.CV"	"Cq.mean"	"Cq.sd"	"Cq.CV"	"Rate"	"CV_metric"
+2e+05	"Pycno"	16	16	0.584348452892587	21.6326665878296	0.963397501718735	0.749622925068173	1	0.749622925068173
+20000	"Pycno"	31	31	0.635905581178059	23.5554193066012	1.39980611580806	1.25045486663047	1	1.25045486663047
+2000	"Pycno"	37	37	0.618814719310456	27.2896021765632	1.25581210196226	1.06460080025886	1	1.06460080025886
+200	"Pycno"	40	40	0.59264527629283	30.6156913280487	1.55273172962296	1.47807577197511	1	1.47807577197511
+20	"Pycno"	41	41	0.577174453250267	33.8711846514446	1.00889702810764	0.794197935721288	1	0.794197935721288
+10	"Pycno"	41	38	0.707747427066756	34.9974034961901	1.292642656701	1.10985735178397	0.926829268292683	1.10985735178397
+2	"Pycno"	56	32	0.902922892786371	37.1700565814972	1.34782050808608	1.1805104980758	0.571428571428571	1.1805104980758
+5	"Pycno"	24	24	0.482203287224876	34.7693017323812	0.836509886358775	0.632150221989244	1	0.632150221989244
+1.60000002384186	"Pycno"	24	18	0.65948872271235	36.8908360799154	1.31475276621717	1.13774486096123	0.75	1.13774486096123
+0.800000011920928	"Pycno"	23	13	0.679644204304255	37.5496967022236	1.10509104765825	0.893375766979324	0.565217391304348	0.893375766979324
+
+
+For Pycno, the lowest standard with 95% or greater detection is: 5 copies/reaction.
+
+WARNING: For Pycno, 10 copies/reaction standard detected at lower rate than 5 copies/reaction standard.
+Please retest.
+
+
+Note: All standards tested for Pycno yielded higher Cq.CV values than the user-defined CV threshold of 0.35. The CV threshold has been adjusted to 0.948225332983866 for the LOQ of this marker.
+
+
+Assay summary:
+
+R.squared: The R-squared value of linear regression of all standards Cq-values vs log10 of the starting quantities.
+Slope: The slope of the linear regression.
+Intercept: The y-intercept of the linear regression.
+
+LOD.discrete: The lowest standard with at least 95% positive detection.
+LOD: The 95% limit of detection as determined by dose-response modeling.
+LOQ: The limit of quantification as determined by decay modeling, using the user-selected CV threshold of: 0.35
+
+rep2.LOD: The effective limit of detection if analyzing in 2 replicates.
+rep3.LOD: The effective limit of detection if analyzing in 3 replicates.
+rep4.LOD: The effective limit of detection if analyzing in 4 replicates.
+rep5.LOD: The effective limit of detection if analyzing in 5 replicates.
+rep8.LOD: The effective limit of detection if analyzing in 8 replicates.
+
+
+rep9.LOD: The effective limit of detection if analyzing in 9 replicates.
+
+
+Potential outliers have been detected. Please review the DAT_RAWa exported as
+Potential-Outliers.csv, and determine if any DAT_RAWa points need to be excluded
+or adjusted due to false positives or poorly normalized baselines.
+
+

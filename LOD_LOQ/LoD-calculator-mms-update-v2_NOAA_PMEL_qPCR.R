@@ -89,10 +89,10 @@ library(dplyr)
 
 ## Read and prepare data ONCE before loops:
 DAT_RAW <- read.csv(FILE.PATH) %>%
-  mutate(., SQ=SQ*2) #2 µL of template DNA was added to each well
+  mutate(., SQ=SQ*TemplateVolume)  #2 µL of template DNA was added to each well
 
 ## Check the data:
-## For qPCR, expect: Target, Cq, SQ
+## For qPCR, expect: Target, Cq, SQ, Reaction Volume, Template Volume
 ## For ddPCR, expect: Target, Concentration, SQ (or Expected_Conc), Reaction Volume, Template Volume
 
 
@@ -458,7 +458,7 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
       LOD.list3 <- ""
       LOQ.list <- ""
       DAT3 <- data.frame(Assay=Targets,R.squared=NA,Slope=NA,Intercept=NA,LOD.discrete=NA,
-                         LOD=NA,LOQ=NA,rep2.LOD=NA,rep3.LOD=NA,rep4.LOD=NA,rep5.LOD=NA,rep8.LOD=NA)
+                         LOD=NA,LOQ=NA,rep2.LOD=NA,rep3.LOD=NA,rep4.LOD=NA,rep5.LOD=NA,rep8.LOD=NA,rep9.LOD=NA)
       LOD.FCTS <- list(LL.2(),LL.3(),LL.3u(),LL.4(),LL.5(),W1.2(),W1.3(),W1.4(),W2.2(),W2.3(),
                        W2.4(),AR.2(),AR.3(),MM.2(),MM.3())
       for(i in 1:length(Targets)) {
@@ -641,6 +641,7 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
           DAT3$rep4.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.25,type="absolute")[1]
           DAT3$rep5.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.2,type="absolute")[1]
           DAT3$rep8.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,type="absolute")[1]
+          DAT3$rep9.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/9),type="absolute")[1]
           ## Residual code using probit method:
           #DAT3$LOD[i] <- (qnorm(0.95)-coef(get(LOD.list[i+1]))[1])/coef(get(LOD.list[i+1]))[2]
           #DAT3$rep2.LOD[i] <- (qnorm(0.50)-coef(get(LOD.list[i+1]))[1])/coef(get(LOD.list[i+1]))[2]
@@ -733,6 +734,7 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
       write("rep4.LOD: The effective limit of detection if analyzing in 4 replicates.",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write("rep5.LOD: The effective limit of detection if analyzing in 5 replicates.",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write("rep8.LOD: The effective limit of detection if analyzing in 8 replicates.\n\n",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
+      write("rep9.LOD: The effective limit of detection if analyzing in 9 replicates.\n\n",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write.csv(DAT3,file=file.path(output_folder, "Assay summary.csv"),row.names=FALSE)
       
       
@@ -817,12 +819,13 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/3),interval="delta",type="absolute"),
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.25,interval="delta",type="absolute"),
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.2,interval="delta",type="absolute"),
-                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,interval="delta",type="absolute"))
+                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,interval="delta",type="absolute"),
+                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/9),interval="delta",type="absolute"))
           if(substr(LOD.list3[i+1],1,3)=="LL2") {
             DAT4 <- exp(DAT4)
           }
           DAT4 <- data.frame(DAT4,LoD=c("1rep.LOD","2rep.LOD","3rep.LOD","4rep.LOD",
-                                        "5rep.LOD","8rep.LOD"),
+                                        "5rep.LOD","8rep.LOD","9rep.LOD"),
                              Assay=rep(Targets[i],nrow(DAT4)))
           DAT4$Assay <- as.character(DAT4$Assay)
           if(i==1) {
