@@ -1,7 +1,7 @@
 ---
-title: 'Lesperance eLowQuant LoD and LoQ: Stanford ddPCR 3 droplet minimum'
+title: 'Lesperance eLowQuant LoD and LoQ: Hakai ddPCR 5 rep 2 droplets'
 author: "Zachary Gold"
-date: "2026-04-09"
+date: "2026-04-10"
 output: html_document
 ---
 
@@ -60,10 +60,10 @@ source(here("eLowQuantUser/eLowQuant-Functions-V20210407.R"))
 
 ```{r}
 ## Load the Data
-FILE.PATH <- here("LOD_LOQ/pycno-fullSC-data-Stanford.csv")
+FILE.PATH <- here("LOD_LOQ/pycno-lowcurve-5reps-Hakai.csv")
 DAT_RAW <- read.csv(FILE.PATH) %>% rename(SQ=TargetConcentration, Concentration=MeasuredConcentration) %>% 
   mutate(SQ = na_if(SQ, 0)) %>% 
-  mutate(PositiveDroplets = if_else(PositiveDroplets < 3,0,PositiveDroplets)) %>% 
+  mutate(PositiveDroplets = if_else(PositiveDroplets < 2,0,PositiveDroplets)) %>% 
   mutate(Concentration = na_if(Concentration, 0),
          PositiveDroplets = na_if(PositiveDroplets,0))
 ```
@@ -663,7 +663,7 @@ knitr::kable(round(xdxq.all.PR,
                     format="pandoc", digits=1, 
                      results="asis")
 
-write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_Stanford_ddPCR_3_droplet.csv"), row.names = F)
+write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_Hakai_5rep_ddPCR_2_droplet.csv"), row.names = F)
 ```
 
 

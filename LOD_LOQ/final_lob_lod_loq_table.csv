@@ -1,0 +1,20 @@
+"LoD_method","assay_method","Type","Lab","Plate","LOB","LOD","LOQ"
+"eLowQuant","qPCR","qPCR","NOAA PMEL OME","Pycno Run 5",0,0.213472258218936,0.807827307704345
+"eLowQuant","ddPCR","1 Droplet","Stanford","Stanford",0,0.132715432406258,0.502225198843848
+"eLowQuant","ddPCR","2 Droplets","Stanford","Stanford",0,0.189553611380972,0.717313717931688
+"eLowQuant","ddPCR","3 Droplets","Stanford","Stanford",0,0.581482699379617,2.20046198838227
+"eLowQuant","ddPCR","1 Droplet","Hakai","Hakai 5rep",0,0.4529957548431,1.71423836342184
+"eLowQuant","ddPCR","2 Droplets","Hakai","Hakai 5rep",0,1.22869030602768,4.64964190894627
+"eLowQuant","ddPCR","3 Droplets","Hakai","Hakai 5rep",0,2.94168201805444,11.1319897799722
+"Klymus","qPCR","qPCR","NOAA PMEL OME","Pycno Run 1",0,25.3899900751919,786
+"Klymus","qPCR","qPCR","NOAA PMEL OME","Pycno Run 3",0,6.03486176622137,41
+"Klymus","qPCR","qPCR","NOAA PMEL OME","Pycno Run 5",0,3.71993342497071,150
+"Klymus","ddPCR","1 Droplet","Stanford","Stanford",0,3.25461843044678,11
+"Klymus","ddPCR","2 Droplets","Stanford","Stanford",0,11.958577554141,12
+"Klymus","ddPCR","3 Droplets","Stanford","Stanford",0,9.7252523987455,24
+"Klymus","ddPCR","1 Droplet","Hakai","Hakai 5rep",0,6.69407786954563,16
+"Klymus","ddPCR","2 Droplets","Hakai","Hakai 5rep",0,9.98916285557881,17
+"Klymus","ddPCR","3 Droplets","Hakai","Hakai 5rep",0,6.25352363552629,17
+"Klymus","ddPCR","1 Droplet","Hakai","Hakai",0,2.09816163367525,16
+"Klymus","ddPCR","2 Droplets","Hakai","Hakai",0,23.9008995744929,23.9008995744929
+"Klymus","ddPCR","3 Droplets","Hakai","Hakai",0,19.4922340180152,19.4922340180152

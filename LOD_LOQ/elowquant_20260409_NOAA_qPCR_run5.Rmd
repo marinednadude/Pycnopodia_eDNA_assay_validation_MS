@@ -1,10 +1,9 @@
 ---
-title: 'Lesperance eLowQuant LoD and LoQ: Stanford ddPCR 3 droplet minimum'
+title: 'Lesparance eLowQuant LoD and LoQ: NOAA OME qPCR'
 author: "Zachary Gold"
 date: "2026-04-09"
 output: html_document
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = "")
@@ -60,12 +59,9 @@ source(here("eLowQuantUser/eLowQuant-Functions-V20210407.R"))
 
 ```{r}
 ## Load the Data
-FILE.PATH <- here("LOD_LOQ/pycno-fullSC-data-Stanford.csv")
-DAT_RAW <- read.csv(FILE.PATH) %>% rename(SQ=TargetConcentration, Concentration=MeasuredConcentration) %>% 
-  mutate(SQ = na_if(SQ, 0)) %>% 
-  mutate(PositiveDroplets = if_else(PositiveDroplets < 3,0,PositiveDroplets)) %>% 
-  mutate(Concentration = na_if(Concentration, 0),
-         PositiveDroplets = na_if(PositiveDroplets,0))
+FILE.PATH <- here("LOD_LOQ/qPCR_Pycno_5_v3_standards.csv")
+DAT_RAW <- read.csv(FILE.PATH) %>% 
+  mutate(SQ = na_if(SQ, 0)) 
 ```
 
 ## Instructions
@@ -104,8 +100,7 @@ install.packages(“tinytex”); tinytex::install_tinytex()
 
 
 DAT <- DAT_RAW %>% 
-  mutate(., Lab = "Stanford ddPCR") %>% 
-  mutate(., Cq=PositiveDroplets)
+  mutate(., Lab = "NOAA PMEL OME qPCR") 
 
 ## Check the data:
 if(sum(colnames(DAT)=="Target")!=1) { #Is there a "Target" column?
@@ -663,7 +658,8 @@ knitr::kable(round(xdxq.all.PR,
                     format="pandoc", digits=1, 
                      results="asis")
 
-write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_Stanford_ddPCR_3_droplet.csv"), row.names = F)
+write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_NOAA_PMEL_OME_qPCR.csv"), row.names = F)
+
 ```
 
 

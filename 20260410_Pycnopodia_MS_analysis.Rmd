@@ -1,0 +1,1525 @@
+---
+title: "Pycno Run 5"
+author: "Zack Gold"
+date: "2025-12-30"
+output: pdf_document
+---
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,fig.height=7, fig.width=6.5, echo = TRUE)
+knitr::opts_chunk$set(fig.pos = '!h')
+sink.indicator <- TRUE
+
+```
+
+# Set Up
+
+### Load Libraries
+
+```{r Packages, include=FALSE}
+# Packages used
+packages = c("tidyverse", 
+             "dplyr",
+             "ggplot2",
+             "knitr",
+             "kableExtra",
+             "RColorBrewer",
+             "readxl",
+             "here",
+             "Hmisc",
+             "scales",
+              "ggpmisc",
+             "ggpubr",
+             "wesanderson",
+             "RColorBrewer",
+             "randomcoloR",
+             "ggdist",
+             "gmodels",
+             "rcompanion",
+             "gghalves",
+             "ggbeeswarm",
+             "rstatix",
+             "multcompView",
+             "ggstatsplot",
+             "knitr")
+
+## Load or install&load
+package.check <- lapply(packages,
+  FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
+
+## Source the functions
+source("eLowQuantUser/eLowQuant-Functions-V20210407.R")
+
+```
+
+
+# Values Set
+```{r}
+IPC_name = "Moa"
+Target_name = "Pycno"
+
+```
+
+# Load Data Pycno Plate Run 5 
+
+```{r}
+sample_set_up <- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Sample Setup", skip = 46)
+
+amplification_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Amplification Data",  skip = 46)
+
+results_data<- read_excel(here("qPCR_raw_data","2025-12-23_161523_Pycno_5_v3.xls"), sheet="Results",  skip = 46)
+
+```
+
+### Merge Tables
+```{r}
+
+amplification_data %>% 
+  left_join(sample_set_up) -> combined_qPCR_data
+
+```
+
+Now we are ready to start analyzing the data.
+
+First thing we want to do is check to see how our internal positive control is working.
+
+## Moa Map
+```{r}
+
+columns = seq(from =1, to=24, by=1)
+columns_t= as.tibble(columns) %>%  dplyr::rename("Column"=value)
+rows = capitalize(letters[1:16])
+rows_t= as.tibble(rows) %>%  dplyr::rename("Row"=value)
+
+cross_join(columns_t, rows_t) -> full_plate
+
+combined_qPCR_data %>% 
+  filter(., `Target Name`==IPC_name) %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> moa_samples
+  
+full_plate %>% 
+  left_join(moa_samples) -> moa_plate
+
+
+palette <- distinctColorPalette(length(moa_plate$`Sample Name` %>%  unique()))
+
+moa_plate %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns , na.value = "black") + ylab("Row") +theme_pubr() +scale_fill_manual(values =palette, na.value = "black") +ggtitle("Moa-IPC Standards & Samples")
+
+
+```
+
+
+
+## Pycno Map
+```{r}
+
+combined_qPCR_data %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> pycno_samples
+  
+full_plate %>% 
+  left_join(pycno_samples) -> pycno_plate
+
+palette <- distinctColorPalette(length(pycno_plate$`Sample Name` %>%  unique()))
+
+pycno_plate %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns ) + ylab("Row") +theme_pubr() +scale_fill_manual(values =palette, na.value = "black") +ggtitle("Pycno Standards & Samples")
+
+```
+
+
+## Moa Rn
+```{r}
+
+combined_qPCR_data %>% 
+filter(., str_detect(`Target Name`,IPC_name)) -> moa_standard
+
+moa_standard$Rn %>%  max() -> max_Rn_moa
+h_moa= max_Rn_moa*0.25
+
+moa_standard %>% 
+ # filter(., `Well Position`=="A24") %>% A24 did not perform well
+ggplot(., aes(y=Rn, x=Cycle, color=`Well Position`)) +
+  geom_point(alpha=0.2) + geom_hline(yintercept =h_moa) +
+  geom_text(aes(0,h_moa,label = round(h_moa,2), vjust = -1),color="black") +theme_bw() +ggtitle("Moa Rn") +theme(legend.position = "blank")
+
+
+```
+
+There is quite a bit of spread in our IPC. Will remove any samples outside normal distribution.
+#### Remove Samples with Anomolous Outlier IPC values
+```{r}
+
+moa_standard %>% 
+  filter(., Cycle ==40) -> moa_standard_c40
+
+moa_standard_c40 %>% 
+ dplyr::summarise(mean_Rn = ci(Rn, confidence = 0.99)[1], 
+                      lower_ci_mpg = ci(Rn, confidence = 0.99)[2],
+                      upper_ci_mpg = ci(Rn, confidence = 0.99)[3], 
+                      sd_Rn = ci (Rn, confidence = 0.99)[4]) -> CI0.95_moa
+
+Sum = groupwiseMean(Rn ~ Cycle, data=moa_standard_c40, conf = 0.99)
+
+moa_standard_c40 %>% 
+summarise(
+    Q1 = quantile(Rn, 0.25, na.rm = TRUE),
+    Q3 = quantile(Rn, 0.75, na.rm = TRUE),
+    IQR = Q3 - Q1,
+    lower_bound = Q1 - 1.5 * IQR,
+    upper_bound = Q3 + 1.5 * IQR
+  ) -> moa_iqr
+
+moa_standard_c40 %>% 
+  mutate(., type=case_when(Rn > moa_iqr$upper_bound ~"Outlier High",
+                           Rn < moa_iqr$lower_bound ~"Outlier Low",
+                           TRUE~"To Keep")) -> moa_standard_c40
+
+moa_standard_c40 %>% 
+  ggplot(., aes(x= Rn, y=Cycle)) +  geom_dots(layout='weave', side = "top", aes(color=type)) + stat_slabinterval(side = "bottom",aes(fill = after_stat(level)))  +scale_fill_brewer(na.translate = FALSE) +theme_pubclean()
+
+moa_standard_c40 %>% 
+  filter(., type!="To Keep") -> moa_outliers_to_drop
+```
+
+#### Filter Data
+```{r}
+combined_qPCR_data %>% 
+  filter(., `Well Position` != moa_outliers_to_drop$`Well Position`) -> combined_qPCR_data_cleaned
+
+results_data %>% 
+    filter(., `Well Position` != moa_outliers_to_drop$`Well Position`) -> results_data_cleaned
+
+```
+
+
+
+
+## Pycno Rn
+```{r}
+combined_qPCR_data_cleaned %>% 
+filter(., str_detect(`Target Name`,Target_name)) %>% 
+  filter(., Task=="STANDARD")-> pycno_standard
+
+pycno_standard$Rn %>%  max() -> max_Rn
+h= max_Rn*0.25
+
+pycno_standard %>% 
+ggplot(., aes(y=Rn, x=Cycle, color=`Sample Name`)) +geom_point(alpha=0.4) +geom_smooth() + geom_hline(yintercept =h) +
+  geom_text(aes(0,h,label = round(h,2), vjust = -1),color="black") +theme_bw() + ggtitle("Pycno Rn") +scale_colour_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2")))
+
+
+```
+
+
+
+Looks great. We except higher concentration standards to surpass the threshold ( here set to 25% of the maximum Rn flourescence value) at fewer cycles and we see that in the data.
+
+## Pycno Ct versus Quantity
+```{r}
+
+pycno_standard %>% 
+  mutate(., Threshold = if_else(Rn > h, "Above","Below")) -> pycno_standard
+
+pycno_standard %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="first")==1) %>% 
+  filter(., Threshold =="Above") -> pycno_standard_above
+
+pycno_standard %>% 
+  ungroup() %>% 
+  filter(., !`Well Position` %in%  pycno_standard_above$`Well Position`) %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="last")==1) -> pycno_standard_below
+
+bind_rows(pycno_standard_above, pycno_standard_below) -> pycno_standard_threshold
+
+
+
+set_breaks = function(limits) {
+     seq(limits[1], limits[2], by = 1)
+}
+
+pycno_standard_threshold %>% 
+  filter(., Cycle < 40 ) %>% 
+  ggplot(., aes(x=`Quantity`, y = Cycle)) +geom_count(aes(color = ..n.., size = ..n..))  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct") -> run5_ct_versus_quant
+
+run5_ct_versus_quant
+```
+
+```{r}
+
+# View the structure of the generated plot object
+# The computed data is stored within the plot object
+grob_data_run5 <- ggplot_build(run5_ct_versus_quant)$data[[3]]
+
+# The result is a list; unlist it to get a character vector
+coef_char_run5 <- unlist(grob_data_run5$coefs)
+
+
+standard_curve_coefs_run5 <- enframe(coef_char_run5, name = "Metric", value = "Value") %>% 
+ mutate( Metric = recode(Metric,
+                             "(Intercept)" = "Intercept",
+                             "x" = "Slope"))
+
+# Extract the R^2 value from the 'r.squared' column
+r_squared_value_run5 <- grob_data_run5$r.squared
+
+```
+
+```{r}
+results_data_cleaned %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task=="STANDARD") %>% 
+   mutate(., CT=as.numeric(CT)) -> pycno_results_standard
+
+
+ pycno_results_standard %>% 
+  ggplot(., aes(x=`Quantity`, y = CT)) +geom_point()  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct")
+ 
+```
+```{r READIN, include=FALSE}
+## READIN paragraph adapted from Merkes, Christopher <cmerkes@usgs.gov>
+##   Used only to read in the data.
+
+
+## Read in your data file (MODIFY FILE NAME AS NEEDED):
+results_data_cleaned %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task!="UNKNOWN") %>% 
+   mutate(., CT=as.numeric(CT))  %>% 
+  mutate(., Lab="NOAA PMEL OME")  %>% 
+  dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) %>% 
+  mutate(., TemplateVolume =2,
+         ReactionVolume= 10) %>% 
+  mutate(., Cq = replace(Cq, Cq>40, NA))-> qPCR_Pycno_5_v3_standards
+
+write.csv(qPCR_Pycno_5_v3_standards, file = here("LOD_LOQ/qPCR_Pycno_5_v3_standards.csv"), row.names = F)
+DAT <- qPCR_Pycno_5_v3_standards
+
+```
+
+# FHL Analysis Transplanted Individual Detection
+
+
+## Merge Sample Metadata
+```{r}
+
+sample_metadata<- read_excel(here("qPCR_raw_data","ElectronicArchive_CruiseSampleMetadata_20250516_FHL.xlsx"), sheet="Electronic Archive")
+
+results_data_cleaned %>% 
+   filter(.,`Target Name`=="Pycno") %>% 
+  filter(., !str_detect(`Task`,"STANDARD")) %>% 
+  mutate(., Quantity=if_else(is.na(Quantity), 0, Quantity)) %>% 
+  mutate(., Concentration = (Quantity*10*(100/2)/ 1) %>% # Quantity is the concentration generated by the qPCR machine in copies per µL, 10 µL per reaction, 100 µL in the total extraction, 2 µL of template added, and 1 L sampled
+  mutate(., Observation = if_else(Quantity ==0, "Not Detected", "Detected")) %>%
+  mutate(., `Sample Name`= if_else(str_detect(`Sample Name`,"Negative Control"), "NTC",`Sample Name`)) %>% 
+  ungroup() %>% 
+  left_join(sample_metadata, by=c("Sample Name"="Sample_Name")) %>% 
+  mutate(., `Sample Name` = if_else(`Sample Name`=="Ext_blank_UWFH25","Extraction Blank",`Sample Name`)) %>% 
+  mutate(., Negative_control = if_else(is.na(Negative_control), TRUE, Negative_control)) %>% 
+  group_by(`Sample Name`) %>% 
+  mutate(Technical_Replicate = row_number(`Sample Name`)) %>% 
+  mutate(., Station = if_else(is.na(Station) & Negative_control==TRUE | Task=="NTC", `Sample Name`, Station)) %>% 
+  mutate(., Name_plotting = str_c(Station," Bottle ", Biological_Replicate," PCR ",Technical_Replicate )) %>% 
+  mutate(., Name_plotting = if_else(is.na(Name_plotting),str_c(`Sample Name`, " PCR ",Technical_Replicate),Name_plotting)) %>% 
+   mutate(., Name_plotting_b = str_c(Station," Bottle ", Biological_Replicate)) %>% 
+  mutate(., Name_plotting_b = if_else(is.na(Name_plotting_b),`Sample Name`,Name_plotting_b)) %>% 
+  mutate(., Type = if_else(is.na(Station),"Extraction Blank",Station )) %>% 
+   mutate(., Type = if_else(str_detect(Type,".NC"),"Field Blank",Type )) %>% 
+  mutate(., Sample_Type = if_else(Negative_control==FALSE,"Sample","Blank")) -> pycno_sample_data_4_plotting
+```
+
+```{r}
+pycno_sample_data_4_plotting %>% 
+     mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Concentration, color=Observation)) + geom_count() +
+    scale_y_continuous( 
+         trans = scales::pseudo_log_trans(base = 10), 
+         breaks = c(1,10,1000,10000,100000,1000000), 
+         labels = scales::trans_format("log10", scales::math_format(10^.x))
+     )    +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=0)) +facet_wrap(Sample_Type~Type,nrow=1, scales="free_x") + ylab("Copies per L") + xlab("Sample") 
+
+  
+# pycno_sample_data_4_plotting_run1 %>% 
+#   filter(., str_detect(Name_plotting_b,"Aquarium")) %>% 
+#   group_by(`Target Name`) %>% 
+#   dplyr::summarise(mean(Concentration))
+```
+### Figure 6a2
+```{r}
+pycno_sample_data_4_plotting
+
+pycno_sample_data_4_plotting$Type2 <- pycno_sample_data_4_plotting$Type
+pycno_sample_data_4_plotting$Type2 <- as.factor(pycno_sample_data_4_plotting$Type2)
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "Aquarium Discharge"] <- "Aquarium\nDischarge"
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "FHL Dock"] <- "FHL\nDock"
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "FHL Intake Pipes"] <- "FHL\nIntake\nPipes"
+
+pycno_sample_data_4_plotting %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., Concentration=if_else(Concentration==0,NA,Concentration) ) %>% 
+  mutate(., Plate = "5")->  plate_5_data_analysis
+
+plate_5_data_analysis %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=log10(Concentration), color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black") + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> a2
+
+a2
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_run5.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+### Figure s6a2
+```{r}
+pycno_sample_data_4_plotting
+
+pycno_sample_data_4_plotting$Type2 <- pycno_sample_data_4_plotting$Type
+pycno_sample_data_4_plotting$Type2 <- as.factor(pycno_sample_data_4_plotting$Type2)
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "Aquarium Discharge"] <- "Aquarium\nDischarge"
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "FHL Dock"] <- "FHL\nDock"
+levels(pycno_sample_data_4_plotting$Type2)[levels(pycno_sample_data_4_plotting$Type2) == "FHL Intake Pipes"] <- "FHL\nIntake\nPipes"
+
+pycno_sample_data_4_plotting %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=CT, color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black",limits = c(20, 40),direction = -1) + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> sa2
+
+sa2
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_Ct_run5.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+Here we see ~2 million copies per L of Pycnopodia target DNA in the Friday Harbor Aquarium discharge water. The discharge is from a flow through system with 39 individual stars of at least 40 cm in diameter.
+
+We were able to detect the 10 transplanted stars from at least one technical replicate from each of the three surface eDNA samples taken ~5m above the individuals. We only detected a single individual located at 10m depth from one of three surface samples taken at the Friday Harbor Lab intake pipes.
+
+These results demonstrate that the eDNA qPCR assay can detect Pycnopodia from both mesocosms and the field. 
+
+
+# FHL Analysis Passive Versus Active Filtration
+```{r}
+
+results_data_cleaned %>% 
+  filter(.,`Target Name`=="Pycno") %>% 
+  filter(., !str_detect(`Task`,"STANDARD")) %>% 
+    mutate(., `Sample Name`=str_replace(`Sample Name`,",",".")) %>% 
+  left_join(sample_metadata, by=c("Sample Name"="Sample_Name")) %>% 
+  group_by(`Sample Name`) %>% 
+    mutate(., Negative_control = if_else(is.na(Negative_control), TRUE, Negative_control)) %>% 
+  mutate(Technical_Replicate = row_number(`Sample Name`)) %>% 
+  mutate(., Station = if_else(is.na(Station) & Negative_control=="TRUE" | Task=="NTC", `Sample Name`, Station)) %>% 
+  mutate(., Name_plotting = str_c(Station," ",Field_collection_method," ", Biological_Replicate," ",Technical_Replicate )) %>% 
+  mutate(., Name_plotting = if_else(is.na(Name_plotting),str_c(`Sample Name`, " ",Technical_Replicate),Name_plotting)) %>% 
+   mutate(., Name_plotting_b = str_c(Station," ",Field_collection_method," ", Biological_Replicate)) %>% 
+  mutate(., Name_plotting_b = if_else(is.na(Name_plotting_b),`Sample Name`,Name_plotting_b)) %>% 
+  mutate(., Quantity=if_else(is.na(Quantity), 0, Quantity)) %>% 
+  mutate(., Concentration = (Quantity*10*(100/2)/ 1) %>% # Quantity is the concentration generated by the qPCR machine in copies per µL, 10 µL per reaction, 100 µL in the total extraction, 2 µL of template added, and 1 L sampled
+  mutate(., Observation = if_else(Quantity ==0, "Not Detected", "Detected")) %>% 
+  mutate(., Type = if_else(is.na(Station),"Extraction Blank",Station )) %>% 
+   mutate(., Type = if_else(str_detect(Type,".NC"),"Field Blank",Type )) %>%  mutate(., Sample_Type = if_else(Negative_control==FALSE,"Sample","Blank")) %>% 
+  mutate(., Field_collection_method = if_else(Task=="NTC","NTC",Field_collection_method)) %>% 
+mutate(., Field_collection_method = if_else(Type=="Extraction Blank","Extraction Blank",Field_collection_method))-> pycno_sample_data_4_plotting
+```
+
+
+```{r}
+
+pycno_sample_data_4_plotting %>% 
+  filter(., !str_detect(Name_plotting_b, "FHL")) %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Concentration_L, color=Observation)) + geom_count() +
+    scale_y_continuous( 
+         trans = scales::pseudo_log_trans(base = 10), 
+         breaks = c(1,10,1000,10000,100000,1000000,10000000,100000000), 
+         labels = scales::trans_format("log10", scales::math_format(10^.x))
+     ) +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05)) +facet_wrap(Sample_Type~Field_collection_method, scales="free_x") + ylab("Copies per µL") +xlab("Bottle Replicates") + theme(axis.text.x=element_blank(), axis.ticks.x=element_blank())
+
+```
+We had minor contamination in the passive filter. It's 2 orders of magnitude less than any of the samples so not a major concern. Currently not adjusting the values here, but could subtract this value from all observed positive results.
+
+
+```{r}
+
+
+pycno_sample_data_4_plotting %>% 
+  filter(., !str_detect(Name_plotting_b, "FHL")) %>% 
+  filter(., Sample_Type!="Blank") %>% 
+  mutate(., Method= case_when(str_detect(Field_collection_method,"Sterivex")~"Active Filtration",str_detect(Field_collection_method,"Smith")~"Active Filtration",
+                  TRUE~"Passive Filtration"            )) ->pycno_sample_data_4_plotting_fm
+```
+
+### Kruskal Wallace test
+```{r}
+# Perform one-way ANOVA
+kw_test_results <-  kruskal.test(Concentration_L ~ Field_collection_method, pycno_sample_data_4_plotting_fm)
+
+# Perform post-hoc Tukey HSD test
+pairwise.wilcox.test(pycno_sample_data_4_plotting_fm$Concentration_L, pycno_sample_data_4_plotting_fm$Field_collection_method,
+                 p.adjust.method = "bonferroni") -> pairwise_results
+
+full_p_matrix <- fullPTable(pairwise_results$p.value)
+multcompLetters(full_p_matrix) -> cld
+
+cld_tibble_optionA <- as_tibble(cld$Letters, rownames = "group") %>% 
+  dplyr::select(Field_collection_method=group, Letters=value)
+
+pairwise_results
+```
+
+
+```{r}  
+
+pycno_sample_data_4_plotting_fm$Field_collection_method2 <- pycno_sample_data_4_plotting_fm$Field_collection_method
+pycno_sample_data_4_plotting_fm$Field_collection_method2 <- as.factor(pycno_sample_data_4_plotting_fm$Field_collection_method2)
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Kringle Gauze"] <- "Kringle\nGauze"
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Vivecare gauze"] <- "Vivecare\nGauze"
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Tische Environmental Filter"] <- "Tische\nEnvironmental\nFilter"
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Paint Roller"] <- "Paint\nRoller"
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Sterivex 0.22µm"] <- "Sterivex\n0.22µm"
+levels(pycno_sample_data_4_plotting_fm$Field_collection_method2)[levels(pycno_sample_data_4_plotting_fm$Field_collection_method2) == "Smith root 0.22 µm"] <- "Smith\nRoot\n0.22 µm"
+
+
+pycno_sample_data_4_plotting_fm %>% 
+  left_join(cld_tibble_optionA) %>% 
+  ggplot(., aes(x=Field_collection_method2, y=Concentration_L)) + 
+  geom_boxplot(aes(color=Method)) +
+  geom_point(aes(color=Method)) +
+  scale_y_continuous( 
+         trans = scales::pseudo_log_trans(base = 10), 
+         breaks = c(1,10,1000,10000,100000,1000000,10000000,100000000), 
+         labels = scales::trans_format("log10", scales::math_format(10^.x))
+     ) +theme_pubr()  + ylab("Copies per L") +xlab("Sampling Method") +scale_color_manual(values=wes_palette("FrenchDispatch",n=2)) + geom_text(aes(label=Letters, y=10^6)) +theme(axis.title = element_text(size = 16, face = "bold"),  axis.text.x = element_text(size = 10), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) -> a1
+
+
+a1
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_passive_active_comparison.png"),
+       width=10,
+       height = 6,
+       dpi = 400,
+      units = c("in"))
+```
+
+
+```{r}
+pycno_sample_data_4_plotting %>% 
+  filter(., !str_detect(Name_plotting_b, "FHL")) %>% 
+  filter(., Sample_Type!="Blank") %>% 
+  mutate(., Method= case_when(str_detect(Field_collection_method,"Sterivex")~"Active Filtration",str_detect(Field_collection_method,"Smith")~"Active Filtration",
+                  TRUE~"Passive Filtration"            )) %>% 
+  group_by(Field_collection_method, Method) %>% 
+  dplyr::summarize(Max=max(Concentration_L), Min=min(Concentration_L), Mean=mean(Concentration_L), median = median(Concentration_L),
+    IQR = IQR(Concentration_L)) %>% left_join(cld_tibble_optionA) %>% kable(digits=2)
+
+```
+
+
+
+Here we see that Sterivex 0.22 µm filters captured nearly an order of magnitude more Pycnopodia DNA than either Smith Root active filters or any of the passive filters deployed here. This is notable given that Sterivex have a smaller surface area (10cm^2) than the Smith Root 47mm filter (17.3 cm^2) and suggests that differences in the housing or sample integrity are driving these apparent differences. These results highlight that passive filters can be used for field applications to detect Pycnopodia, albeit at a significant disadvantage in that even the best performing materials captured less than a 10th of the DNA captured by active sterivex filtration methods.
+
+
+
+# Load Data Pycno qPCR Plate 1
+
+```{r}
+sample_set_up_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Sample Setup", skip = 46)
+
+amplification_data_run1 <- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Amplification Data",  skip = 46)
+
+results_data_run1<- read_excel(here("qPCR_raw_data","2025-05-23_132340_Pycno_test_1.xls"), sheet="Results",  skip = 46)
+
+```
+
+### Merge Tables
+```{r}
+
+amplification_data_run1 %>% 
+  left_join(sample_set_up_run1) %>% 
+  mutate(., `Sample Name` = if_else(is.na(`Sample Name`),str_c(`Target Name`,"_",Task,"_", Quantity), `Sample Name` )) %>% 
+  mutate(., `Sample Name` = if_else(is.na(`Sample Name`),"Negative Control", `Sample Name` ))-> combined_qPCR_data_run1
+
+```
+
+Now we are ready to start analyzing the data.
+
+First thing we want to do is check to see how our internal positive control is working.
+
+## Moa Map
+```{r}
+
+columns = seq(from =1, to=24, by=1)
+columns_t= as.tibble(columns) %>%  dplyr::rename("Column"=value)
+rows = capitalize(letters[1:16])
+rows_t= as.tibble(rows) %>%  dplyr::rename("Row"=value)
+
+cross_join(columns_t, rows_t) -> full_plate
+
+
+combined_qPCR_data_run1 %>% 
+  filter(., `Target Name`=="Moa-IPC") %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> moa_samples_run1
+  
+full_plate %>% 
+  left_join(moa_samples_run1) -> moa_plate_run1
+
+
+moa_plate_run1 %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns ) + ylab("Row") +theme_pubr() +scale_fill_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2"), wes_palette("Chevalier1"))) +ggtitle("Moa-IPC Standards & Samples")
+
+
+```
+
+
+
+## Pycno Map
+```{r}
+
+combined_qPCR_data_run1 %>% 
+  filter(., `Target Name`=="Pycno") %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> pycno_samples_run1
+  
+full_plate %>% 
+  left_join(pycno_samples_run1) -> pycno_plate_run1
+
+
+pycno_plate_run1 %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns ) + ylab("Row") +theme_pubr() +scale_fill_manual(values =c(wes_palette("Darjeeling1")[1:2],wes_palette("Darjeeling1")[5],wes_palette("Darjeeling2"), wes_palette("Chevalier1"), brewer.pal(n=7, "Oranges"))) +ggtitle("Pycno Standards & Samples")
+
+```
+
+
+## Moa Rn
+```{r}
+combined_qPCR_data_run1 %>% 
+filter(., str_detect(`Sample Name`,"Moa-IPC_STANDARD")) -> moa_standard_run1
+
+moa_standard_run1$Rn %>%  max() -> max_Rn_moa_run1
+h_moa_run1= max_Rn_moa_run1*0.25
+
+moa_standard_run1 %>% 
+ggplot(., aes(y=Rn, x=Cycle, color=`Well Position`)) +
+  geom_point(alpha=0.2) + geom_hline(yintercept =h_moa_run1) +
+  geom_text(aes(0,h_moa_run1,label = round(h_moa_run1,2), vjust = -1),color="black") +theme_bw() +ggtitle("Moa Rn")
+
+
+```
+
+
+There is quite a bit of spread in our IPC. Will remove any samples outside normal distribution.
+#### Remove Samples with Anomolous Outlier IPC values
+```{r}
+
+moa_standard_run1 %>% 
+  filter(., Cycle ==40) -> moa_standard_c40_run1
+
+moa_standard_c40_run1 %>% 
+ dplyr::summarise(mean_Rn = ci(Rn, confidence = 0.99)[1], 
+                      lower_ci_mpg = ci(Rn, confidence = 0.99)[2],
+                      upper_ci_mpg = ci(Rn, confidence = 0.99)[3], 
+                      sd_Rn = ci (Rn, confidence = 0.99)[4]) -> CI0.95_moa_run1
+
+Sum_run1 = groupwiseMean(Rn ~ Cycle, data=moa_standard_c40_run1, conf = 0.99)
+
+moa_standard_c40_run1 %>% 
+summarise(
+    Q1 = quantile(Rn, 0.25, na.rm = TRUE),
+    Q3 = quantile(Rn, 0.75, na.rm = TRUE),
+    IQR = Q3 - Q1,
+    lower_bound = Q1 - 1.5 * IQR,
+    upper_bound = Q3 + 1.5 * IQR
+  ) -> moa_iqr_run1
+
+moa_standard_c40_run1 %>% 
+  mutate(., type=case_when(Rn > moa_iqr_run1$upper_bound ~"Outlier High",
+                           Rn < moa_iqr_run1$lower_bound ~"Outlier Low",
+                           TRUE~"To Keep")) -> moa_standard_c40_run1
+
+moa_standard_c40_run1 %>% 
+  ggplot(., aes(x= Rn, y=Cycle)) +  geom_dots(layout='weave', side = "top", aes(color=type)) + stat_slabinterval(side = "bottom",aes(fill = after_stat(level)))  +scale_fill_brewer(na.translate = FALSE) +theme_pubclean()
+
+moa_standard_c40_run1 %>% 
+  filter(., type!="To Keep") -> moa_outliers_to_drop_run1
+```
+
+#### Filter Data
+```{r}
+combined_qPCR_data_run1 %>% 
+  filter(., `Well Position` != moa_outliers_to_drop_run1$`Well Position`) -> combined_qPCR_data_cleaned_run1
+
+
+results_data_run1 %>% 
+    filter(., `Well Position` != moa_outliers_to_drop$`Well Position`) -> results_data_cleaned_run1
+```
+
+
+
+
+## Pycno Rn
+```{r}
+combined_qPCR_data_run1 %>% 
+filter(., str_detect(`Sample Name`,"Pycno_STANDARD")) -> pycno_standard_run1
+
+pycno_standard_run1$Rn %>%  max() -> max_Rn_run1
+h_run1= 0.8
+
+pycno_standard_run1 %>% 
+ggplot(., aes(y=Rn, x=Cycle, color=`Sample Name`)) +geom_point(alpha=0.4) + geom_hline(yintercept =h_run1) +
+  geom_text(aes(0,h_run1,label = round(h_run1,2), vjust = -1),color="black") +theme_bw() + ggtitle("Pycno Rn") +scale_colour_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2")))
+
+
+```
+
+#### Pycno Ct versus Quantity
+```{r}
+
+pycno_standard_run1 %>% 
+  mutate(., Threshold = if_else(Rn > h_run1, "Above","Below")) -> pycno_standard_run1
+
+pycno_standard_run1 %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="first")==1) %>% 
+  filter(., Threshold =="Above") -> pycno_standard_above_run1
+
+pycno_standard_run1 %>% 
+  ungroup() %>% 
+  filter(., !`Well Position` %in%  pycno_standard_above_run1$`Well Position`) %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="last")==1) -> pycno_standard_below_run1
+
+bind_rows(pycno_standard_above_run1, pycno_standard_below_run1) -> pycno_standard_threshold_run1
+
+
+
+set_breaks = function(limits) {
+     seq(limits[1], limits[2], by = 1)
+}
+
+pycno_standard_threshold_run1 %>% 
+    filter(., Cycle < 40 ) %>% 
+  ggplot(., aes(x=`Quantity`, y = Cycle)) +geom_count(aes(color = ..n.., size = ..n..))  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct") -> run1_ct_versus_quant
+
+
+run1_ct_versus_quant
+```
+
+```{r}
+
+# View the structure of the generated plot object
+# The computed data is stored within the plot object
+grob_data_run1 <- ggplot_build(run1_ct_versus_quant)$data[[3]]
+
+# The result is a list; unlist it to get a character vector
+coef_char_run1 <- unlist(grob_data_run1$coefs)
+
+
+standard_curve_coefs_run1 <- enframe(coef_char_run1, name = "Metric", value = "Value") %>% 
+ mutate( Metric = recode(Metric,
+                             "(Intercept)" = "Intercept",
+                             "x" = "Slope"))
+
+# Extract the R^2 value from the 'r.squared' column
+r_squared_value_run1 <- grob_data_run1$r.squared
+
+```
+
+```{r}
+results_data_cleaned_run1 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task=="STANDARD") %>% 
+   mutate(., CT=as.numeric(CT)) -> pycno_results_standard_run1
+
+
+ pycno_results_standard_run1 %>% 
+  ggplot(., aes(x=`Quantity`, y = CT)) +geom_point()  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct")
+ 
+```
+
+
+
+```{r}
+results_data_cleaned_run1 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task!="UNKNOWN") %>% 
+   mutate(., CT=as.numeric(CT))  %>% 
+  mutate(., Lab="NOAA PMEL OME") %>% 
+  dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) %>% 
+   mutate(., TemplateVolume =2,
+         ReactionVolume= 10) %>% 
+  mutate(., Cq = replace(Cq, Cq>40, NA))-> qPCR_Pycno_1_standards
+
+write.csv(qPCR_Pycno_1_standards, file = here("LOD_LOQ/qPCR_Pycno_1_standards.csv"), row.names = F)
+```
+
+## FHL Analysis Transplanted Individual Detection
+
+## Merge Sample Metadata
+```{r}
+
+sample_metadata<- read_excel(here("qPCR_raw_data","ElectronicArchive_CruiseSampleMetadata_20250516_FHL.xlsx"), sheet="Electronic Archive")
+
+results_data_cleaned_run1 %>% 
+   filter(.,`Target Name`=="Pycno") %>% 
+  filter(., !str_detect(`Task`,"STANDARD")) %>% 
+    mutate(., Quantity=if_else(is.na(Quantity), 0, Quantity)) %>% 
+  mutate(., Concentration = (Quantity*10*(100/2)/ 1) %>% # Quantity is the concentration generated by the qPCR machine in copies per µL, 10 µL per reaction, 100 µL in the total extraction, 2 µL of template added, and 1 L sampled
+  mutate(., Observation = if_else(Quantity ==0, "Not Detected", "Detected")) %>%
+  mutate(., `Sample Name`= if_else(str_detect(`Sample Name`,"Negative Control"), "NTC",`Sample Name`)) %>% 
+  ungroup() %>% 
+  left_join(sample_metadata, by=c("Sample Name"="Field_Name")) %>% 
+  mutate(., `Sample Name` = if_else(`Sample Name`=="Ext_blank_UWFH25","Extraction Blank",`Sample Name`)) %>% 
+  mutate(., Negative_control = if_else(is.na(Negative_control), TRUE, Negative_control)) %>% 
+  group_by(`Sample Name`) %>% 
+  mutate(Technical_Replicate = row_number(`Sample Name`)) %>% 
+  mutate(., Station = if_else(is.na(Station) & Negative_control==TRUE | Task=="NTC", `Sample Name`, Station)) %>% 
+  mutate(., Name_plotting = str_c(Station," Bottle ", Biological_Replicate," PCR ",Technical_Replicate )) %>% 
+  mutate(., Name_plotting = if_else(is.na(Name_plotting),str_c(`Sample Name`, " PCR ",Technical_Replicate),Name_plotting)) %>% 
+   mutate(., Name_plotting_b = str_c(Station," Bottle ", Biological_Replicate)) %>% 
+  mutate(., Name_plotting_b = if_else(is.na(Name_plotting_b),`Sample Name`,Name_plotting_b)) %>% 
+  mutate(., Type = if_else(is.na(Station),"Extraction Blank",Station )) %>% 
+   mutate(., Type = if_else(str_detect(Type,".NC"),"Field Blank",Type )) %>% 
+  mutate(., Sample_Type = if_else(Negative_control==FALSE,"Sample","Blank")) -> pycno_sample_data_4_plotting_run1
+```
+
+### Figure sa3
+```{r}
+pycno_sample_data_4_plotting_run1
+
+pycno_sample_data_4_plotting_run1$Type2 <- pycno_sample_data_4_plotting_run1$Type
+pycno_sample_data_4_plotting_run1$Type2 <- as.factor(pycno_sample_data_4_plotting_run1$Type2)
+levels(pycno_sample_data_4_plotting_run1$Type2)[levels(pycno_sample_data_4_plotting_run1$Type2) == "Aquarium Discharge"] <- "Aquarium\nDischarge"
+levels(pycno_sample_data_4_plotting_run1$Type2)[levels(pycno_sample_data_4_plotting_run1$Type2) == "FHL Dock"] <- "FHL\nDock"
+levels(pycno_sample_data_4_plotting_run1$Type2)[levels(pycno_sample_data_4_plotting_run1$Type2) == "FHL Intake Pipes"] <- "FHL\nIntake\nPipes"
+
+pycno_sample_data_4_plotting_run1 %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., Concentration=if_else(Concentration==0,NA,Concentration) ) %>% 
+  mutate(., Plate = "1")-> plate_1_data_analysis
+
+plate_1_data_analysis %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=log10(Concentration), color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black") + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> sa3
+
+sa3
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_run1.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+```{r}
+pycno_sample_data_4_plotting_run1 %>% 
+  filter(., str_detect(Station, "Aquarium")) %>% 
+  ungroup() %>% 
+  dplyr::summarise(mean(Concentration), sd(Concentration))
+```
+
+### Figure sa4
+```{r}
+
+pycno_sample_data_4_plotting_run1 %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT = replace(CT, CT>40, NA)) %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=CT, color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black", limits = c(20, 40)) + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> sa4
+
+sa4
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_Ct_run1.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+
+# Load Data Pycno qPCR Plate 3
+
+```{r}
+sample_set_up_run3 <- read_excel(here("qPCR_raw_data","Pycno_test_3.xls"), sheet="Sample Setup", skip = 46)
+
+amplification_data_run3 <- read_excel(here("qPCR_raw_data","Pycno_test_3.xls"), sheet="Amplification Data",  skip = 46)
+
+results_data_run3<- read_excel(here("qPCR_raw_data","Pycno_test_3.xls"), sheet="Results",  skip = 46)
+
+```
+
+### Merge Tables
+```{r}
+
+amplification_data_run3 %>% 
+  left_join(sample_set_up_run3) %>% 
+  mutate(., `Sample Name` = if_else(is.na(`Sample Name`),str_c(`Target Name`,"_",Task,"_", Quantity), `Sample Name` )) %>% 
+  mutate(., `Sample Name` = if_else(is.na(`Sample Name`),"Negative Control", `Sample Name` ))-> combined_qPCR_data_run3
+
+```
+
+Now we are ready to start analyzing the data.
+
+First thing we want to do is check to see how our internal positive control is working.
+
+## Moa Map
+```{r}
+
+columns = seq(from =1, to=24, by=1)
+columns_t= as.tibble(columns) %>%  dplyr::rename("Column"=value)
+rows = capitalize(letters[1:16])
+rows_t= as.tibble(rows) %>%  dplyr::rename("Row"=value)
+
+cross_join(columns_t, rows_t) -> full_plate
+
+
+combined_qPCR_data_run3 %>% 
+  filter(., `Target Name`=="MOA") %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> moa_samples_run3
+  
+full_plate %>% 
+  left_join(moa_samples_run3) -> moa_plate_run3
+
+
+moa_plate_run3 %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns ) + ylab("Row") +theme_pubr() +scale_fill_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2"), wes_palette("Chevalier1"), wes_palette("Cavalcanti1"), wes_palette("Zissou1"), wes_palette("Royal1"), wes_palette("Royal2"),wes_palette("AsteroidCity1"),wes_palette("AsteroidCity2"), wes_palette("FrenchDispatch"),wes_palette("IsleofDogs1"),wes_palette("IsleofDogs2"))) +ggtitle("Moa-IPC Standards & Samples")
+
+
+```
+
+
+
+## Pycno Map
+```{r}
+
+combined_qPCR_data_run3 %>% 
+  filter(., `Target Name`=="Pycno") %>% 
+  mutate(., Row = str_sub(`Well Position`,start = 1L, end = 1L), 
+         Column=  as.numeric(str_sub(`Well Position`,start = 2L, end = -1L ))) -> pycno_samples_run3
+  
+full_plate %>% 
+  left_join(pycno_samples_run3) -> pycno_plate_run3
+
+
+pycno_plate_run3 %>% 
+  mutate(Row = factor(Row, levels = rows)) %>%  
+  ggplot(aes(x=Column, y=fct_rev(Row), fill=`Sample Name` )) +geom_tile() +scale_x_continuous(breaks=columns, labels =columns ) + ylab("Row") +theme_pubr() +scale_fill_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2"), wes_palette("Chevalier1"), wes_palette("Cavalcanti1"), wes_palette("Zissou1"), wes_palette("Royal1"), wes_palette("Royal2"),wes_palette("AsteroidCity1"),wes_palette("AsteroidCity2"), wes_palette("FrenchDispatch"),wes_palette("IsleofDogs1"),wes_palette("IsleofDogs2"))) +ggtitle("Pycno Standards & Samples")
+
+```
+
+
+## Moa Rn
+```{r}
+combined_qPCR_data_run3 %>% 
+  filter(`Target Name`=="MOA" & Task=="STANDARD") -> moa_standard_run3
+
+moa_standard_run3$Rn %>%  max() -> max_Rn_moa_run3
+h_moa_run3= max_Rn_moa_run3*0.25
+
+moa_standard_run3 %>% 
+ggplot(., aes(y=Rn, x=Cycle, color=`Well Position`)) +
+  geom_point(alpha=0.2) + geom_hline(yintercept =h_moa_run3) +
+  geom_text(aes(0,h_moa_run3,label = round(h_moa_run3,2), vjust = -1),color="black") +theme_bw() +ggtitle("Moa Rn") +theme(legend.position = "none")
+
+
+```
+
+
+There is quite a bit of spread in our IPC. Will remove any samples outside normal distribution.
+#### Remove Samples with Anomolous Outlier IPC values
+```{r}
+
+moa_standard_run3 %>% 
+  filter(., Cycle ==40) -> moa_standard_c40_run3
+
+moa_standard_c40_run3 %>% 
+ dplyr::summarise(mean_Rn = ci(Rn, confidence = 0.99)[1], 
+                      lower_ci_mpg = ci(Rn, confidence = 0.99)[2],
+                      upper_ci_mpg = ci(Rn, confidence = 0.99)[3], 
+                      sd_Rn = ci (Rn, confidence = 0.99)[4]) -> CI0.95_moa_run3
+
+Sum_run3 = groupwiseMean(Rn ~ Cycle, data=moa_standard_c40_run3, conf = 0.99)
+
+moa_standard_c40_run3 %>% 
+summarise(
+    Q1 = quantile(Rn, 0.25, na.rm = TRUE),
+    Q3 = quantile(Rn, 0.75, na.rm = TRUE),
+    IQR = Q3 - Q1,
+    lower_bound = Q1 - 1.5 * IQR,
+    upper_bound = Q3 + 1.5 * IQR
+  ) -> moa_iqr_run3
+
+moa_standard_c40_run3 %>% 
+  mutate(., type=case_when(Rn > moa_iqr_run3$upper_bound ~"Outlier High",
+                           Rn < moa_iqr_run3$lower_bound ~"Outlier Low",
+                           TRUE~"To Keep")) -> moa_standard_c40_run3
+
+moa_standard_c40_run3 %>% 
+  ggplot(., aes(x= Rn, y=Cycle)) +  geom_dots(layout='weave', side = "top", aes(color=type)) + stat_slabinterval(side = "bottom",aes(fill = after_stat(level)))  +scale_fill_brewer(na.translate = FALSE) +theme_pubclean()
+
+moa_standard_c40_run3 %>% 
+  filter(., type!="To Keep") -> moa_outliers_to_drop_run3
+```
+
+#### Filter Data
+```{r}
+combined_qPCR_data_run3 %>% 
+  filter(., `Well Position` != moa_outliers_to_drop_run3$`Well Position`) -> combined_qPCR_data_cleaned_run3
+
+
+results_data_run3 %>% 
+    filter(., `Well Position` != moa_outliers_to_drop$`Well Position`) -> results_data_cleaned_run3
+```
+
+
+
+
+## Pycno Rn
+```{r}
+combined_qPCR_data_run3 %>% 
+   filter(`Target Name`=="Pycno" & Task=="STANDARD")-> pycno_standard_run3
+
+pycno_standard_run3$Rn %>%  max() -> max_Rn_run3
+h_run3= 0.8
+
+pycno_standard_run3 %>% 
+ggplot(., aes(y=Rn, x=Cycle, color=`Sample Name`)) +geom_point(alpha=0.4) + geom_hline(yintercept =h_run3) +
+  geom_text(aes(0,h_run3,label = round(h_run3,2), vjust = -1),color="black") +theme_bw() + ggtitle("Pycno Rn") +scale_colour_manual(values =c(wes_palette("Darjeeling1"), wes_palette("Darjeeling2")))
+
+
+```
+
+#### Pycno Ct versus Quantity
+```{r}
+
+pycno_standard_run3 %>% 
+  mutate(., Threshold = if_else(Rn > h_run3, "Above","Below")) -> pycno_standard_run3
+
+pycno_standard_run3 %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="first")==1) %>% 
+  filter(., Threshold =="Above") -> pycno_standard_above_run3
+
+pycno_standard_run3 %>% 
+  ungroup() %>% 
+  filter(., !`Well Position` %in%  pycno_standard_above_run3$`Well Position`) %>% 
+  group_by(`Well Position`,`Sample Name`) %>% 
+  filter(., rank(Threshold, ties.method="last")==1) -> pycno_standard_below_run3
+
+bind_rows(pycno_standard_above_run3, pycno_standard_below_run3) -> pycno_standard_threshold_run3
+
+
+
+set_breaks = function(limits) {
+     seq(limits[1], limits[2], by = 1)
+}
+
+pycno_standard_threshold_run3 %>% 
+    filter(., Cycle < 40 ) %>% 
+  ggplot(., aes(x=`Quantity`, y = Cycle)) +geom_count(aes(color = ..n.., size = ..n..))  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct") -> run3_ct_versus_quant
+
+
+run3_ct_versus_quant
+```
+
+```{r}
+
+# View the structure of the generated plot object
+# The computed data is stored within the plot object
+grob_data_run3 <- ggplot_build(run3_ct_versus_quant)$data[[3]]
+
+# The result is a list; unlist it to get a character vector
+coef_char_run3 <- unlist(grob_data_run3$coefs)
+
+
+standard_curve_coefs_run3 <- enframe(coef_char_run3, name = "Metric", value = "Value") %>% 
+ mutate( Metric = recode(Metric,
+                             "(Intercept)" = "Intercept",
+                             "x" = "Slope"))
+
+# Extract the R^2 value from the 'r.squared' column
+r_squared_value_run3 <- grob_data_run3$r.squared
+
+```
+
+```{r}
+results_data_cleaned_run3 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task=="STANDARD") %>% 
+   mutate(., CT=as.numeric(CT)) -> pycno_results_standard_run3
+
+
+ pycno_results_standard_run3 %>% 
+  ggplot(., aes(x=`Quantity`, y = CT)) +geom_point()  +
+    scale_x_log10("Quantity",
+        breaks = trans_breaks("log10", function(x) 10^x),
+        labels = trans_format("log10", math_format(10^.x))) +
+  guides(color = 'legend') +
+     scale_size_continuous(breaks = set_breaks)+
+     scale_color_continuous(breaks = set_breaks)+
+  stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")),label.x = "right",
+  label.y = "top") +theme_bw() +ylab("Ct")
+ 
+```
+
+
+
+```{r}
+results_data_cleaned_run3 %>% 
+  filter(., `Target Name`==Target_name) %>% 
+  filter(., Task!="UNKNOWN") %>% 
+   mutate(., CT=as.numeric(CT))  %>% 
+  mutate(., Lab="NOAA PMEL OME") %>% 
+  dplyr::select(Target=`Target Name`, Lab, Cq=CT, SQ=Quantity) %>% 
+   mutate(., TemplateVolume =2,
+         ReactionVolume= 10) %>% 
+  mutate(., Cq = replace(Cq, Cq>40, NA))-> qPCR_Pycno_3_standards
+
+write.csv(qPCR_Pycno_3_standards, file = here("LOD_LOQ/qPCR_Pycno_3_standards.csv"), row.names = F)
+```
+
+```{r}
+results_data_cleaned_run3 %>% 
+  filter(., `Target Name` == "Pycno") %>% 
+  filter(., str_detect(`Sample Name`,"FH25"))
+
+```
+
+## FHL Analysis Transplanted Individual Detection
+
+## Merge Sample Metadata
+```{r}
+
+sample_metadata<- read_excel(here("qPCR_raw_data","ElectronicArchive_CruiseSampleMetadata_20250516_FHL.xlsx"), sheet="Electronic Archive")
+
+results_data_cleaned_run3 %>% 
+   filter(.,`Target Name`=="Pycno") %>% 
+  filter(., !str_detect(`Task`,"STANDARD")) %>% 
+    mutate(., Quantity=if_else(is.na(Quantity), 0, Quantity)) %>% 
+  mutate(., Concentration = (Quantity*10*(100/2)/ 1) %>% # Quantity is the concentration generated by the qPCR machine in copies per µL, 10 µL per reaction, 100 µL in the total extraction, 2 µL of template added, and 1 L sampled
+  mutate(., Observation = if_else(Quantity ==0, "Not Detected", "Detected")) %>%
+  mutate(., `Sample Name`= if_else(str_detect(`Sample Name`,"Negative Control"), "NTC",`Sample Name`)) %>% 
+  ungroup() %>% 
+  mutate(., Sample_Name= str_remove(`Sample Name`,".FH25")) %>% 
+  left_join(sample_metadata, by=c("Sample_Name"="Sample_Name")) %>% 
+  mutate(., `Sample Name` = if_else(`Sample Name`=="Ext_blank_UWFH25","Extraction Blank",`Sample Name`)) %>% 
+  mutate(., Negative_control = if_else(is.na(Negative_control), TRUE, Negative_control)) %>% 
+  group_by(`Sample Name`) %>% 
+  mutate(Technical_Replicate = row_number(`Sample Name`)) %>% 
+  mutate(., Station = if_else(is.na(Station) & Negative_control==TRUE | Task=="NTC", `Sample Name`, Station)) %>% 
+  mutate(., Name_plotting = str_c(Station," Bottle ", Biological_Replicate," PCR ",Technical_Replicate )) %>% 
+  mutate(., Name_plotting = if_else(is.na(Name_plotting),str_c(`Sample Name`, " PCR ",Technical_Replicate),Name_plotting)) %>% 
+   mutate(., Name_plotting_b = str_c(Station," Bottle ", Biological_Replicate)) %>% 
+  mutate(., Name_plotting_b = if_else(is.na(Name_plotting_b),`Sample Name`,Name_plotting_b)) %>% 
+  mutate(., Type = if_else(is.na(Station),"Extraction Blank",Station )) %>% 
+   mutate(., Type = if_else(str_detect(Type,".NC"),"Field Blank",Type )) %>% 
+  mutate(., Sample_Type = if_else(Negative_control==FALSE,"Sample","Blank")) -> pycno_sample_data_4_plotting_run3
+```
+
+### Figure sa5
+```{r}
+
+
+pycno_sample_data_4_plotting_run3$Type2 <- pycno_sample_data_4_plotting_run3$Type
+pycno_sample_data_4_plotting_run3$Type2 <- as.factor(pycno_sample_data_4_plotting_run3$Type2)
+levels(pycno_sample_data_4_plotting_run3$Type2)[levels(pycno_sample_data_4_plotting_run3$Type2) == "Aquarium Discharge"] <- "Aquarium\nDischarge"
+levels(pycno_sample_data_4_plotting_run3$Type2)[levels(pycno_sample_data_4_plotting_run3$Type2) == "FHL Dock"] <- "FHL\nDock"
+levels(pycno_sample_data_4_plotting_run3$Type2)[levels(pycno_sample_data_4_plotting_run3$Type2) == "FHL Intake Pipes"] <- "FHL\nIntake\nPipes"
+
+pycno_sample_data_4_plotting_run3 %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., Concentration=if_else(Concentration==0,NA,Concentration) ) %>% 
+  mutate(., Plate = "3")-> plate_3_data_analysis
+  
+plate_3_data_analysis %>%   
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=log10(Concentration), color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black") + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> sa5
+
+sa5
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_run3.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+### Figure sa6
+```{r}
+
+pycno_sample_data_4_plotting_run3 %>% 
+  filter(., str_detect(Field_collection_method,"Sterivex")) %>% 
+  filter(., Sample_Type !="Blank") %>% 
+       mutate(across(Sample_Type, ~factor(., levels=c("Sample","Blank")))) %>% 
+  group_by(Name_plotting_b) %>% 
+  mutate(., Replicate = row_number()) %>% 
+  ungroup() %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT = replace(CT, CT>40, NA)) %>% 
+  ggplot(., aes(x=Name_plotting_b, y=Replicate, fill=CT, color="")) + geom_tile() +theme_pubr()+theme(axis.text.x = element_text(angle = -65, vjust = 1, hjust=-0.05))  +facet_wrap(.~Type2, nrow=1, scales="free_x")  + xlab("Bottle & Sterivex\nFilter Replicate") + ylab("Technical qPCR Replicate") +theme(axis.text.x=element_blank(),axis.text.y=element_blank(), axis.ticks.x=element_blank(), axis.title = element_text(size = 16, face = "bold"), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) + scale_fill_viridis_c(option="magma", begin = 0.2, end=1, na.value = "black", limits = c(20, 40)) + scale_colour_manual(values=NA) +   
+     guides(colour=guide_legend("No Detection", override.aes=list(colour="black"))) +
+  labs(fill = "log10(Copies per L)") -> sa6
+
+sa6
+
+
+ggsave(filename = here("Figures","FHL_mesocosm_field_trial_Ct_run3.png"),
+       width=10,
+       height = 4,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+# Combine Standard Plates
+```{r}
+
+plate1_standards <- read.delim(file = here("LOD_LOQ/qPCR_Pycno_1_standards.csv"), header=T, sep=",") %>% mutate(., Plate = 1)
+
+plate3_standards <- read.delim(file = here("LOD_LOQ/qPCR_Pycno_3_standards.csv"), header=T, sep=",") %>% mutate(., Plate = 3)
+
+plate5_standards <- read.delim(file = here("LOD_LOQ/qPCR_Pycno_5_v3_standards.csv"), header=T, sep=",") %>% mutate(., Plate = 5)
+
+rbind(plate1_standards, plate3_standards, plate5_standards) -> plates_135_combined
+
+write.csv(plates_135_combined, file = here("LOD_LOQ/plates_135_combined.csv"), row.names = F)
+
+```
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  ggplot(aes(x= log10(SQ), y=Cq, color= Plate)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2")))
+  
+
+
+```
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  ggplot(aes(x= log10(SQ), y=Cq, color= Plate)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2"))) +facet_wrap(~Plate)
+  
+
+```
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  ggplot(aes(x= log10(SQ), y=Cq, color= Plate)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2"))) +facet_wrap(~Plate)
+  
+
+```
+
+
+
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  ggplot(aes(x= log10(SQ), y=Cq)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2"))) 
+  
+
+```
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  filter(, Plate !="1") %>% 
+  ggplot(aes(x= log10(SQ), y=Cq)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2"))) 
+  
+
+```
+
+```{r}
+
+plates_135_combined %>%
+  mutate(., Plate= as.character(Plate)) %>% 
+  mutate(., SQ=SQ*TemplateVolume) %>% 
+  filter(, Plate !="1") %>% 
+  ggplot(aes(x= log10(SQ), y=Cq, color=Plate)) + geom_point() + stat_poly_line() +
+  stat_poly_eq(use_label(c("eq", "R2"))) 
+  
+
+```
+```{r}
+
+
+bind_rows(plate_5_data_analysis,plate_3_data_analysis,plate_1_data_analysis) -> combo_plate_analysis
+
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  ggplot(., aes(x=Name_plotting, y= CT, fill= Plate)) +geom_col(stat = "identity",position="dodge") +facet_wrap(~Name_plotting_b, scales="free_x")
+```
+
+```{r}
+
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  ggplot(., aes(x=Name_plotting_b, y= CT, color= Plate)) +geom_count() +facet_wrap(~Type2, scales="free_x")
+
+
+```
+
+```{r}
+
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  filter(., CT >0) %>% 
+  ggplot(., aes(x=Name_plotting_b, y= CT, color= Plate)) +geom_boxplot() +facet_wrap(~Type2, scales="free_x")
+
+
+```
+
+```{r}
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  dplyr::group_by(Plate, Type, Name_plotting_b) %>% 
+  filter(., CT > 0) %>% 
+  dplyr::summarise(mean_CT= mean(CT), sd_CT=sd(CT), n=n())
+```
+
+```{r}
+
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  dplyr::group_by(Plate, Type, Name_plotting_b) %>% 
+  filter(., CT > 0) %>% 
+  dplyr::summarise(mean_CT= mean(CT), sd_CT=sd(CT), n=n())
+```
+
+```{r}
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  dplyr::group_by(Plate, Type) %>% 
+  filter(., CT > 0) %>% 
+  dplyr::summarise(mean_CT= mean(CT), sd_CT=sd(CT), n=n())
+
+```
+
+```{r}
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  dplyr::group_by(Plate, Type) %>% 
+  filter(., CT < 1) %>% 
+  dplyr::summarise(n=n())
+
+```
+```{r}
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  filter(., CT > 0)  -> fhl_pos_CT
+
+model_aov_fhl_pos_CT <- aov(CT ~ Plate + Type + Plate*Type, data=fhl_pos_CT)
+
+summary(model_aov_fhl_pos_CT)
+
+tukey_hsd(model_aov_fhl_pos_CT)
+```
+
+```{r}
+
+model_aov_fhl_pos_CT_bottle <- aov(CT ~ Plate + Name_plotting_b + Plate*Name_plotting_b, data=fhl_pos_CT)
+
+summary(model_aov_fhl_pos_CT_bottle)
+
+tukey_hsd(model_aov_fhl_pos_CT_bottle)
+```
+
+
+```{r}
+combo_plate_analysis %>% 
+  mutate(., CT=as.numeric(CT)) %>% 
+  mutate(., CT= replace_na(CT, 0)) %>% 
+  filter(., CT > 0) %>% 
+  filter(., Type =="FHL Dock" ) -> fhl_dock_CT
+
+model_aov_fhl_dock <- aov(CT ~ Plate, data=fhl_dock_CT)
+
+summary(model_aov_fhl_dock)
+
+tukey_hsd(model_aov_fhl_dock)
+```
+
+# Figure 5
+
+```{r}
+pycno_sample_data_4_plotting  %>% 
+  mutate(., Plate="Pycno Run 5") %>% 
+  dplyr::select(Plate, `Sample Name`, CT, Quantity, `Quantity Mean`, `Quantity SD`, Concentration, Biological_Replicate, Technical_Replicate, Name_plotting, Name_plotting_b, Station)-> LoD_plate3_analysis
+pycno_sample_data_4_plotting_run3 %>% 
+  mutate(., Plate="Pycno Run 3") %>% 
+  dplyr::select(Plate, `Sample Name`, CT, Quantity, `Quantity Mean`, `Quantity SD`, Concentration, Biological_Replicate, Technical_Replicate, Name_plotting, Name_plotting_b, Station)-> LoD_plate2_analysis
+pycno_sample_data_4_plotting_run1 %>% 
+  mutate(., Plate="Pycno Run 1") %>% 
+  dplyr::select(Plate, `Sample Name`, CT, Quantity, `Quantity Mean`, `Quantity SD`, Concentration, Biological_Replicate, Technical_Replicate, Name_plotting, Name_plotting_b, Station)-> LoD_plate1_analysis
+
+colnames(LoD_plate3_analysis)
+colnames(LoD_plate2_analysis)
+colnames(LoD_plate1_analysis)
+
+bind_rows(LoD_plate3_analysis, LoD_plate2_analysis, LoD_plate1_analysis) -> LoD_plate_analysis_combo
+
+loblodloq_df <- read.delim(, file=here("LOD_LOQ","final_lob_lod_loq_table.csv"), sep=",") %>% 
+  filter(., Type=="qPCR") %>% pivot_wider(names_from = LoD_method, values_from = c(LOB,LOD,LOQ)) %>% 
+  mutate(., LOB_eLowQuant = if_else(is.na(LOB_eLowQuant),0, LOB_eLowQuant),
+         LOD_eLowQuant = if_else(is.na(LOD_eLowQuant),0.2134723, LOD_eLowQuant),
+         LOQ_eLowQuant = if_else(is.na(LOQ_eLowQuant),0.8078273, LOQ_eLowQuant))
+
+wes_palette("AsteroidCity1") -> AC
+
+LoD_plate_analysis_combo %>% 
+  left_join(loblodloq_df) %>% 
+  filter(., Station %in% c("FHL Dock","FHL Intake Pipes")) %>% 
+  mutate(., Quantity=Quantity*2) %>% 
+  ggplot(aes(y=Quantity, x= Station, color=Plate, shape =Plate)) + geom_jitter(size=5, alpha=0.4) + theme_pubclean() + xlab("Copies per Reaction") + facet_wrap(~ Plate, scales = "free_y") +
+  scale_color_manual(values =c(AC[2],AC[4],AC[5])) + 
+geom_hline(aes(yintercept=LOD_eLowQuant),color=AC[1]) +
+  geom_text(aes(y = LOD_eLowQuant, x = Inf, label = paste0("eLowQuant LoD = ", round(LOD_eLowQuant, 2))), 
+             vjust = -4.5, hjust=1.4, color = AC[1])+ geom_hline(aes(yintercept=LOD_Klymus), color=AC[3])  +
+  geom_text(aes(y = LOD_Klymus, x = Inf, label = paste0("Klymus et al. 2020 LoD = ", round(LOD_Klymus, 1.4))), vjust = 2, hjust=1.2, color = AC[3]) +theme(legend.position = "none")+theme(axis.title = element_text(size = 16, face = "bold"), axis.text = element_text(size = 16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold") ) 
+
+
+ggsave(filename = here("Figures","Figure_5_field_trial_LoD.png"),
+       width=10,
+       height = 6,
+       dpi = 400,
+      units = c("in"))
+```
+
+
+
+

@@ -1,10 +1,9 @@
 ---
-title: 'Lesperance eLowQuant LoD and LoQ: Stanford ddPCR 3 droplet minimum'
+title: "Lesperance eLowQuant LoD and LoQ: Stanford ddPCR for 1 droplet"
 author: "Zachary Gold"
-date: "2026-04-09"
+date: "2026-04-08"
 output: html_document
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = "")
@@ -63,7 +62,6 @@ source(here("eLowQuantUser/eLowQuant-Functions-V20210407.R"))
 FILE.PATH <- here("LOD_LOQ/pycno-fullSC-data-Stanford.csv")
 DAT_RAW <- read.csv(FILE.PATH) %>% rename(SQ=TargetConcentration, Concentration=MeasuredConcentration) %>% 
   mutate(SQ = na_if(SQ, 0)) %>% 
-  mutate(PositiveDroplets = if_else(PositiveDroplets < 3,0,PositiveDroplets)) %>% 
   mutate(Concentration = na_if(Concentration, 0),
          PositiveDroplets = na_if(PositiveDroplets,0))
 ```
@@ -663,7 +661,7 @@ knitr::kable(round(xdxq.all.PR,
                     format="pandoc", digits=1, 
                      results="asis")
 
-write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_Stanford_ddPCR_3_droplet.csv"), row.names = F)
+write.csv(xdxq.all.PR, file=here("LOD_LOQ","eLowQuant_Stanford_ddPCR_1_droplet.csv"), row.names = F)
 ```
 
 

@@ -47,10 +47,9 @@
 
 ##ITEMS TO MODIFY
 ############################################################################################
-
 library(here)
 ## Define the location of your file:
-FILE.PATH <- here("LOD_LOQ/qPCR_Pycno_3_standards.csv")
+FILE.PATH <- here("LOD_LOQ/pycno-lowcurve-5reps-Hakai.csv")
 
 ## Define your CV threshold(s) for LoQ:
 LOQ.Thresholds <- c(0.35)  # Vector of CV thresholds to compare
@@ -74,7 +73,7 @@ LOQ.FCT <- "Best"
 ##   Selecting "Best" will test polynomial models up to 6th-order.
 
 ## Define your assay type:
-ASSAY.TYPE <- "qPCR"  # Options: "qPCR" or "ddPCR"
+ASSAY.TYPE <- "ddPCR"  # Options: "qPCR" or "ddPCR"
 
 ## Define minimum positive droplets for ddPCR detection:
 MIN.POSITIVE.DROPLETS.OPTIONS <- c(1, 2, 3)  # Vector of minimum droplet options to compare
@@ -88,22 +87,15 @@ library(drc)
 library(dplyr)
 
 ## Read and prepare data ONCE before loops:
-DAT_RAW <- read.csv(FILE.PATH) %>%
-  mutate(., SQ=SQ*TemplateVolume)  #2 µL of template DNA was added to each well
+DAT_RAW <- read.csv(FILE.PATH) %>% rename(SQ=TargetConcentration, Concentration=MeasuredConcentration) %>% 
+  mutate(SQ = na_if(SQ, 0)) %>% 
+  mutate(Concentration = na_if(Concentration, 0)) %>% 
+  filter(., SQ < 312499)
 
 ## Check the data:
-## For qPCR, expect: Target, Cq, SQ, Reaction Volume, Template Volume
+## For qPCR, expect: Target, Cq, SQ
 ## For ddPCR, expect: Target, Concentration, SQ (or Expected_Conc), Reaction Volume, Template Volume
 
-
-
-## Create master output folder with timestamp:
-input_filename <- tools::file_path_sans_ext(basename(FILE.PATH))
-timestamp <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
-master_output_folder <- paste0(input_filename, "_comparison_", timestamp)
-dir.create(master_output_folder, showWarnings = FALSE)
-output_folder <- file.path(master_output_folder, param_label)
-dir.create(output_folder, showWarnings = FALSE)
 
 if(sum(colnames(DAT_RAW)=="Target")!=1) { #Is there a "Target" column?
   A <- grep("target",colnames(DAT_RAW),ignore.case=TRUE)
@@ -230,6 +222,12 @@ or adjusted due to false positives or poorly normalized baselines.",
 
 
 
+## Create master output folder with timestamp:
+input_filename <- tools::file_path_sans_ext(basename(FILE.PATH))
+timestamp <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+master_output_folder <- paste0(input_filename, "_comparison_", timestamp)
+dir.create(master_output_folder, showWarnings = FALSE)
+
 ## Create comparison summary dataframe:
 comparison_summary <- data.frame()
 
@@ -256,7 +254,8 @@ for(LOD.Threshold in LOD.Thresholds) {
       } else {
         param_label <- paste0("LOD", LOD.Threshold*100, "_LOQ", LOQ.Threshold*100, "_MinPos", MIN.POSITIVE.DROPLETS)
       }
-      
+      output_folder <- file.path(master_output_folder, param_label)
+      dir.create(output_folder, showWarnings = FALSE)
       
       ## Create an analysis log file:
       write(paste0("Analysis started: ", date(), "\n"), 
@@ -460,7 +459,7 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
       LOD.list3 <- ""
       LOQ.list <- ""
       DAT3 <- data.frame(Assay=Targets,R.squared=NA,Slope=NA,Intercept=NA,LOD.discrete=NA,
-                         LOD=NA,LOQ=NA,rep2.LOD=NA,rep3.LOD=NA,rep4.LOD=NA,rep5.LOD=NA,rep8.LOD=NA,rep9.LOD=NA)
+                         LOD=NA,LOQ=NA,rep2.LOD=NA,rep3.LOD=NA,rep4.LOD=NA,rep5.LOD=NA,rep8.LOD=NA)
       LOD.FCTS <- list(LL.2(),LL.3(),LL.3u(),LL.4(),LL.5(),W1.2(),W1.3(),W1.4(),W2.2(),W2.3(),
                        W2.4(),AR.2(),AR.3(),MM.2(),MM.3())
       for(i in 1:length(Targets)) {
@@ -643,7 +642,6 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
           DAT3$rep4.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.25,type="absolute")[1]
           DAT3$rep5.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.2,type="absolute")[1]
           DAT3$rep8.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,type="absolute")[1]
-          DAT3$rep9.LOD[i] <- ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/9),type="absolute")[1]
           ## Residual code using probit method:
           #DAT3$LOD[i] <- (qnorm(0.95)-coef(get(LOD.list[i+1]))[1])/coef(get(LOD.list[i+1]))[2]
           #DAT3$rep2.LOD[i] <- (qnorm(0.50)-coef(get(LOD.list[i+1]))[1])/coef(get(LOD.list[i+1]))[2]
@@ -736,7 +734,6 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
       write("rep4.LOD: The effective limit of detection if analyzing in 4 replicates.",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write("rep5.LOD: The effective limit of detection if analyzing in 5 replicates.",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write("rep8.LOD: The effective limit of detection if analyzing in 8 replicates.\n\n",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
-      write("rep9.LOD: The effective limit of detection if analyzing in 9 replicates.\n\n",file=file.path(output_folder, "Analysis Log.txt"),append=TRUE)
       write.csv(DAT3,file=file.path(output_folder, "Assay summary.csv"),row.names=FALSE)
       
       
@@ -821,13 +818,12 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/3),interval="delta",type="absolute"),
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.25,interval="delta",type="absolute"),
                         ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.2,interval="delta",type="absolute"),
-                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,interval="delta",type="absolute"),
-                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^(1/9),interval="delta",type="absolute"))
+                        ED(get(LOD.list2[i+1]),1-(1-LOD.Threshold)^0.125,interval="delta",type="absolute"))
           if(substr(LOD.list3[i+1],1,3)=="LL2") {
             DAT4 <- exp(DAT4)
           }
           DAT4 <- data.frame(DAT4,LoD=c("1rep.LOD","2rep.LOD","3rep.LOD","4rep.LOD",
-                                        "5rep.LOD","8rep.LOD","9rep.LOD"),
+                                        "5rep.LOD","8rep.LOD"),
                              Assay=rep(Targets[i],nrow(DAT4)))
           DAT4$Assay <- as.character(DAT4$Assay)
           if(i==1) {
@@ -969,7 +965,6 @@ or adjusted due to false positives or poorly normalized baselines.\n\n",
     } # End MIN.POSITIVE.DROPLETS loop
   } # End LOQ.Threshold loop
 } # End LOD.Threshold loop
-
 
 ## Save comparison summary:
 write.csv(comparison_summary, 

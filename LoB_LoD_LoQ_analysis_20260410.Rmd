@@ -1,0 +1,278 @@
+---
+title: "LoB, LoD, and LoQ Tables"
+author: "Zachary Gold"
+date: "2026-04-10"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(nationalparkcolors)
+pal3 <- park_palette("CraterLake")[1:4]
+library(ggpubr)
+```
+
+# Load Results
+
+### eLowQuant
+
+```{r}
+eLowQuant_qPCR_NOAA <- read.delim("LOD_LOQ/eLowQuant_NOAA_PMEL_OME_qPCR.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="qPCR",
+         Type="qPCR",
+         Lab ="NOAA PMEL OME",
+         Plate="Pycno Run 5")
+
+eLowQuant_ddPCR_Stanford_1_droplet <- read.delim("LOD_LOQ/eLowQuant_Stanford_ddPCR_1_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="1 Droplet",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+eLowQuant_ddPCR_Stanford_2_droplet <- read.delim("LOD_LOQ/eLowQuant_Stanford_ddPCR_2_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="2 Droplets",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+eLowQuant_ddPCR_Stanford_3_droplet <- read.delim("LOD_LOQ/eLowQuant_Stanford_ddPCR_3_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="3 Droplets",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+eLowQuant_ddPCR_hakai_1_droplet <- read.delim("LOD_LOQ/eLowQuant_Hakai_5rep_ddPCR_1_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="1 Droplet",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+eLowQuant_ddPCR_hakai_2_droplet <- read.delim("LOD_LOQ/eLowQuant_Hakai_5rep_ddPCR_2_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="2 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+eLowQuant_ddPCR_hakai_3_droplet <- read.delim( "LOD_LOQ/eLowQuant_Hakai_5rep_ddPCR_3_droplet.csv", sep=",") %>% 
+  mutate(., LoD_method = "eLowQuant",
+         assay_method="ddPCR",
+         Type="3 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+
+bind_rows(eLowQuant_qPCR_NOAA,
+eLowQuant_ddPCR_Stanford_1_droplet,
+eLowQuant_ddPCR_Stanford_2_droplet,
+eLowQuant_ddPCR_Stanford_3_droplet,
+eLowQuant_ddPCR_hakai_1_droplet,
+eLowQuant_ddPCR_hakai_2_droplet,
+eLowQuant_ddPCR_hakai_3_droplet) -> eLowQuant_combo
+```
+
+
+
+### Klymus 
+
+
+```{r}
+
+Klymus_qPCR_NOAA_pycno_5 <- read.delim("LOD_LOQ/qPCR_Pycno_5_v3_standards_comparison_2026-04-10_10-38-41/Parameter_Comparison_Summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="qPCR",
+         Type="qPCR",
+         Lab ="NOAA PMEL OME",
+         Plate="Pycno Run 5")
+
+Klymus_qPCR_NOAA_pycno_3 <- read.delim("LOD_LOQ/qPCR_Pycno_3_standards_comparison_2026-04-10_10-47-16/Parameter_Comparison_Summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="qPCR",
+         Type="qPCR",
+         Lab ="NOAA PMEL OME",
+         Plate="Pycno Run 3")
+
+Klymus_qPCR_NOAA_pycno_1 <- read.delim("LOD_LOQ/qPCR_Pycno_1_standards_comparison_2026-04-10_10-39-02/Parameter_Comparison_Summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="qPCR",
+         Type="qPCR",
+         Lab ="NOAA PMEL OME",
+         Plate="Pycno Run 1")
+
+
+Klymus_ddPCR_Stanford_1droplet  <- read.delim("LOD_LOQ/pycno-fullSC-data-Stanford_comparison_2026-04-02_22-10-55/LOD95_LOQ35_MinPos1/Assay summary.csv", sep=",")  %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="1 Droplet",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+Klymus_ddPCR_Stanford_2droplet  <- read.delim("LOD_LOQ/pycno-fullSC-data-Stanford_comparison_2026-04-02_22-10-55/LOD95_LOQ35_MinPos2/Assay summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="2 Droplets",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+Klymus_ddPCR_Stanford_3droplet  <- read.delim("LOD_LOQ/pycno-fullSC-data-Stanford_comparison_2026-04-02_22-10-55/LOD95_LOQ35_MinPos3/Assay summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="3 Droplets",
+         Lab ="Stanford",
+         Plate="Stanford")
+
+
+
+Klymus_ddPCR_hakai_5_rep_1droplet <- read.delim("LOD_LOQ/pycno-lowcurve-5reps-Hakai_comparison_2026-04-09_23-10-35/LOD95_LOQ35_MinPos1/Assay summary.csv", sep=",")%>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="1 Droplet",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+
+Klymus_ddPCR_hakai_5_rep_2droplet <- read.delim("LOD_LOQ/pycno-lowcurve-5reps-Hakai_comparison_2026-04-09_23-10-35/LOD95_LOQ35_MinPos2/Assay summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="2 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+
+Klymus_ddPCR_hakai_5_rep_3droplet <- read.delim("LOD_LOQ/pycno-lowcurve-5reps-Hakai_comparison_2026-04-09_23-10-35/LOD95_LOQ35_MinPos3/Assay summary.csv", sep=",") %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="3 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai 5rep")
+
+
+
+Klymus_ddPCR_hakai_1droplet <- read.delim("LOD_LOQ/pycno-fullSC-data-Hakai_comparison_2026-04-02_22-30-11/LOD95_LOQ35_MinPos1/Assay summary.csv", sep=",")  %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="1 Droplet",
+         Lab ="Hakai",
+         Plate="Hakai")
+
+Klymus_ddPCR_hakai_2droplet <- read.delim("LOD_LOQ/pycno-fullSC-data-Hakai_comparison_2026-04-02_22-30-11/LOD95_LOQ35_MinPos2/Assay summary.csv", sep=",")  %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="2 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai") 
+
+Klymus_ddPCR_hakai_3droplet <- read.delim("LOD_LOQ/pycno-fullSC-data-Hakai_comparison_2026-04-02_22-30-11/LOD95_LOQ35_MinPos3/Assay summary.csv", sep=",")  %>% 
+  mutate(., LoD_method = "Klymus",
+         assay_method="ddPCR",
+         Type="3 Droplets",
+         Lab ="Hakai",
+         Plate="Hakai")
+
+bind_rows(Klymus_qPCR_NOAA_pycno_1,
+          Klymus_qPCR_NOAA_pycno_3,
+          Klymus_qPCR_NOAA_pycno_5,
+          Klymus_ddPCR_Stanford_1droplet,
+          Klymus_ddPCR_Stanford_2droplet,
+          Klymus_ddPCR_Stanford_3droplet,
+          Klymus_ddPCR_hakai_5_rep_1droplet,
+          Klymus_ddPCR_hakai_5_rep_2droplet,
+          Klymus_ddPCR_hakai_5_rep_3droplet,
+          Klymus_ddPCR_hakai_1droplet,
+          Klymus_ddPCR_hakai_2droplet,
+          Klymus_ddPCR_hakai_3droplet) -> klymus_combo
+
+```
+
+# Table 
+```{r}
+eLowQuant_combo %>% 
+  dplyr::select(LoD_method, assay_method, Type, Lab, Plate, LOB, LOD, LOQ ) -> eLowQuant_clean
+
+klymus_combo %>% 
+  mutate(., LOB=0) %>% 
+  dplyr::select(LoD_method,assay_method, Type, Lab, Plate, LOB, LOD, LOQ ) -> Klymus_clean
+
+bind_rows(eLowQuant_clean, Klymus_clean) -> loblodloq_df
+
+write.csv(loblodloq_df, file=here("LOD_LOQ","final_lob_lod_loq_table.csv"), row.names = F)
+
+loblodloq_df %>% kable(digits = 2)
+```
+
+## LoD
+
+```{r}
+
+loblodloq_df %>% 
+  pivot_longer(cols=LOB:LOQ,names_to = "Metric", values_to = "Copies per rxn" ) %>% 
+  filter(., Metric=="LOD") -> LOD
+
+LOD %>% 
+  ggplot(aes(x=Plate, y=log10(`Copies per rxn`), fill=Lab)) + geom_col()+ facet_wrap(LoD_method~assay_method~Type~Lab~Metric, scales="free_x") + scale_fill_manual(values=pal3)  + theme_pubclean() + theme(legend.position = "none") -> p1
+
+
+ggsave(filename = here("Figures","LoD_comparisons.png"),
+       width=16,
+       height = 16,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+```{r}
+
+aov(LOD ~ LoD_method+assay_method+Type+Lab+Plate , data=loblodloq_df) -> LOD_aov
+
+summary(LOD_aov)
+
+tukey_hsd(LOD_aov)
+```
+
+```{r}
+
+aov(LOD ~ LoD_method*assay_method+LoD_method+assay_method , data=loblodloq_df) -> LOD_aov_2
+
+summary(LOD_aov_2)
+
+tukey_hsd(LOD_aov_2)
+```
+
+```{r}
+
+loblodloq_df %>% 
+  pivot_longer(cols=LOB:LOQ,names_to = "Metric", values_to = "Copies per rxn" ) %>% 
+  filter(., Metric=="LOQ") -> LOQ
+
+LOQ %>% 
+  ggplot(aes(x=Plate, y=log10(`Copies per rxn`), fill=Lab)) + geom_col()+ facet_wrap(LoD_method~assay_method~Type~Lab~Metric, scales="free_x") + scale_fill_manual(values=pal3)  + theme_pubclean() + theme(legend.position = "none") -> p2
+
+
+ggsave(filename = here("Figures","LoQ_comparisons.png"),
+       width=16,
+       height = 16,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+```{r}
+
+aov(LOQ ~ LoD_method+assay_method+Type+Lab+Plate , data=loblodloq_df) -> LOQ_aov
+
+summary(LOQ_aov)
+
+tukey_hsd(LOQ_aov)
+```
+
+```{r}
+
+aov(LOQ ~ LoD_method*assay_method+LoD_method+assay_method , data=loblodloq_df) -> LOQ_aov_2
+
+summary(LOQ_aov_2)
+
+tukey_hsd(LOQ_aov_2)
+```
+
+
