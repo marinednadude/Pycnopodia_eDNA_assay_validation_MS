@@ -1,7 +1,8 @@
-# This github repository is for a manuscript still in preparation. Use the results and data from this cautiously.
+**This github repository is for a manuscript still in preparation. Use the results and data from this cautiously.**
 
-# Pycnopodia_eDNA_assay_validation_MS
-This repository has all the code and data used to develop and analyze the Pycnopodia helianthoides eDNA qPCR assay.
+# Molecular Star Gazing: Development and Validation of an Environmental DNA Assay for the Imperiled Sunflower Sea Star (*Pycnopodia helianthoides*)
+
+This repository has all the code and data used to develop and analyze the *Pycnopodia helianthoides* eDNA qPCR assay.
 
 
 # LoD
