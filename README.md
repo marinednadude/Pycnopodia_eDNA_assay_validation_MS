@@ -5,8 +5,9 @@
 This repository has all the code and data used to develop and analyze the *Pycnopodia helianthoides* eDNA qPCR assay.
 
 
-# LoD
-## LoB_LoD_LoQ_analysis_20260410.Rmd
+# Limits of Blank, Detection, and Quantification Analyses
+
+#### LoB_LoD_LoQ_analysis_20260410.Rmd
 This file pulls in the LoB, LoD, and LoQ calculations from Hakai, Stanford, and NOAA PMEL OME and builds a table.
 
 ## /LOD_LOQ
@@ -32,35 +33,35 @@ Stanford University limit of detection and quantification analysis following the
 
 ### eLowQuant Method
 
-####elowquant_20260409_hakai_ddpcr_3droplet_5rep.Rmd
+#### elowquant_20260409_hakai_ddpcr_3droplet_5rep.Rmd
 Hakai limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 3 positive droplets per sample.
 
-####elowquant_20260409_hakai_ddpcr_2droplet_5rep.Rmd
+#### elowquant_20260409_hakai_ddpcr_2droplet_5rep.Rmd
 Hakai limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 2 positive droplets per sample.
 
-####elowquant_20260409_hakai_ddpcr_1droplet_5rep.Rmd
+#### elowquant_20260409_hakai_ddpcr_1droplet_5rep.Rmd
 Hakai limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 1 positive droplets per sample.
 
 
-####elowquant_20260409_NOAA_qPCR_run5.Rmd
+#### elowquant_20260409_NOAA_qPCR_run5.Rmd
 NOAA PMEL OME limit of detection and quantification analysis following the eLowQuant methods
 
 
-####elowquant_20260409_stanford_ddpcr_3droplets.Rmd
+#### elowquant_20260409_stanford_ddpcr_3droplets.Rmd
 Stanford University limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 3 positive droplets per sample.
 
-####elowquant_20260409_stanford_ddpcr_2droplets.Rmd
+#### elowquant_20260409_stanford_ddpcr_2droplets.Rmd
 Stanford University limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 2 positive droplets per sample.
 
-####elowquant_20260409_stanford_ddpcr_1droplet.Rmd
+#### elowquant_20260409_stanford_ddpcr_1droplet.Rmd
 Stanford University limit of detection and quantification analysis following the eLowQuant methods with a minimum requirement of 1 positive droplets per sample.
 
 
 # Tissue, Mesocosm, and Field Trials
-## 20260410_Pycnopodia_MS_analysis.Rmd
+#### 20260410_Pycnopodia_MS_analysis.Rmd
 This conducts analyses on the qPCR data from NOAA PMEL OME on the assay tissue specificity, and UW Friday Harbor Laboratory mesocosm and field trials. 
 
 # Paired Underwater Visual Census and eDNA
-## 20260316_uvc_eDNA_analysis.Rmd
+#### 20260316_uvc_eDNA_analysis.Rmd
 This conducts analyses on the ddPCR data from Hakai on the paired eDNA and diver surveys.
 
