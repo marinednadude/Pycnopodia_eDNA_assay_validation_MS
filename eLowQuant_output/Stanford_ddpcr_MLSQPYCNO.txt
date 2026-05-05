@@ -1,6 +1,0 @@
-PYCNO y0= 32 n0= 96 
-
-      Estimate  Std.Err Z value Pr(>z)
-alpha 1.57e-08 1.22e+00    0.00   1.00
-beta  2.82e+00 2.89e+00    0.98   0.33
-SQ0   1.42e-01 2.98e-01    0.48   0.63

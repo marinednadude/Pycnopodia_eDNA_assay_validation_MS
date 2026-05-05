@@ -24,6 +24,7 @@ library(patchwork)
 library(nationalparkcolors)
 ```
 
+# Raw Data
 
 ```{r}
 uvc_edna_df <- read.csv(here("Hakai_uvc_eDNA/PycnovBiomass_ToShare.csv")) %>% mutate(., Habitat=LocationType)  %>% mutate(SurveyType = recode(SurveyType, 
@@ -44,8 +45,6 @@ uvc_edna_df$site_longitude <- as.numeric(uvc_edna_df$site_longitude)
 
 ```
 
-
-### Colors
 ```{r}
 pal <- park_palette("ChannelIslands")[2:3]
 pal2 <- park_palette("ChannelIslands")[5:6]
@@ -55,7 +54,7 @@ pal4 <- park_palette("MtRainier")[2:4]
 
 ```
 
-# Figure 7 Proportion 
+## Figure S5 Proportion 
 
 ```{r}
 
@@ -98,7 +97,7 @@ uvc_edna_df %>%
 
 
 
-ggsave(filename = here("Figures","proportion.png"),
+ggsave(filename = here("Figures","Fig_S5_proportion.png"),
        width=12,
        height = 8,
        dpi = 400,
@@ -187,12 +186,12 @@ cv_abundance_SurveyType %>%
   
 a3
 ```
-###  Figure 8
+##  Figure S6
 ```{r}
 
 a1 +a3 + plot_layout(axis_titles = "collect", guides="collect" ,axes = "collect",widths = c(2, 1)) + plot_annotation(tag_levels = 'A') & theme(legend.position = "none") 
 
-ggsave(filename = here("Figures","coeff_var.png"),
+ggsave(filename = here("Figures","Fig_S6_coeff_var.png"),
        width=12,
        height = 8,
        dpi = 400,
@@ -201,9 +200,9 @@ ggsave(filename = here("Figures","coeff_var.png"),
 ```
 
 
-#  Figure 9 - Biomass Density
+##  Figure S7 - Biomass Density
 
-## Bin Spatially
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
@@ -211,6 +210,14 @@ ggsave(filename = here("Figures","coeff_var.png"),
 library(geosphere)
 library(dplyr)
 
+
+uvc_edna_df %>% 
+  mutate(biomass_density_sum = as.numeric(biomass_density_sum),
+         density_sum = as.numeric(density_sum),
+         pyc_count_sum = as.numeric(pyc_count_sum)) %>% 
+  filter(., !is.na(biomass_density_sum))%>% 
+  filter(., !is.na(density_sum))%>% 
+  filter(., !is.na(pyc_count_sum)) -> subtidal_compare
 
 # 1. Calculate distance matrix in kilometers
 dmat <- distm(subtidal_compare[, c('site_longitude', 'site_latitude')], fun = distHaversine) / 1000
@@ -229,7 +236,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 
@@ -256,7 +263,7 @@ b1
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -291,10 +298,10 @@ b5
 
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id) %>%
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> station
 
@@ -312,7 +319,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_5km) %>% 
@@ -333,7 +340,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_20km) %>% 
@@ -357,22 +364,23 @@ b4
 
 
 
-###  Combined plot
+###  Combined plot - Biomass Density
 
 ```{r}
 
 b1+b2+b3+b4  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale.png"),
+ggsave(filename = here("Figures","Fig_S7_ecological_integration_scale.png"),
        width=14,
        height = 8,
        dpi = 400,
       units = c("in"))
 ```
-# Supplemental Analyses Counts
 
-## Bin Spatially
+## Figure S8 Density
+
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
@@ -398,7 +406,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 uvc_edna_df$density_sum <- as.numeric(uvc_edna_df$density_sum)
@@ -426,7 +434,7 @@ b1s
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -461,7 +469,7 @@ b5s
 
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,site_id) %>% 
@@ -482,7 +490,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2s
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_5km) %>% 
@@ -491,7 +499,7 @@ subtidal_compare %>%
 
 
 sc_cluster_id_5km %>% 
-  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia  Density") +
+  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Density") +
   ggtitle("5 Km Averaged") + ylim(0,log10(250000)) + xlim(0,1) +theme_pubr() +
   stat_poly_eq(use_label(c("eq")),label.x = "right",
 label.y = 0.2, size=7) +
@@ -503,7 +511,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3s
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_20km) %>% 
@@ -512,7 +520,7 @@ subtidal_compare %>%
 
 
 sc_cluster_id_20km %>% 
-  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L),color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L),color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Density") +
   ggtitle("Region Averaged")+ ylim(0,log10(250000)) + xlim(0,1) +theme_pubr()  +
   stat_poly_eq(use_label(c("eq")),label.x = "right",
 label.y = 0.2, size=7) +
@@ -527,23 +535,23 @@ b4s
 
 
 
-### Combined plot
+### Combined plot - Density
 
 ```{r}
 
 b1s+b2s+b3s+b4s  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale_density.png"),
+ggsave(filename = here("Figures","Fig_S8_ecological_integration_scale_density.png"),
        width=14,
        height = 8,
        dpi = 400,
       units = c("in"))
 ```
 
-# Supplemental Analyses Counts
+##Figure S9 Counts
 
-## Bin Spatially
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
@@ -569,7 +577,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 uvc_edna_df$pyc_count_sum <- as.numeric(uvc_edna_df$pyc_count_sum)
@@ -597,7 +605,7 @@ b1sc
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -631,7 +639,7 @@ b5sc
 ```
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 
 subtidal_compare %>% 
@@ -654,7 +662,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2sc
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
     mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
@@ -676,7 +684,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3sc
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
@@ -701,14 +709,14 @@ b4sc
 
 
 
-### Plot
+### Combined Plot - Counts
 
 ```{r}
 
 b1sc+b2sc+b3sc+b4sc  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale_total_counts.png"),
+ggsave(filename = here("Figures","Fig_S9_ecological_integration_scale_total_counts.png"),
        width=14,
        height = 8,
        dpi = 400,
@@ -716,7 +724,7 @@ ggsave(filename = here("Figures","ecological_integration_scale_total_counts.png"
 ```
 
 
-# LoD Applies
+# LoD Filtering Applied
 
 ```{r}
 
@@ -728,7 +736,7 @@ uvc_edna_df %>%
   mutate(., copies_L = if_else(copies_L <LoD_per_copies_per_L,0,copies_L )) -> uvc_edna_df_lod
 ```
 
-# Figure 7 Proportion 
+## Figure 7 Proportion 
 
 ```{r}
 
@@ -771,7 +779,7 @@ uvc_edna_df_lod %>%
 
 
 
-ggsave(filename = here("Figures","proportion_lod.png"),
+ggsave(filename = here("Figures","Fig_7_proportion_lod.png"),
        width=12,
        height = 8,
        dpi = 400,
@@ -862,12 +870,25 @@ cv_abundance_SurveyType %>%
   
 a3
 ```
-###  Figure 8
+##  Figure S11
 ```{r}
 
 a1 +a3 + plot_layout(axis_titles = "collect", guides="collect" ,axes = "collect",widths = c(2, 1)) + plot_annotation(tag_levels = 'A') & theme(legend.position = "none") 
 
-ggsave(filename = here("Figures","coeff_var_lod.png"),
+ggsave(filename = here("Figures","Fig_S11_coeff_var_lod.png"),
+       width=12,
+       height = 8,
+       dpi = 400,
+      units = c("in"))
+
+```
+
+##  Figure 8 Concentration by Site
+```{r}
+
+a1 + plot_layout(axis_titles = "collect", guides="collect" ,axes = "collect")  & theme(legend.position = "none") 
+
+ggsave(filename = here("Figures","Fig_8_coeff_var_lod.png"),
        width=12,
        height = 8,
        dpi = 400,
@@ -876,15 +897,20 @@ ggsave(filename = here("Figures","coeff_var_lod.png"),
 ```
 
 
-#  Figure 9 - Biomass Density
+##  Figure 9 - Biomass Density
 
-## Bin Spatially
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
 #install.packages(c("geosphere", "dplyr"))
 library(geosphere)
 library(dplyr)
+
+
+uvc_edna_df_lod %>% 
+  mutate(biomass_density_sum = as.numeric(biomass_density_sum)) %>% 
+  filter(., !is.na(biomass_density_sum)) -> subtidal_compare
 
 
 # 1. Calculate distance matrix in kilometers
@@ -904,7 +930,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 
@@ -931,7 +957,7 @@ b1
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -966,7 +992,7 @@ b5
 
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,site_id) %>% 
@@ -987,7 +1013,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_5km) %>% 
@@ -1008,7 +1034,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_20km) %>% 
@@ -1032,22 +1058,22 @@ b4
 
 
 
-###  Combined plot
+### Combined plot - Biomass Density
 
 ```{r}
 
 b1+b2+b3+b4  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale_lod.png"),
+ggsave(filename = here("Figures","Fig_9_ecological_integration_scale_lod.png"),
        width=14,
        height = 8,
        dpi = 400,
       units = c("in"))
 ```
-# Supplemental Analyses Counts
+## Fig S13. Density
 
-## Bin Spatially
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
@@ -1073,7 +1099,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 uvc_edna_df_lod$density_sum <- as.numeric(uvc_edna_df_lod$density_sum)
@@ -1101,7 +1127,7 @@ b1s
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -1136,7 +1162,7 @@ b5s
 
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,site_id) %>% 
@@ -1157,7 +1183,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2s
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
   mutate(., density_sum=as.numeric(density_sum)) %>% 
@@ -1167,7 +1193,7 @@ subtidal_compare %>%
 
 
 sc_cluster_id_5km %>% 
-  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia  Density") +
+  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L), color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Density") +
   ggtitle("5 Km Averaged") + ylim(0,log10(250000)) + xlim(0,1) +theme_pubr() +
   stat_poly_eq(use_label(c("eq")),label.x = "right",
 label.y = 0.2, size=7) +
@@ -1179,7 +1205,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3s
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     group_by(Habitat, SurveyType,cluster_id_20km) %>% 
@@ -1188,7 +1214,7 @@ subtidal_compare %>%
 
 
 sc_cluster_id_20km %>% 
-  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L),color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Biomass Density") +
+  ggplot(., aes(x=mean_density_sum, y=log10(mean_copies_L))) + stat_poly_line(color = "black",fill="grey80")+geom_point(size=5, aes(color=Habitat)) + geom_errorbar(aes(ymin = log10(mean_copies_L-se_copies_L), ymax = log10(mean_copies_L+se_copies_L),color=Habitat), width = 0) +geom_errorbarh(aes(xmin = mean_density_sum-se_density_sum, xmax = mean_density_sum+se_density_sum, color=Habitat), width = 0)  +theme_pubr() + ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Mean Pycnopodia Density") +
   ggtitle("Region Averaged")+ ylim(0,log10(250000)) + xlim(0,1) +theme_pubr()  +
   stat_poly_eq(use_label(c("eq")),label.x = "right",
 label.y = 0.2, size=7) +
@@ -1203,23 +1229,23 @@ b4s
 
 
 
-### Combined plot
+### Combined plot - Density
 
 ```{r}
 
 b1s+b2s+b3s+b4s  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale_density_lod.png"),
+ggsave(filename = here("Figures","Fig_S13_ecological_integration_scale_density_lod.png"),
        width=14,
        height = 8,
        dpi = 400,
       units = c("in"))
 ```
 
-# Supplemental Analyses Counts
+## Fig S14. Counts
 
-## Bin Spatially
+### Bin Spatially
 ```{r}
 
 # Example using geosphere and dplyr
@@ -1245,7 +1271,7 @@ subtidal_compare$cluster_id_500m <- cutree(clustered, h = 0.5)
 
 ```
 
-## B1. Bottle Specific
+### B1. Bottle Specific
 
 ```{r}
 uvc_edna_df_lod$pyc_count_sum <- as.numeric(uvc_edna_df_lod$pyc_count_sum)
@@ -1273,7 +1299,7 @@ b1sc
 
 
 
-## B5 Habitat
+### B5 Habitat
 ```{r}
 
 
@@ -1307,7 +1333,7 @@ b5sc
 ```
 
 
-## B2. 100m Bin
+### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
   mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
@@ -1329,7 +1355,7 @@ label.y = 0.04, size=7) +scale_color_manual(values=pal) +theme(legend.position =
 b2sc
 ```
 
-## B3. 5km Bin
+### B3. 5km Bin
 ```{r}
 subtidal_compare %>% 
     mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
@@ -1351,7 +1377,7 @@ label.y = 0.04, size=7)+scale_color_manual(values=pal) +theme(legend.position = 
 b3sc
 ```
 
-## B4. Regional Average
+### B4. Regional Average
 ```{r}
 subtidal_compare %>% 
     mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
@@ -1376,14 +1402,14 @@ b4sc
 
 
 
-### Plot
+### Combined Plot - Counts
 
 ```{r}
 
 b1sc+b2sc+b3sc+b4sc  + plot_layout(axis_titles = "collect", axes = "collect", ncol = 4) + plot_annotation(tag_levels = 'A')
 
 
-ggsave(filename = here("Figures","ecological_integration_scale_total_counts_lod.png"),
+ggsave(filename = here("Figures","Fig_S14_ecological_integration_scale_total_counts_lod.png"),
        width=14,
        height = 8,
        dpi = 400,

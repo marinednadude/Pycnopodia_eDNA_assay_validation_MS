@@ -1,8 +1,0 @@
-
- PYCNO 
-Convergence= 0 
-      Estimate  Std.Err Z value Pr(>z)
-alpha 8.63e-11 8.04e-01    0.00   1.00
-beta  2.82e+00 1.96e+00    1.44   0.15
-LLR test stat= 3.794387 , df=  2 , p-value= 0.149989 
-

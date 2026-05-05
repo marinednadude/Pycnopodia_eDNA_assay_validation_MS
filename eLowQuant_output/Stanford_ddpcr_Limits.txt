@@ -1,5 +1,0 @@
-
-
-         alpha   aSE   beta   bSE   LOB   LODL   LOD   LODU   LOQL   LOQ   LOQU
-------  ------  ----  -----  ----  ----  -----  ----  -----  -----  ----  -----
-PYCNO        0     0    2.3   0.7     0    0.1   0.2    0.4    0.4   0.6    1.4
