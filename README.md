@@ -65,3 +65,7 @@ This conducts analyses on the qPCR data from NOAA PMEL OME on the assay tissue s
 #### 20260316_uvc_eDNA_analysis.Rmd
 This conducts analyses on the ddPCR data from Hakai on the paired eDNA and diver surveys.
 
+# Opportunistic Wasting Versus Healthy Comparison
+#### 20260506_Healthy_Wasting_Analysis.Rmd
+This conducts analyses on the ddPCR data from Stanford on the comparison between field samples from healthy and wasting stars.
+
