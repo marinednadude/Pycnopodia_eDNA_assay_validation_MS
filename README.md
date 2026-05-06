@@ -69,3 +69,7 @@ This conducts analyses on the ddPCR data from Hakai on the paired eDNA and diver
 #### 20260506_Healthy_Wasting_Analysis.Rmd
 This conducts analyses on the ddPCR data from Stanford on the comparison between field samples from healthy and wasting stars.
 
+# Larval eDNA
+#### 20260506_Larval_Analysis.Rmd
+This conducts analyses on the ddPCR data from Stanford on eDNA generated from larval mesocosms and individual larval bodies.
+
