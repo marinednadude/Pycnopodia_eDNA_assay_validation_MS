@@ -1,0 +1,180 @@
+---
+title: "Healthy vs. Wasting Analysis"
+author: "Meghan M. Shea"
+date: "`r Sys.Date()`"  
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+    theme: flatly
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(
+  warning = FALSE, 
+  message = FALSE,
+  fig.height = 7, 
+  fig.width = 6.5, 
+  echo = TRUE,
+  fig.align = 'center',
+  cache = FALSE
+)
+
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+```
+
+# Set Up
+
+### Load Libraries
+
+```{r Packages, include=TRUE}
+# Packages used
+packages = c("tidyverse", "knitr", "kableExtra")
+
+## Load or install&load
+package.check <- lapply(packages,
+  FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  }
+)
+
+```
+
+### Import Data
+```{r Data Import, include=TRUE}
+
+ddPCR_data <- read.csv("raw_data/ddPCR_raw_data/Stanford/Stanford_22Jan2026_SonomaFieldSamples.csv", stringsAsFactors = FALSE)
+
+```
+
+
+# Data Cleaning & Quality Control
+
+First, we want to confirm our reaction details
+
+```{r Reaction details, include=TRUE}
+
+rxn_volume = 20
+volume_post_DNA_extraction = 100
+template_volume = 5
+
+```
+
+
+Then, we want to check that our NTC and positive control are as expected and that all samples have generated sufficient (>10000 droplets)
+```{r Control Check, include=TRUE}
+
+# Check if all NTC samples have concentration of 0
+ntc_check <- ddPCR_data %>%
+  filter(Sample.Type == "NTC") %>%
+  filter(Conc.copies.µL. != 0)
+
+# View any NTC samples that don't have 0 concentration
+if (nrow(ntc_check) > 0) {
+  print("WARNING: The following NTC samples have non-zero concentrations:")
+  print(ntc_check)
+} else {
+  print("✓ All NTC samples have concentration = 0")
+}
+
+
+#Check if positive control sample(s) are close (within 20%) to the expected concentration
+
+# Filter for gBlock samples and extract the number
+gblock_check <- ddPCR_data %>%
+  filter(grepl("gBlock", Sample.description.1)) %>%
+  mutate(
+    expected_conc = as.numeric(str_extract(Sample.description.1, "\\d+")),
+    adjusted_conc = Conc.copies.µL. * rxn_volume/template_volume,
+    percent_diff = abs((adjusted_conc - expected_conc) / expected_conc) * 100,
+    within_20pct = percent_diff <= 20
+  )
+
+# Display samples that fail the 10% threshold
+failing_samples <- gblock_check %>%
+  filter(!within_20pct)
+
+if (nrow(failing_samples) > 0) {
+  print("WARNING: The following gBlock samples are NOT within 10% of expected concentration:")
+  print(failing_samples %>% select(Sample.description.1, expected_conc, adjusted_conc, percent_diff))
+} else {
+  print("✓ All gBlock samples are within 10% of expected concentration")
+}
+
+
+# Check if all samples have sufficient (>10000) droplets
+low_droplets <- ddPCR_data %>%
+  filter(Accepted.Droplets < 10000) 
+
+# Display results
+if (nrow(low_droplets) > 0) {
+  print("WARNING: The following samples have fewer than 10,000 accepted droplets:")
+  print(low_droplets)
+} else {
+  print("✓ All samples have at least 10,000 accepted droplets")
+}
+
+```
+
+Then, we want to convert our ddPCR output in copies per ul into copies per L of water filtered. 
+```{r Concentration Conversion, include=TRUE}
+
+ddPCR_data$copies.per.L = (ddPCR_data$Conc.copies.µL. * rxn_volume * (volume_post_DNA_extraction/template_volume))/(ddPCR_data$Volume.Filtered/1000)
+
+```
+
+# Analysis
+
+Now, we want to summarize our data across sample types. 
+
+```{r Summaries, include=TRUE}
+# Filter out PC and NTC samples, then summarize for each combination of sample type & distance
+summary_table_1 <- ddPCR_data %>%
+  filter(!Sample.Type %in% c("PC", "NTC")) %>%
+  group_by(Sample.Type, Distance) %>%
+  summarise(
+    n = n(),
+    mean_copies_per_L = mean(copies.per.L, na.rm = TRUE),
+    sd_copies_per_L = sd(copies.per.L, na.rm = TRUE),
+    min_copies_per_L = min(copies.per.L, na.rm = TRUE),
+    max_copies_per_L = max(copies.per.L, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+summary_table_1 %>%
+  kable(col.names = c("Sample Type", "Distance", "N", "Mean", "SD", "Min", "Max"),
+        caption = "eDNA (Copies per L) by Sample Type and Distance",
+        digits = 2,
+        format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE,
+                position = "left") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#2C3E50")
+
+# Summarize across all healthy samples
+summary_table_2 <- ddPCR_data %>%
+  filter(Sample.Type %in% c("Healthy")) %>%
+  summarise(
+    n = n(),
+    mean_copies_per_L = mean(copies.per.L, na.rm = TRUE),
+    sd_copies_per_L = sd(copies.per.L, na.rm = TRUE),
+    min_copies_per_L = min(copies.per.L, na.rm = TRUE),
+    max_copies_per_L = max(copies.per.L, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+summary_table_2 %>%
+  kable(col.names = c("N", "Mean Copies/L", "SD", "Min", "Max"),
+        caption = "eDNA (Copies per L) for All Healthy Samples",
+        digits = 2,
+        format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                full_width = FALSE,
+                position = "left") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#27AE60")
+
+```
