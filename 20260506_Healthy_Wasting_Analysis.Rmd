@@ -99,10 +99,10 @@ failing_samples <- gblock_check %>%
   filter(!within_20pct)
 
 if (nrow(failing_samples) > 0) {
-  print("WARNING: The following gBlock samples are NOT within 10% of expected concentration:")
+  print("WARNING: The following gBlock samples are NOT within 20% of expected concentration:")
   print(failing_samples %>% select(Sample.description.1, expected_conc, adjusted_conc, percent_diff))
 } else {
-  print("✓ All gBlock samples are within 10% of expected concentration")
+  print("✓ All gBlock samples are within 20% of expected concentration")
 }
 
 
@@ -177,4 +177,112 @@ summary_table_2 %>%
                 position = "left") %>%
   row_spec(0, bold = TRUE, color = "white", background = "#27AE60")
 
+```
+
+
+
+### Limits of Detection and Quantification
+
+We also want to compare our sample concentrations to our calculated limits of detection and quantification. We want to read in our lab's limits of detection (LOD) and limits of quantification (LOQ), convert them from copies/reaction to copies/L using every filtration volume observed in this data set, and identify the lowest and highest resulting limits.
+
+```{r LOD LOQ Import and Conversion, include=TRUE}
+
+lod_loq_data <- read.csv("LOD_LOQ/final_lob_lod_loq_table.csv", stringsAsFactors = FALSE)
+
+# Filter to Stanford lab only
+stanford_lod_loq <- lod_loq_data %>%
+  filter(Lab == "Stanford")
+
+# Get every unique Volume.Filtered value present in ddPCR_data, excluding NA
+unique_volumes <- unique(na.omit(ddPCR_data$Volume.Filtered))
+smallest_volume <- min(unique_volumes)
+largest_volume <- max(unique_volumes)
+
+# Convert LOD and LOQ (copies/reaction) to copies/L, calculated for every
+# combination of Stanford LOD/LOQ value and observed filtration volume
+lod_loq_converted <- stanford_lod_loq %>%
+  crossing(Volume.Filtered = unique_volumes) %>%
+  mutate(
+    LOD_copies_per_L = LOD * (volume_post_DNA_extraction / template_volume) / (Volume.Filtered / 1000),
+    LOQ_copies_per_L = LOQ * (volume_post_DNA_extraction / template_volume) / (Volume.Filtered / 1000),
+    volume_label = case_when(
+      Volume.Filtered == smallest_volume ~ "smallest sample volume",
+      Volume.Filtered == largest_volume ~ "largest sample volume",
+      TRUE ~ paste0(Volume.Filtered, " mL sample volume")
+    )
+  )
+
+# Identify the row corresponding to each of the 4 extreme values
+lod_min_row <- lod_loq_converted[which.min(lod_loq_converted$LOD_copies_per_L), ]
+lod_max_row <- lod_loq_converted[which.max(lod_loq_converted$LOD_copies_per_L), ]
+loq_min_row <- lod_loq_converted[which.min(lod_loq_converted$LOQ_copies_per_L), ]
+loq_max_row <- lod_loq_converted[which.max(lod_loq_converted$LOQ_copies_per_L), ]
+
+# Build labeled lines, including method, type, volume, and value detail
+lod_loq_lines <- tibble(
+  value = c(lod_min_row$LOD_copies_per_L, lod_max_row$LOD_copies_per_L,
+            loq_min_row$LOQ_copies_per_L, loq_max_row$LOQ_copies_per_L),
+  Limit = c("LOD", "LOD", "LOQ", "LOQ"),
+  Bound = c("Min", "Max", "Min", "Max"),
+  main_label = c(
+    "Smallest Calculated LOD",
+    "Largest Calculated LOD",
+    "Smallest Calculated LOQ",
+    "Largest Calculated LOQ"
+  ),
+  detail_label = c(
+    paste0("(", paste(lod_min_row$LoD_method, lod_min_row$Type, lod_min_row$volume_label, sep = ", "), ")"),
+    paste0("(", paste(lod_max_row$LoD_method, lod_max_row$Type, lod_max_row$volume_label, sep = ", "), ")"),
+    paste0("(", paste(loq_min_row$LoD_method, loq_min_row$Type, loq_min_row$volume_label, sep = ", "), ")"),
+    paste0("(", paste(loq_max_row$LoD_method, loq_max_row$Type, loq_max_row$volume_label, sep = ", "), ")")
+  )
+) %>%
+  mutate(value_line = paste0(main_label, " = ", round(value, 1), " copies/L"))
+
+```
+
+
+### Figure: eDNA Concentration by Sample Type and Distance
+
+Now, we want to visualize the distribution of eDNA concentration (copies per L) for each sample type, using a box & whisker plot overlaid with individual data points, grouped by sample type and then by distance within each.
+
+```{r Boxplot by Sample Type and Distance, include=TRUE, fig.height=6, fig.width=9}
+
+# Exclude PC and NTC samples, which aren't biological sample types
+# Ensure Distance is treated as an ordered factor (0, 50, 100) rather than sorted alphabetically/numerically by default
+plot_data <- ddPCR_data %>%
+  filter(!Sample.Type %in% c("PC", "NTC")) %>%
+  mutate(Distance = factor(Distance, levels = c(0, 50, 100)))
+
+ggplot(plot_data, aes(x = Distance, y = copies.per.L)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.5, width = 0.6, fill = "gray") +
+  geom_jitter(width = 0.15, height = 0, size = 2, alpha = 1, shape = 21, fill = "black", color = "black") +
+  geom_hline(data = lod_loq_lines, aes(yintercept = value, color = Bound), linewidth = 0.6, show.legend = FALSE) +
+  geom_text(
+    data = lod_loq_lines,
+    aes(x = -Inf, y = value, label = value_line, color = Bound),
+    hjust = -0.05, vjust = -1.9, size = 3.2, fontface = "bold", show.legend = FALSE
+  ) +
+  geom_text(
+    data = lod_loq_lines,
+    aes(x = -Inf, y = value, label = detail_label, color = Bound),
+    hjust = -0.05, vjust = -0.7, size = 2.4, show.legend = FALSE
+  ) +
+  scale_color_manual(values = c(Min = "#F8766D", Max = "#00BFC4")) +
+  scale_y_log10() +
+  facet_wrap(~ Sample.Type, scales = "free_x") +
+  labs(
+    x = "Distance from Individual (m)",
+    y = "Pycnopodia eDNA - Copies/L"
+  ) +
+  theme_classic(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    strip.text = element_text(face = "bold", size = 12),
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.7)
+  )
+
+ggsave("Figures/Fig_S5_healthy_wasting_concentrations.png", 
+       width = 7, height = 5, units = "in", 
+       dpi = 300)
 ```
