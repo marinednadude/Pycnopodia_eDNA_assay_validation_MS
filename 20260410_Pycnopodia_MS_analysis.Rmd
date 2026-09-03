@@ -552,6 +552,18 @@ ggsave(filename = here("Figures","Figure_S4_FHL_mesocosm_passive_active_comparis
       units = c("in"))
 ```
 
+```{r}
+
+pycno_sample_data_4_plotting_fm %>% 
+  left_join(cld_tibble_optionA) %>% 
+  group_by(Field_collection_method2) %>% 
+  dplyr::summarise(mean(Concentration_L),max(Concentration_L),min(Concentration_L))
+
+
+```
+
+
+
 
 ```{r}
 pycno_sample_data_4_plotting %>% 

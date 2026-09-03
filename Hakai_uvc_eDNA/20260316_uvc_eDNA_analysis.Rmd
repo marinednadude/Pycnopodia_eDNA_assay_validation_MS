@@ -45,6 +45,121 @@ uvc_edna_df$site_longitude <- as.numeric(uvc_edna_df$site_longitude)
 
 ```
 
+### Rename sites
+```{r}
+
+uvc_edna_df %>% 
+  mutate(., site_id2 = recode(site_id,
+`rivers nelson narrows`="SHORE22",
+`rivers rutherford point`="SHORE28",
+`rivers hay stacks`="SHORE23",
+`burke doc marker`="SHORE09",
+`burke eagle rock`="SHORE20",
+`burke sagen`="SHORE10",
+`burke hvidsen`="SHORE21",
+`mustang0007`="SHORE14",
+`mustang315`="SHORE15",
+`mustang314`="SHORE16",
+`kwakume5038`="SHORE19",
+`kwakume5041`="SHORE17",
+`kwakume5050`="SHORE18",
+`Thrasher`="REEF01",
+`Meay`="MACRO2",
+`kwakshua0006`="SHORE11",
+`kwakshua146`="SHORE11",
+kwakshua154="SHORE12",
+`fifth beach`="ROCKY03",
+`Fifith Beach`="ROCKY03",
+`west beach`="ROCKY06",
+`Choked Pass`="SEA02",
+`north beach`="ROCKY07",
+`goodlad0001`="SHORE25",
+`annex`="ROCKY12",
+`moulds bay`="ROCKY14",
+`shellaligan pass`='ROCKY13')) -> uvc_edna_df
+
+```
+
+```{r}
+
+
+uvc_edna_df %>% 
+  filter(., Region != "Intertidal Quadra") %>%
+  group_by(site_id2) %>% 
+  slice(1) -> sites_2_plot
+
+sites_2_plot %>% 
+  ungroup()  -> sites_to_label_s
+
+
+min_lat <- min(sites_2_plot$`site_latitude`, na.rm = T)
+max_lat <- max(sites_2_plot$`site_latitude`, na.rm = T)
+
+min_lon <- min(sites_2_plot$`site_longitude`, na.rm = T)-0.5
+max_lon <- max(sites_2_plot$`site_longitude`, na.rm = T)-0.5
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+
+
+library(ggrepel)
+ggplot(data = world) +
+    geom_sf() +
+    geom_point(data = sites_2_plot, aes(x = `site_longitude`, y = `site_latitude` , colour=Region, shape=Region))  + scale_colour_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +
+  geom_text_repel(data = sites_to_label_s, aes(x = `site_longitude`, y = `site_latitude`, label=site_id2),
+                  size = 4, fontface = "bold", color = "black",
+                  box.padding = 0.5, point.padding = 0.3,
+                  force = 2, force_pull = 0.5,
+                  max.overlaps = Inf,
+                  min.segment.length = 0,
+                  seed = 42) +
+    coord_sf(xlim = c(min_lon-2, max_lon+2), ylim = c(min_lat-0.5, max_lat+0.5), expand = FALSE) +theme_bw()+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +xlab("Longitude") +ylab("Latitude")  + scale_x_continuous(breaks = c(-170,-160)) +theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.text=element_text(size=14),
+        axis.title=element_text(size=20,face="bold"),legend.title = element_text( size=12, face="bold"),legend.text = element_text(size=10, 
+                                     face="bold"), title = element_text(size=20, face="bold") ) + theme(legend.text=element_text(size=16), legend.title=element_text(size=20))
+
+```
+
+
+```{r}
+
+uvc_edna_df %>% 
+  filter(., Region == "Intertidal Quadra") %>%
+  group_by(site_id2) %>% 
+  slice(1) -> sites_2_plot
+
+sites_2_plot %>% 
+  ungroup()  -> sites_to_label_s
+
+
+min_lat <- min(sites_2_plot$`site_latitude`, na.rm = T)
+max_lat <- max(sites_2_plot$`site_latitude`, na.rm = T)
+
+min_lon <- min(sites_2_plot$`site_longitude`, na.rm = T)-0.5
+max_lon <- max(sites_2_plot$`site_longitude`, na.rm = T)-0.5
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+
+
+library(ggrepel)
+ggplot(data = world) +
+    geom_sf() +
+    geom_point(data = sites_2_plot, aes(x = `site_longitude`, y = `site_latitude` , colour=Region, shape=Region))  + scale_colour_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +
+  geom_text_repel(data = sites_to_label_s, aes(x = `site_longitude`, y = `site_latitude`, label=site_id2),
+                  size = 4, fontface = "bold", color = "black",
+                  box.padding = 0.5, point.padding = 0.3,
+                  force = 2, force_pull = 0.5,
+                  max.overlaps = Inf,
+                  min.segment.length = 0,
+                  seed = 42) +
+    coord_sf(xlim = c(min_lon-1, max_lon+1), ylim = c(min_lat-1, max_lat+1), expand = FALSE) +theme_bw()+theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) +xlab("Longitude") +ylab("Latitude")  + scale_x_continuous(breaks = c(-170,-160)) +theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),panel.background = element_blank(), axis.text=element_text(size=14),
+        axis.title=element_text(size=20,face="bold"),legend.title = element_text( size=12, face="bold"),legend.text = element_text(size=10, 
+                                     face="bold"), title = element_text(size=20, face="bold") ) + theme(legend.text=element_text(size=16), legend.title=element_text(size=20))
+
+```
+
+
+
 ```{r}
 pal <- park_palette("ChannelIslands")[2:3]
 pal2 <- park_palette("ChannelIslands")[5:6]
@@ -71,7 +186,7 @@ levels(uvc_edna_df$Region2)[levels(uvc_edna_df$Region2) == "Intertidal Outer Isl
 
 
 uvc_edna_df %>% 
-    group_by(Region2,SampleID, site_id) %>% 
+    group_by(Region2,SampleID, site_id2) %>% 
   dplyr::summarise(
     zero_count_eDNA = sum(copies_L == 0),
     nonzero_count_eDNA = sum(copies_L > 0),
@@ -108,7 +223,7 @@ ggsave(filename = here("Figures","Fig_S5_proportion.png"),
 ```{r}
 
 uvc_edna_df %>% 
-    group_by(Region,SurveyType, SampleID, site_id) %>% 
+    group_by(Region,SurveyType, SampleID, site_id2) %>% 
   dplyr::summarise(
     zero_count_eDNA = sum(copies_L == 0),
     nonzero_count_eDNA = sum(copies_L > 0),
@@ -136,7 +251,7 @@ levels(uvc_edna_df$Region2)[levels(uvc_edna_df$Region2) == "Intertidal Outer Isl
 
   uvc_edna_df$Region %>%  unique()
 uvc_edna_df %>% 
-  ggplot(., aes(x=site_id, y=log10(copies_L+1), fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region2, scales = "free_x")  +
+  ggplot(., aes(x=site_id2, y=log10(copies_L+1), fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region2, scales = "free_x")  +
   theme(axis.text.x = element_blank(),axis.title = element_text(face = "bold", size=16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold")) + ylim(0,6) +scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Site") -> a1
 
 a1
@@ -147,7 +262,7 @@ a1
 ```{r}
 library(multcompView)
 uvc_edna_df %>% 
-  group_by(SurveyType, site_id) %>% 
+  group_by(SurveyType, site_id2) %>% 
   dplyr::summarize(mean_copies=mean(copies_L), sd_copies =sd(copies_L), cv_length = (sd_copies / mean_copies)) -> cv_abundance_SurveyType
 
 cv_abundance_SurveyType %>% 
@@ -301,7 +416,7 @@ b5
 ### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
-    group_by(Habitat, SurveyType,site_id) %>%
+    group_by(Habitat, SurveyType,site_id2) %>%
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> station
 
@@ -472,7 +587,7 @@ b5s
 ### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id2) %>% 
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_density_sum = mean(density_sum), sd_density_sum = mean(density_sum), se_density_sum = standard_error(density_sum)) -> station
 
@@ -644,7 +759,7 @@ b5sc
 
 subtidal_compare %>% 
   mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id2) %>% 
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_count_sum = mean(pyc_count_sum), sd_count_sum = mean(pyc_count_sum), se_count_sum = standard_error(pyc_count_sum)) -> station
 
@@ -753,7 +868,7 @@ levels(uvc_edna_df_lod$Region2)[levels(uvc_edna_df_lod$Region2) == "Intertidal O
 
 
 uvc_edna_df_lod %>% 
-    group_by(Region2,SampleID, site_id) %>% 
+    group_by(Region2,SampleID, site_id2) %>% 
   dplyr::summarise(
     zero_count_eDNA = sum(copies_L == 0),
     nonzero_count_eDNA = sum(copies_L > 0),
@@ -790,7 +905,7 @@ ggsave(filename = here("Figures","Fig_7_proportion_lod.png"),
 ```{r}
 
 uvc_edna_df_lod %>% 
-    group_by(Region,SurveyType, SampleID, site_id) %>% 
+    group_by(Region,SurveyType, SampleID, site_id2) %>% 
   dplyr::summarise(
     zero_count_eDNA = sum(copies_L == 0),
     nonzero_count_eDNA = sum(copies_L > 0),
@@ -818,18 +933,57 @@ levels(uvc_edna_df_lod$Region2)[levels(uvc_edna_df_lod$Region2) == "Intertidal O
 
   uvc_edna_df_lod$Region %>%  unique()
 uvc_edna_df_lod %>% 
-  ggplot(., aes(x=site_id, y=log10(copies_L+1), fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region2, scales = "free_x")  +
-  theme(axis.text.x = element_blank(),axis.title = element_text(face = "bold", size=16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold")) + ylim(0,6) +scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Site") -> a1
+  ggplot(., aes(x=site_id2, y=log10(copies_L+1), fill=Region)) +geom_boxplot() +theme_pubr() +facet_grid(~Region2, scales = "free_x",space = "free_x")  +
+  theme(axis.text.x = element_text(size = 12, face = "bold",angle = 45, hjust = 1),axis.title = element_text(face = "bold", size=16), strip.text = element_text(size = 16, face = "bold"), legend.text = element_text(size = 16), legend.title = element_text(size = 16, face = "bold")) + ylim(0,6) +scale_fill_manual(values=c(pal2[1],pal2[2],pal[2],pal[1])) +ylab("Log10(Mean Pycnopodia eDNA Copies per L)") + xlab("Site") -> a1
 
 a1
 ```
 
 
-## Subtidal versus intertidal
+
+
+```{r}
+aov( copies_L ~ site_id2, data= uvc_edna_df_lod) -> anova_res
+
+summary(anova_res)
+
+tukey_hsd <- TukeyHSD(anova_res)
+```
+
+```{r}
+uvc_edna_df_lod %>% 
+  group_by(Region, site_id2) %>% 
+  dplyr::summarise(mean(copies_L), sd(copies_L), max(copies_L), min(copies_L))
+```
+
+```{r}
+aov( copies_L ~ Region, data= uvc_edna_df_lod) -> anova_reg
+
+summary(anova_reg)
+
+TukeyHSD(anova_reg)
+```
+
+```{r}
+uvc_edna_df_lod %>% 
+  group_by(Region) %>% 
+  dplyr::summarise(mean(copies_L), sd(copies_L), max(copies_L), min(copies_L))
+```
+
+```{r}
+uvc_edna_df_lod %>% 
+filter(., site_id2!="ROCKY07") %>% 
+  group_by(Region) %>% 
+  dplyr::summarise(mean(copies_L), sd(copies_L), max(copies_L), min(copies_L))
+```
+
+
+
+## Subtidal versus Intertidal
 ```{r}
 library(multcompView)
 uvc_edna_df_lod %>% 
-  group_by(SurveyType, site_id) %>% 
+  group_by(SurveyType, site_id2) %>% 
   mutate(., copies_L=copies_L+0.0000000000000000000000000001) %>%
   dplyr::summarize(mean_copies=mean(copies_L), sd_copies =sd(copies_L), cv_length = (sd_copies / mean_copies)) -> cv_abundance_SurveyType
 
@@ -995,7 +1149,7 @@ b5
 ### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id2) %>% 
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_biomass_density_sum = mean(biomass_density_sum), sd_biomass_density_sum = mean(biomass_density_sum), se_biomass_density_sum = standard_error(biomass_density_sum)) -> station
 
@@ -1165,7 +1319,7 @@ b5s
 ### B2. 100m Bin
 ```{r}
 subtidal_compare %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id2) %>% 
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_density_sum = mean(density_sum), sd_density_sum = mean(density_sum), se_density_sum = standard_error(density_sum)) -> station
 
@@ -1337,7 +1491,7 @@ b5sc
 ```{r}
 subtidal_compare %>% 
   mutate(., pyc_count_sum=as.numeric(pyc_count_sum)) %>% 
-    group_by(Habitat, SurveyType,site_id) %>% 
+    group_by(Habitat, SurveyType,site_id2) %>% 
   dplyr::summarise( mean_copies_L = mean(copies_L), sd_copies_L = sd(copies_L),se_copies_L = standard_error(copies_L),
  mean_count_sum = mean(pyc_count_sum), sd_count_sum = mean(pyc_count_sum), se_count_sum = standard_error(pyc_count_sum)) -> station
 
