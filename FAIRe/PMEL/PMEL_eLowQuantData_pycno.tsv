@@ -1,0 +1,268 @@
+samp_name	technical_rep_id	assay_name	pcr_plate_id	quantificationCycle	estimatedNumberOfCopies_method	estimatedNumberOfCopies	estimatedNumberOfCopies_unit	LoDLoQLevel
+E2697.1T-1-Plate:5	1	Pycno	5	26.0233116149902	Ct/Cq with standard curve	2278.17602539062	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-2-Plate:5	2	Pycno	5	26.1537132263184	Ct/Cq with standard curve	2086.4658203125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-3-Plate:5	3	Pycno	5	26.3187389373779	Ct/Cq with standard curve	1866.80444335938	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.1T-1-Plate:5	1	Pycno	5	28.7839298248291	Ct/Cq with standard curve	354.320648193359	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.1T-2-Plate:5	2	Pycno	5	28.9239463806152	Ct/Cq with standard curve	322.407836914062	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.1T-3-Plate:5	3	Pycno	5	29.0234260559082	Ct/Cq with standard curve	301.496459960938	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-1-Plate:5	1	Pycno	5	23.7297496795654	Ct/Cq with standard curve	10691.6328125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-2-Plate:5	2	Pycno	5	23.8404808044434	Ct/Cq with standard curve	9922.6279296875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-3-Plate:5	3	Pycno	5	24.2409324645996	Ct/Cq with standard curve	7575.15625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.2T-1-Plate:5	1	Pycno	5	29.1960830688477	Ct/Cq with standard curve	268.371032714844	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.2T-2-Plate:5	2	Pycno	5	28.7454605102539	Ct/Cq with standard curve	363.629089355469	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.2T-3-Plate:5	3	Pycno	5	29.2540798187256	Ct/Cq with standard curve	258.081390380859	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-1-Plate:5	1	Pycno	5	23.8266429901123	Ct/Cq with standard curve	10015.619140625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-2-Plate:5	2	Pycno	5	23.7035427093506	Ct/Cq with standard curve	10882.1904296875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-3-Plate:5	3	Pycno	5	24.0260562896729	Ct/Cq with standard curve	8755.8466796875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.3T-1-Plate:5	1	Pycno	5	29.7310619354248	Ct/Cq with standard curve	187.118499755859	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.3T-2-Plate:5	2	Pycno	5	29.4523448944092	Ct/Cq with standard curve	225.794387817383	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2698.3T-3-Plate:5	3	Pycno	5	29.7461318969727	Ct/Cq with standard curve	185.227249145508	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2707.1T-1-Plate:5	1	Pycno	5	39.3834838867188	Ct/Cq with standard curve	0.279447883367538	copies/reaction	Above LOD_eLowQuant
+E2707.1T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.1T-3-Plate:5	3	Pycno	5	39.5838623046875	Ct/Cq with standard curve	0.244139805436134	copies/reaction	Above LOD_eLowQuant
+E2699.1T-1-Plate:5	1	Pycno	5	26.2757587432861	Ct/Cq with standard curve	1921.68225097656	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.1T-2-Plate:5	2	Pycno	5	25.9673748016357	Ct/Cq with standard curve	2365.71923828125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.1T-3-Plate:5	3	Pycno	5	26.4500617980957	Ct/Cq with standard curve	1708.64990234375	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2707.2T-1-Plate:5	1	Pycno	5	38.3908767700195	Ct/Cq with standard curve	0.545624315738678	copies/reaction	Above LOD_eLowQuant
+E2707.2T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.2T-3-Plate:5	3	Pycno	5	39.7205200195312	Ct/Cq with standard curve	0.222654297947884	copies/reaction	Above LOD_eLowQuant
+E2699.2T-1-Plate:5	1	Pycno	5	27.8899822235107	Ct/Cq with standard curve	647.300659179688	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.2T-2-Plate:5	2	Pycno	5	27.7579345703125	Ct/Cq with standard curve	707.561096191406	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.2T-3-Plate:5	3	Pycno	5	28.2817459106445	Ct/Cq with standard curve	497.06640625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2707.3T-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.3T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.3T-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2699.3T-1-Plate:5	1	Pycno	5	28.9781112670898	Ct/Cq with standard curve	310.848266601562	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.3T-2-Plate:5	2	Pycno	5	28.9490795135498	Ct/Cq with standard curve	316.991577148438	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2699.3T-3-Plate:5	3	Pycno	5	29.122444152832	Ct/Cq with standard curve	282.029113769531	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2708.1T-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2700.1T-1-Plate:5	1	Pycno	5	30.6203594207764	Ct/Cq with standard curve	102.746849060059	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2700.1T-2-Plate:5	2	Pycno	5	30.5847339630127	Ct/Cq with standard curve	105.244186401367	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2700.1T-3-Plate:5	3	Pycno	5	30.9096412658691	Ct/Cq with standard curve	84.5432891845703	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2708.2T-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2700.2T-1-Plate:5	1	Pycno	5	30.9939670562744	Ct/Cq with standard curve	79.8715591430664	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2700.2T-2-Plate:5	2	Pycno	5	30.5973796844482	Ct/Cq with standard curve	104.350845336914	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2700.2T-3-Plate:5	3	Pycno	5	30.9101600646973	Ct/Cq with standard curve	84.5137329101562	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2700.3T-1-Plate:5	1	Pycno	5	25.863561630249	Ct/Cq with standard curve	2537.203125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2700.3T-2-Plate:5	2	Pycno	5	25.7715473175049	Ct/Cq with standard curve	2699.560546875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2700.3T-3-Plate:5	3	Pycno	5	26.1570110321045	Ct/Cq with standard curve	2081.83276367188	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2701.1T-1-Plate:5	1	Pycno	5	30.533540725708	Ct/Cq with standard curve	108.939476013184	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.1T-2-Plate:5	2	Pycno	5	30.3577213287354	Ct/Cq with standard curve	122.647216796875	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.1T-3-Plate:5	3	Pycno	5	30.3281669616699	Ct/Cq with standard curve	125.115158081055	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.2T-1-Plate:5	1	Pycno	5	32.7607612609863	Ct/Cq with standard curve	24.2745094299316	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.2T-2-Plate:5	2	Pycno	5	31.9048042297363	Ct/Cq with standard curve	43.2253036499023	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.2T-3-Plate:5	3	Pycno	5	32.1842803955078	Ct/Cq with standard curve	35.8029975891113	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2701.3T-1-Plate:5	1	Pycno	5	27.9065132141113	Ct/Cq with standard curve	640.127502441406	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2701.3T-2-Plate:5	2	Pycno	5	27.7659225463867	Ct/Cq with standard curve	703.761352539062	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2701.3T-3-Plate:5	3	Pycno	5	27.9691753387451	Ct/Cq with standard curve	613.6513671875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2703.1T-1-Plate:5	1	Pycno	5	33.3085136413574	Ct/Cq with standard curve	16.7800025939941	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.1T-2-Plate:5	2	Pycno	5	33.3644523620605	Ct/Cq with standard curve	16.1590404510498	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.1T-3-Plate:5	3	Pycno	5	33.3195953369141	Ct/Cq with standard curve	16.6551208496094	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2708.3T-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.3T-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.3T-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2703.2T-1-Plate:5	1	Pycno	5	32.9989242553711	Ct/Cq with standard curve	20.6740970611572	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.2T-2-Plate:5	2	Pycno	5	33.2073402404785	Ct/Cq with standard curve	17.9643402099609	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.2T-3-Plate:5	3	Pycno	5	34.1930313110352	Ct/Cq with standard curve	9.24364185333252	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2705.NC-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2705.NC-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2705.NC-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2703.3T-1-Plate:5	1	Pycno	5	33.9719734191895	Ct/Cq with standard curve	10.72900390625	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.3T-2-Plate:5	2	Pycno	5	33.0461349487305	Ct/Cq with standard curve	20.0265102386475	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2703.3T-3-Plate:5	3	Pycno	5	33.7555160522461	Ct/Cq with standard curve	12.4144897460938	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+E2706.NC-1-Plate:5	1	Pycno	5	37.471305847168	Ct/Cq with standard curve	1.01415586471558	copies/reaction	Above LOQ_eLowQuant
+E2706.NC-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2706.NC-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2704.NC-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2704.NC-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2704.NC-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E3122.NC-1-Plate:5	1	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E3122.NC-2-Plate:5	2	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E3122.NC-3-Plate:5	3	Pycno	5	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2697.1T-1-Plate:3	1	Pycno	3	27.3106422424316	Ct/Cq with standard curve	3587.55786132812	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-2-Plate:3	2	Pycno	3	31.6960926055908	Ct/Cq with standard curve	217.739151000977	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-3-Plate:3	3	Pycno	3	28.9267024993896	Ct/Cq with standard curve	1277.55334472656	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:10-1-Plate:3	1	Pycno	3	22.9717845916748	Ct/Cq with standard curve	57376.34375	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:10-2-Plate:3	2	Pycno	3	22.3324565887451	Ct/Cq with standard curve	86324.046875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D052273Y 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2697.2T-1-Plate:3	1	Pycno	3	26.5854053497314	Ct/Cq with standard curve	5702.10986328125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-2-Plate:3	2	Pycno	3	26.9351196289062	Ct/Cq with standard curve	4560.3466796875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:100-1-Plate:3	1	Pycno	3	26.1763515472412	Ct/Cq with standard curve	7405.232421875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:100-2-Plate:3	2	Pycno	3	26.1333255767822	Ct/Cq with standard curve	7611.62548828125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:100-3-Plate:3	3	Pycno	3	25.1856956481934	Ct/Cq with standard curve	13945.146484375	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D052273Y 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2697.3T-1-Plate:3	1	Pycno	3	28.4041137695312	Ct/Cq with standard curve	1783.96166992188	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-2-Plate:3	2	Pycno	3	25.342435836792	Ct/Cq with standard curve	12616.2783203125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-3-Plate:3	3	Pycno	3	26.2736835479736	Ct/Cq with standard curve	6958.75048828125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:1000-1-Plate:3	1	Pycno	3	29.2836761474609	Ct/Cq with standard curve	1017.01422119141	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:1000-2-Plate:3	2	Pycno	3	29.5206775665283	Ct/Cq with standard curve	874.106872558594	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061183Q 1:1000-3-Plate:3	3	Pycno	3	29.5657234191895	Ct/Cq with standard curve	849.308227539062	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D052273Y 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D052273Y 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D023141A 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.1T-1-Plate:3	1	Pycno	3	43.1784400939941	Ct/Cq with standard curve	0	copies/reaction	Above LOB_eLowQuant
+E2707.1T-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.1T-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D061197E 1:10-1-Plate:3	1	Pycno	3	21.4730663299561	Ct/Cq with standard curve	149483.40625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061197E 1:10-2-Plate:3	2	Pycno	3	19.663516998291	Ct/Cq with standard curve	475008.78125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061197E 1:10-3-Plate:3	3	Pycno	3	20.0911026000977	Ct/Cq with standard curve	361456.78125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D056848X 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.2T-1-Plate:3	1	Pycno	3	41.3789405822754	Ct/Cq with standard curve	0.447885692119598	copies/reaction	Above LOD_eLowQuant
+E2707.2T-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.2T-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D061197E 1:100-1-Plate:3	1	Pycno	3	24.6047458648682	Ct/Cq with standard curve	20212.65625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061197E 1:100-2-Plate:3	2	Pycno	3	23.575216293335	Ct/Cq with standard curve	39020.63671875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D056848X 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.3T-1-Plate:3	1	Pycno	3	41.2531623840332	Ct/Cq with standard curve	0.485364228487015	copies/reaction	Above LOD_eLowQuant
+E2707.3T-2-Plate:3	2	Pycno	3	41.9747695922851	Ct/Cq with standard curve	0.306082308292389	copies/reaction	Above LOD_eLowQuant
+M0D061197E 1:1000-1-Plate:3	1	Pycno	3	27.6437492370605	Ct/Cq with standard curve	2899.80834960938	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061197E 1:1000-2-Plate:3	2	Pycno	3	26.2359752655029	Ct/Cq with standard curve	7128.439453125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D061197E 1:1000-3-Plate:3	3	Pycno	3	26.5267734527588	Ct/Cq with standard curve	5919.7666015625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D056848X 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056848X 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:10-3-Plate:3	3	Pycno	3	41.1987266540527	Ct/Cq with standard curve	0.502542078495026	copies/reaction	Above LOD_eLowQuant
+M0D056876Z 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-2-Plate:3	2	Pycno	3	42.104320526123	Ct/Cq with standard curve	0.281767427921295	copies/reaction	Above LOD_eLowQuant
+E2708.2T-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK1597 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.3T-1-Plate:3	1	Pycno	3	43.9652862548828	Ct/Cq with standard curve	0	copies/reaction	Above LOB_eLowQuant
+E2708.3T-2-Plate:3	2	Pycno	3	42.4001846313477	Ct/Cq with standard curve	0.233235836029053	copies/reaction	Above LOD_eLowQuant
+E2708.3T-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D064351M 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D056876Z 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:10-2-Plate:3	2	Pycno	3	44.4761276245117	Ct/Cq with standard curve	0	copies/reaction	Above LOB_eLowQuant
+M0D070653W 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069325U 1:10-1-Plate:3	1	Pycno	3	34.8244895935059	Ct/Cq with standard curve	29.5037860870361	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+M0D069325U 1:10-2-Plate:3	2	Pycno	3	33.3336410522461	Ct/Cq with standard curve	76.4811096191406	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+M0D069325U 1:10-3-Plate:3	3	Pycno	3	33.6263427734375	Ct/Cq with standard curve	63.4360504150391	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+Ext_Blank_FHL25_1-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069325U 1:100-1-Plate:3	1	Pycno	3	38.6403312683105	Ct/Cq with standard curve	2.57672905921936	copies/reaction	Above LOQ_eLowQuant
+M0D069325U 1:100-2-Plate:3	2	Pycno	3	36.6910285949707	Ct/Cq with standard curve	8.95273590087891	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+M0D069325U 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D070653W 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069325U 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069325U 1:1000-2-Plate:3	2	Pycno	3	37.1199340820312	Ct/Cq with standard curve	6.80682039260864	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+M0D069325U 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:10-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:10-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:10-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+BHAK-1619 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:100-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:100-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:100-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D053804V 1:1000-3-Plate:3	3	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:1000-1-Plate:3	1	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+M0D069326V 1:1000-2-Plate:3	2	Pycno	3	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2697.1T-1-Plate:1	1	Pycno	1	24.9524669647217	Ct/Cq with standard curve	33949.8046875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-2-Plate:1	2	Pycno	1	25.1062622070312	Ct/Cq with standard curve	30479.541015625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.1T-3-Plate:1	3	Pycno	1	24.9799880981445	Ct/Cq with standard curve	33301.01171875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-1-Plate:1	1	Pycno	1	23.4190692901611	Ct/Cq with standard curve	99480.671875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-2-Plate:1	2	Pycno	1	22.1245136260986	Ct/Cq with standard curve	246555.984375	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.2T-3-Plate:1	3	Pycno	1	23.2333984375	Ct/Cq with standard curve	113311.3125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-1-Plate:1	1	Pycno	1	23.3945446014404	Ct/Cq with standard curve	101205.9765625	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-2-Plate:1	2	Pycno	1	23.6753845214844	Ct/Cq with standard curve	83117.7421875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2697.3T-3-Plate:1	3	Pycno	1	23.446361541748	Ct/Cq with standard curve	97595.21875	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+E2707.1T-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.1T-2-Plate:1	2	Pycno	1	36.3036422729492	Ct/Cq with standard curve	11.8724088668823	copies/reaction	Above LOQ_eLowQuant
+E2707.1T-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.2T-1-Plate:1	1	Pycno	1	40.6034202575684	Ct/Cq with standard curve	0.582515358924866	copies/reaction	Above LOD_eLowQuant
+E2707.2T-2-Plate:1	2	Pycno	1	37.7216110229492	Ct/Cq with standard curve	4.3932318687439	copies/reaction	Above LOQ_eLowQuant
+E2707.2T-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.3T-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2707.3T-2-Plate:1	2	Pycno	1	36.6968193054199	Ct/Cq with standard curve	9.01199817657471	copies/reaction	Above LOQ_eLowQuant
+E2707.3T-3-Plate:1	3	Pycno	1	37.0496788024902	Ct/Cq with standard curve	7.03687047958374	copies/reaction	Above LOQ_eLowQuant
+E2708.1T-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-2-Plate:1	2	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.1T-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-1-Plate:1	1	Pycno	1	37.4657707214355	Ct/Cq with standard curve	5.25635242462158	copies/reaction	Above LOQ_eLowQuant
+E2708.2T-2-Plate:1	2	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.2T-3-Plate:1	3	Pycno	1	37.6270980834961	Ct/Cq with standard curve	4.69420671463013	copies/reaction	Above LOQ_eLowQuant
+E2708.3T-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.3T-2-Plate:1	2	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2708.3T-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-2-Plate:1	2	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+E2702.NC-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-1-Plate:1	1	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-2-Plate:1	2	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+Ext_Blank_FHL25_1-3-Plate:1	3	Pycno	1	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification

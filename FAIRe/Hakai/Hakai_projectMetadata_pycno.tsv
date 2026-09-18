@@ -1,0 +1,88 @@
+requirement_level_code	section	term_name	project_level
+M	Project	recordedBy	Kristin M. Robinson,Alyssa-Lois M. Gehman,Matthew A. Lemay, Colleen T.E. Kellogg, Rute B.G. Clemente-Carvalho
+R	Project	recordedByID	https://orcid.org/0000-0002-9500-1983|https://orcid.org/0000-0003-0595-9950|https://orcid.org/0000-0001-7051-0020|https://orcid.org/0000-0003-4048-5316|https://orcid.org/0000-0001-6922-9418
+M	Project	project_contact	zachary.gold@noaa.gov
+R	Project	institution	Hakai
+R	Project	institutionID	NA
+R	Project	project_name	Molecular Star Gazing: Development and Validation of an Environmental DNA Assay for the Imperiled Sunflower Sea Star (Pycnopodia helianthoides)
+M	Project	project_id	Pycnopodia_eDNA_assay_validation_MS
+O	Project	parent_project_id	NOAA_PMEL_OME
+O	Project	study_factor	analyses:filtration [OBI:0302885], environmental material collection process [OBI:0600012];DNA extraction [OBI:0000257];real time polymerase chain reaction assay [OBI:0000893]|audience:scientists|broad_scale_environmental_context:marine biome [ENVO:00000447], marine photic zone [ENVO:00000209], freshwater biome [ENVO:00000873];marine biome [ENVO:00000447], marine photic zone [ENVO:00000209]|creator:Han Weinrich, Zachary Gold, Shannon Brown, Sean McAllister|environmental_medium:sea water [ENVO:00002149], fresh water [ENVO:00002011];sea water [ENVO:00002149], saline water aquarium [ENVO:00002197]|geographic_location:North East Pacific Ocean [GAZ:00013765], Bering Sea [GAZ:00008990], Arctic Ocean [GAZ:00000323], Lake Washington [GAZ:00008722], South Pacific Ocean [GAZ:00002418];North East Pacific Ocean [GAZ:00013765], Bering Sea [GAZ:00008990], Arctic Ocean [GAZ:00000323], Lake Washington [GAZ:00008722];Pacific Ocean [GAZ:00000360]|hasVersion:1.0.0;1.1.1;1.1.4|issued:2025-11-14;TBD|language:en|license:CC0 1.0 Universal|local_environmental_context:oceanic epipelagic zone biome [ENVO:01000035], marine benthic biome [ENVO:01000024], freshwater lake biome [ENVO:01000252], estuary [ENVO:00000045];oceanic epipelagic zone biome [ENVO:01000035], marine benthic biome [ENVO:01000024], freshwater lake [ENVO:00000021];marine biome [ENVO:00000447], marine photic zone [ENVO:00000209], aquarium [ENVO:00002196]|materials_required:filtration [OBI:0302885];vortexer [OBI:0400118], centrifuge [OBI:0400106], incubator [OBI:0000136];vortexer [OBI:0400118], centrifuge [OBI:0400106],  real-time PCR instrument [OBI:0001110]|maturity level:mature;Concept|methodology_category:sample collection;sample extraction and purification;Omics Analysis|personnel_required:1|project:NOAA Pacific Marine Environmental Laboratory Ocean Molecular Ecology Group protocols|publisher:NOAA Pacific Marine Environmental Laboratory Ocean Molecular Ecology Program; University of Washington Cooperative Institute for Climate, Ocean, & Ecosystem Studies;NOAA Pacific Marine Environmental Laboratory Ocean Molecular Ecology Group; University of Washington Cooperative Institute for Climate, Ocean, & Ecosystem Studies|purpose:biodiversity assessment objective [OBI:0001969];real time polymerase chain reaction assay [OBI:0000893]|skills_required:sterile technique, pipetting skills, standard molecular technique, research vessel experience;sterile technique, pipetting skills, standard molecular technique|target:deoxyribonucleic acid (DNA) [NCIT:C449], environmental DNA [NCIT:C169106];deoxyribonucleic acid (DNA) [NCIT:C449];Pycnopodia helianthoides [NCBITaxon:7614]|time_required:75;480;270
+M	Project	assay_type	targeted
+HR	Project	sterilise_method	https://doi.org/10.5281/zenodo.16945434
+HR	Project	neg_cont_0_1	1
+HR	Project	pos_cont_0_1	1
+M	Data management	checkls_ver	1.0.2
+R	Data management	mod_date	2026-09-17
+R	Data management	license	CC0 1.0 Universal
+R	Data management	rightsHolder	NOAA PMEL
+R	Data management	accessRights	Universal
+O	Data management	informationWithheld	NA
+O	Data management	dataGeneralizations	NA
+R	Data management	bibliographicCitation	https://doi.org/10.5281/zenodo.20076925
+O	Data management	associated_resource	https://doi.org/10.64898/2026.05.07.723600
+R	Data management	code_repo	https://github.com/marinednadude/Pycnopodia_eDNA_assay_validation_MS
+R	Sample collection	biological_rep	NA
+M	PCR	pcr_0_1	1
+O	PCR	inhibition_check_0_1	0
+O	PCR	inhibition_check	NA
+O	PCR	thermocycler	AutoDG Automated Droplet Generator (Bio-Rad, Hercules, CA), a C1000 Touch Thermal Cycler (Bio-Rad, Hercules, CA) and a QX200 Droplet Digital PCR System (Bio-Rad, Hercules, CA)
+M	PCR	assay_name	Pycno
+R	PCR	assay_validation	The assay was validated through a multi-step process, including in-silico analysis and in vitro/in-situ trials
+M	PCR	targetTaxonomicAssay	Pycnopodia  helianthoides
+R	PCR	targetTaxonomicScope	
+HR	PCR	target_gene	ND5
+O	PCR	target_subfragment	
+HR	PCR	ampliconSize	123
+M	PCR	pcr_primer_forward	CTAACATCATTAACTTTCAGAACACG
+M	PCR	pcr_primer_reverse	GCCTGTTTGGGTTAGCTGG
+R	PCR	pcr_primer_name_forward	Pycno-nad5-v1-F
+R	PCR	pcr_primer_name_reverse	Pycno-nad5-v1-R
+HR	PCR	pcr_primer_reference_forward	https://doi.org/10.64898/2026.05.07.723600
+HR	PCR	pcr_primer_reference_reverse	https://doi.org/10.64898/2026.05.07.723600
+R	PCR	pcr_primer_vol_forward	0.225
+R	PCR	pcr_primer_vol_reverse	0.225
+R	PCR	pcr_primer_conc_forward	10
+R	PCR	pcr_primer_conc_reverse	10
+HR	PCR	probeReporter	FAM
+HR	PCR	probeQuencher	Zero-End Quencher (ZEN) + IBFQ
+HR	PCR	probe_seq	CCAGGGATGAAATGAAACTGTAGGTGCCC
+HR	PCR	probe_ref	https://doi.org/10.64898/2026.05.07.723600
+HR	PCR	probe_conc	10
+HR	PCR	commercial_mm	TaqMan Environmental Master Mix 2.0
+HR	PCR	custom_mm	qPCR reactions were run in 10 μL reaction volumes, with  2 μL of DNA, 5.0 μL of TaqMan Environmental Master Mix 2.0, 0.9 μL of water, 0.9 μL Target & IPC F/R primer mix (10 µM), 0.2 μL Target & IPC probe mix (10 µM), and 1. µL of IPC E3.
+O	PCR	block_seq	NA
+O	PCR	block_ref	NA
+O	PCR	block_taxa	NA
+R	PCR	amplificationReactionVolume	20
+HR	PCR	pcr_dna_vol	2
+HR	PCR	pcr_rep	3
+R	PCR	nucl_acid_amp	https://doi.org/10.64898/2026.05.07.723600
+HR	PCR	pcr_cond	denaturation:95_10;annealing:95_0.5;anealing:57_1;45;Extension:98_10
+HR	PCR	annealingTemp	57
+HR	PCR	pcr_cycles	35
+O	PCR	pcr_analysis_software	R | Bio-Rad QX Insight ddPCR Analysis Software
+O	PCR	pcr_method_additional	AutoDG Automated Droplet Generator (Bio-Rad, Hercules, CA), a C1000 Touch Thermal Cycler (Bio-Rad, Hercules, CA) and a QX200 Droplet Digital PCR System (Bio-Rad, Hercules, CA) (Shea et al., 2026) https://doi.org/10.5281/zenodo.20057581
+M	Targeted assay detection	amp_vis_method	ddPCR
+M	Targeted assay detection	detection_criteria	Calculated sample concentration above the LOD for at least one replicate
+R	Targeted assay detection	lod_method	https://doi.org/10.3791/61825| https://doi.org/10.1002/edn3.220
+R	Targeted assay detection	pcr_assay_lod_techreps	5
+M	Targeted assay detection	pcr_assay_lod	6.69407786954563
+M	Targeted assay detection	pcr_assay_lod_unit	copies/reaction
+R	Targeted assay detection	pcr_assay_lod_UL	10.2517990223794
+R	Targeted assay detection	pcr_assay_lod_LL	3.13635671671182
+R	Targeted assay detection	loq_method	https://doi.org/10.3791/61825| https://doi.org/10.1002/edn3.220
+R	Targeted assay detection	pcr_assay_loq_techreps	5
+M	Targeted assay detection	pcr_assay_loq	16
+M	Targeted assay detection	pcr_assay_loq_unit	copies/reaction
+R	Targeted assay detection	pcr_assay_loq_UL	NA
+R	Targeted assay detection	pcr_assay_loq_LL	NA
+R	Targeted assay detection	std_type	synthetic double-stranded DNA
+O	Targeted assay detection	std_source	Integrated DNA Technologies
+R	Targeted assay detection	std_seq	TGATCATAATCAATCGATGACTATTCTCCACTAACCATAAAGACATTGGTACCCTGTACCTAATCTTCGGCTAACATCATTAACTTTCAGAACACGAAAAATAGACCAGGGATGAAATGAAACTGTAGGTGCCCAAGGCATAGCCTTATCCTCTACAGACTTATCTAAGACGTACCAGCTAACCCAAACAGGC
+M	Targeted assay detection	thresholdQuantificationCycle	35
+O	Targeted assay detection	baselineValue	10
+O	Targeted assay detection	automaticThresholdQuantificationCycle	0
+O	Targeted assay detection	automaticBaselineValue	0
+O	Targeted assay detection	targeted_detection_method_additional	
+O	Targeted assay detection	estimatedNumberOfCopies_method	Ct/Cq with standard curve

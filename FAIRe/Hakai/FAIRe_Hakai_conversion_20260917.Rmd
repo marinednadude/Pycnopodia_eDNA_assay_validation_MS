@@ -1,0 +1,530 @@
+---
+title: "FAIRe_Hakai_conversion_20260917"
+author: "Zachary Gold"
+date: "2026-09-18"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(rmarkdown)
+library(here)
+library(readxl)
+```
+
+# Read in Saple Metadata
+```{r}
+
+sample_metadata<- read.csv("Hakai_uvc_eDNA/PycnovBiomass_ToShare_Raw.csv")
+lod_data <- read.csv("raw_data/ddPCR_raw_data/Hakai/Pycno_LOQ-LOD_ddPCR_data.csv")
+```
+
+# Read in FAIRe BeBOP
+```{r}
+
+# Read all lines and find the YAML boundaries
+raw_lines_SR_collect_bebop <- read_lines(here("FAIRe/PMEL/NOAA-PMEL-OME_eDNA_Collection_Protocol_SmithRoot_PeristalticPump.md"))
+bounds_SR_collect_bebop <- which(raw_lines_SR_collect_bebop == "---")
+
+# Extract the header lines into a tibble
+PMEL_SR_collect_bebop_list <- tibble(raw_text = raw_lines_SR_collect_bebop[(bounds_SR_collect_bebop[1] + 1):(bounds_SR_collect_bebop[2] - 1)]) |> 
+  # Remove empty lines
+  filter(trimws(raw_text) != "") |> 
+  # Create a category column by detecting the '#' symbol and removing it
+  mutate(
+    category = if_else(str_starts(raw_text, "#"), str_remove(raw_text, "^#\\s*"), NA_character_)
+  ) |> 
+  # Fill the category names down to the subsequent rows
+  fill(category, .direction = "down") |> 
+  # Drop the original comment rows now that the category is assigned
+  filter(!str_starts(raw_text, "#")) |> 
+  # Split the text into term and value at the first colon
+  # extra = "merge" ensures we don't accidentally split values that contain colons
+  separate(raw_text, into = c("term", "value"), sep = ":\\s*", extra = "merge") |> 
+  # Clean up any rogue whitespace
+  mutate(across(everything(), str_trim))
+
+# Read all lines and find the YAML boundaries
+raw_lines_Stx_collect_bebop <- read_lines(here("FAIRe/PMEL/NOAA-PMEL-OME_eDNA_Collection_Protocol_Sterivex_PeristalticPump.md"))
+bounds_Stx_collect_bebop <- which(raw_lines_Stx_collect_bebop == "---")
+
+# Extract the header lines into a tibble
+
+PMEL_Stx_collect_bebop_list <- tibble(raw_text = raw_lines_Stx_collect_bebop[(bounds_Stx_collect_bebop[1] + 1):(bounds_Stx_collect_bebop[2] - 1)]) |> 
+  # Remove empty lines
+  filter(trimws(raw_text) != "") |> 
+  # Create a category column by detecting the '#' symbol and removing it
+  mutate(
+    category = if_else(str_starts(raw_text, "#"), str_remove(raw_text, "^#\\s*"), NA_character_)
+  ) |> 
+  # Fill the category names down to the subsequent rows
+  fill(category, .direction = "down") |> 
+  # Drop the original comment rows now that the category is assigned
+  filter(!str_starts(raw_text, "#")) |> 
+  # Split the text into term and value at the first colon
+  # extra = "merge" ensures we don't accidentally split values that contain colons
+  separate(raw_text, into = c("term", "value"), sep = ":\\s*", extra = "merge") |> 
+  # Clean up any rogue whitespace
+  mutate(across(everything(), str_trim))
+
+
+
+
+# Read all lines and find the YAML boundaries
+raw_lines_Stx_extr_bebop <- read_lines(here("FAIRe/PMEL/NOAA-PMEL-OME_eDNA_Sterivex_Extraction_Protocol_Centrifuge.md"))
+bounds_Stx_extr_bebop <- which(raw_lines_Stx_extr_bebop == "---")
+
+# Extract the header lines into a tibble
+PMEL_Stx_extr_bebop_list <- tibble(raw_text = raw_lines_Stx_extr_bebop[(bounds_Stx_collect_bebop[1] + 1):(bounds_Stx_collect_bebop[2] - 1)]) |> 
+  # Remove empty lines
+  filter(trimws(raw_text) != "") |> 
+  # Create a category column by detecting the '#' symbol and removing it
+  mutate(
+    category = if_else(str_starts(raw_text, "#"), str_remove(raw_text, "^#\\s*"), NA_character_)
+  ) |> 
+  # Fill the category names down to the subsequent rows
+  fill(category, .direction = "down") |> 
+  # Drop the original comment rows now that the category is assigned
+  filter(!str_starts(raw_text, "#")) |> 
+  # Split the text into term and value at the first colon
+  # extra = "merge" ensures we don't accidentally split values that contain colons
+  separate(raw_text, into = c("term", "value"), sep = ":\\s*", extra = "merge") |> 
+  # Clean up any rogue whitespace
+  mutate(across(everything(), str_trim))
+
+
+
+
+# Read all lines and find the YAML boundaries
+raw_lines_SR_extr_bebop <- read_lines(here("FAIRe/PMEL/NOAA-PMEL-OME_eDNA_DiscFilters_Extraction_Protocol_Centrifuge.md"))
+bounds_SR_extr_bebop <- which(raw_lines_SR_extr_bebop == "---")
+
+# Extract the header lines into a tibble
+
+PMEL_SR_extr_bebop_list <- tibble(raw_text = raw_lines_SR_extr_bebop[(bounds_SR_extr_bebop[1] + 1):(bounds_SR_extr_bebop[2] - 1)]) |> 
+  # Remove empty lines
+  filter(trimws(raw_text) != "") |> 
+  # Create a category column by detecting the '#' symbol and removing it
+  mutate(
+    category = if_else(str_starts(raw_text, "#"), str_remove(raw_text, "^#\\s*"), NA_character_)
+  ) |> 
+  # Fill the category names down to the subsequent rows
+  fill(category, .direction = "down") |> 
+  # Drop the original comment rows now that the category is assigned
+  filter(!str_starts(raw_text, "#")) |> 
+  # Split the text into term and value at the first colon
+  # extra = "merge" ensures we don't accidentally split values that contain colons
+  separate(raw_text, into = c("term", "value"), sep = ":\\s*", extra = "merge") |> 
+  # Clean up any rogue whitespace
+  mutate(across(everything(), str_trim))
+
+# Read all lines and find the YAML boundaries
+raw_lines_qPCR_bebop <- read_lines(here("FAIRe/PMEL/NOAA-PMEL-OME_Pycno_nad5_v1_qPCR_Protocol_BeBOP.md"))
+bounds_qPCR_bebop <- which(raw_lines_qPCR_bebop == "---")
+
+# Extract the header lines into a tibble
+
+PMEL_qPCR_bebop_list <- tibble(raw_text = raw_lines_qPCR_bebop[(bounds_qPCR_bebop[1] + 1):(bounds_qPCR_bebop[2] - 1)]) |> 
+  # Remove empty lines
+  filter(trimws(raw_text) != "") |> 
+  # Create a category column by detecting the '#' symbol and removing it
+  mutate(
+    category = if_else(str_starts(raw_text, "#"), str_remove(raw_text, "^#\\s*"), NA_character_)
+  ) |> 
+  # Fill the category names down to the subsequent rows
+  fill(category, .direction = "down") |> 
+  # Drop the original comment rows now that the category is assigned
+  filter(!str_starts(raw_text, "#")) |> 
+  # Split the text into term and value at the first colon
+  # extra = "merge" ensures we don't accidentally split values that contain colons
+  separate(raw_text, into = c("term", "value"), sep = ":\\s*", extra = "merge") |> 
+  # Clean up any rogue whitespace
+  mutate(across(everything(), str_trim))
+
+```
+
+```{r}
+bind_rows(PMEL_SR_collect_bebop_list,PMEL_Stx_collect_bebop_list,PMEL_Stx_extr_bebop_list,PMEL_SR_extr_bebop_list,PMEL_qPCR_bebop_list) -> bebop_total
+
+bebop_total %>% 
+  filter(., category =="MIOP terms") %>% 
+  distinct() -> miop_terms
+
+miop_terms %>% 
+  group_by(term) %>% 
+  summarise(value = paste(value, collapse = ";"), .groups = "drop") %>% 
+  mutate(., value = if_else(term=="creator","Han Weinrich, Zachary Gold, Shannon Brown, Sean McAllister",value)) %>% mutate(., `term:value`=str_c(term,":",value)) %>% ungroup() %>% dplyr::select(`term:value`) -> miop_unique
+
+as.list(miop_unique) -> miop_unique_list
+
+miop_unique_values <- paste(miop_unique_list$`term:value`, collapse = "|")
+```
+
+# Read in FAIRe Checklist information
+```{r}
+FAIRe_projectMetadata_checklist <- read_xlsx(here("FAIRe/FAIRe_checklist_v1.0.2_FULLtemplate.xlsx"), sheet="projectMetadata")
+
+FAIRe_sampleMetadata_checklist <- read_xlsx(here("FAIRe/FAIRe_checklist_v1.0.2_FULLtemplate.xlsx"), sheet="sampleMetadata") 
+
+FAIRe_sampleMetadata_checklist <- unlist(FAIRe_sampleMetadata_checklist[2, ], use.names = FALSE) %>% as_tibble_col(column_name = "term") 
+
+FAIRe_stdData_checklist <- read_xlsx(here("FAIRe/FAIRe_checklist_v1.0.2_FULLtemplate.xlsx"), sheet="stdData") 
+
+FAIRe_stdData_checklist <- unlist(FAIRe_stdData_checklist[2, ], use.names = FALSE) %>% as_tibble_col(column_name = "term") 
+
+FAIRe_ampData_checklist <- read_xlsx(here("FAIRe/FAIRe_checklist_v1.0.2_FULLtemplate.xlsx"), sheet="ampData") 
+
+FAIRe_ampData_checklist <- unlist(FAIRe_ampData_checklist[2, ], use.names = FALSE) %>% as_tibble_col(column_name = "term")
+
+FAIRe_eLowQuantData_checklist <- read_xlsx(here("FAIRe/FAIRe_checklist_v1.0.2_FULLtemplate.xlsx"), sheet="eLowQuantData") 
+
+FAIRe_eLowQuantData_checklist <- unlist(FAIRe_eLowQuantData_checklist[2, ], use.names = FALSE) %>% as_tibble_col(column_name = "term") 
+
+
+```
+
+### lod
+```{r}
+
+loblodloq_df <- read.delim(, file=here("LOD_LOQ","final_lob_lod_loq_table.csv"), sep=",") %>% 
+  filter(., assay_method=="ddPCR" & Lab=="Hakai" & Type=="1 Droplet") %>% pivot_wider(names_from = LoD_method, values_from = c(LOB,LOD,LOQ)) %>% 
+  mutate(., LOB_eLowQuant = if_else(is.na(LOB_eLowQuant),0, LOB_eLowQuant),
+         LOD_eLowQuant = if_else(is.na(LOD_eLowQuant),0.4529958	, LOD_eLowQuant),
+         LOQ_eLowQuant = if_else(is.na(LOQ_eLowQuant),1.714238	, LOQ_eLowQuant))
+```
+
+# Project Metadata
+
+## Mapping of Values
+```{r}
+
+sample_metadata %>% 
+   mutate(recordedBy ="Kristin M. Robinson,Alyssa-Lois M. Gehman,Matthew A. Lemay, Colleen T.E. Kellogg, Rute B.G. Clemente-Carvalho") %>% 
+  mutate(., recordedByID= "https://orcid.org/0000-0002-9500-1983|https://orcid.org/0000-0003-0595-9950|https://orcid.org/0000-0001-7051-0020|https://orcid.org/0000-0003-4048-5316|https://orcid.org/0000-0001-6922-9418",
+         project_contact = "zachary.gold@noaa.gov",
+         institution= "Hakai",
+         institutionID= NA,
+         project_name = "Molecular Star Gazing: Development and Validation of an Environmental DNA Assay for the Imperiled Sunflower Sea Star (Pycnopodia helianthoides)",
+         project_id = "Pycnopodia_eDNA_assay_validation_MS",
+         parent_project_id = "NOAA_PMEL_OME",
+         study_factor = miop_unique_values,
+         assay_type = "targeted",
+         sterilise_method = "https://doi.org/10.5281/zenodo.16945434",
+         neg_cont_0_1 = 1,
+         pos_cont_0_1 = 1,
+         checkls_ver = "1.0.2",
+         mod_date = "2026-09-17",
+         license = "CC0 1.0 Universal",
+         rightsHolder ="NOAA PMEL",
+         accessRights="Universal",
+         informationWithheld=NA,
+         dataGeneralizations=NA,
+         bibliographicCitation="https://doi.org/10.5281/zenodo.20076925",
+         associated_resource="https://doi.org/10.64898/2026.05.07.723600",
+         code_repo="https://github.com/marinednadude/Pycnopodia_eDNA_assay_validation_MS",
+         biological_rep = NA,
+         pcr_0_1 = 1,
+         inhibition_check_0_1=0,
+         inhibition_check=NA,
+         thermocycler = "AutoDG Automated Droplet Generator (Bio-Rad, Hercules, CA), a C1000 Touch Thermal Cycler (Bio-Rad, Hercules, CA) and a QX200 Droplet Digital PCR System (Bio-Rad, Hercules, CA)",
+         assay_name=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="assay_name")],
+         assay_validation=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="assay_validation")],
+         targetTaxonomicAssay=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="targetTaxonomicAssay")],
+        targetTaxonomicScope="",
+        target_gene=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="target_gene")],
+        target_subfragment="",
+        target_subfragment="",
+        ampliconSize=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="ampliconSize")],
+        pcr_primer_forward=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_forward")],
+        pcr_primer_reverse=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_reverse")],
+        pcr_primer_name_forward=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_name_forward")],
+        pcr_primer_name_reverse=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_name_reverse")],
+        pcr_primer_reference_forward="https://doi.org/10.64898/2026.05.07.723600",
+        pcr_primer_reference_reverse="https://doi.org/10.64898/2026.05.07.723600",
+        pcr_primer_vol_forward=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_vol_forward")],
+        pcr_primer_vol_reverse=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_vol_reverse")],                                                                              
+        pcr_primer_conc_forward=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_conc_forward")],
+        pcr_primer_conc_reverse=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_primer_conc_reverse")],
+        probeReporter=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="probeReporter")],
+        probeQuencher=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="probeQuencher")],
+        probeQuencher=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="probeQuencher")],
+        probe_seq=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="probe_seq")],
+        probe_ref="https://doi.org/10.64898/2026.05.07.723600",
+        probe_conc=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="probe_conc")],
+        commercial_mm=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="commercial_mm")],
+        custom_mm=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="custom_mm")],
+        block_seq=NA,
+        block_ref=NA,
+        block_taxa=NA,
+        amplificationReactionVolume=20,
+        pcr_dna_vol=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_dna_vol")],
+        pcr_rep=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="pcr_rep")],
+        nucl_acid_amp="https://doi.org/10.64898/2026.05.07.723600",
+        pcr_cond="denaturation:95_10;annealing:95_0.5;anealing:57_1;45;Extension:98_10",
+        annealingTemp=57,
+        pcr_cycles=35,
+        pcr_analysis_software="R | Bio-Rad QX Insight ddPCR Analysis Software",
+        pcr_method_additional="AutoDG Automated Droplet Generator (Bio-Rad, Hercules, CA), a C1000 Touch Thermal Cycler (Bio-Rad, Hercules, CA) and a QX200 Droplet Digital PCR System (Bio-Rad, Hercules, CA) (Shea et al., 2026) https://doi.org/10.5281/zenodo.20057581",
+        amp_vis_method="ddPCR",
+        detection_criteria=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="detection_criteria")],
+        lod_method=paste0(PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="lod_method")],"|"," https://doi.org/10.1002/edn3.220"),
+        pcr_assay_lod_techreps=5,
+        pcr_assay_lod=6.69407786954563,
+        pcr_assay_lod_unit="copies/reaction",
+        pcr_assay_lod_UL=10.2517990223794,
+        pcr_assay_lod_LL=3.13635671671182,
+        loq_method=paste0(PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="loq_method")],"|"," https://doi.org/10.1002/edn3.220"),
+        pcr_assay_loq_techreps=5,
+        pcr_assay_loq=16,
+        pcr_assay_loq_unit="copies/reaction",
+        pcr_assay_loq_UL=NA,
+        pcr_assay_loq_LL=NA,
+        elowquant_lod_method	=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="elowquant_lod_method")],
+                                                         elowquant_pcr_assay_lod_techreps	=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="elowquant_pcr_assay_lod_techreps")],
+        elowquant_pcr_assay_lod	=loblodloq_df$LOD_eLowQuant[1],
+        elowquant_pcr_assay_lod_unit	="copies/reaction",
+        elowquant_pcr_assay_lod_UL=36.4466534194249,
+        elowquant_pcr_assay_lod_LL	=-0.425958828489739,
+        elowquant_loq_method	=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="elowquant_loq_method")],
+        elowquant_pcr_assay_loq_techreps	=5,
+        elowquant_pcr_assay_loq	=1.71423836342184,
+        elowquant_pcr_assay_loq_unit	="copies/reaction",
+        elowquant_pcr_assay_loq_UL	=140.706601978664,
+        elowquant_pcr_assay_loq_LL=-0.425958828489739,
+        std_type=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="std_type")],
+        std_source=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="std_source")],
+        std_seq=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="std_seq")],
+        thresholdQuantificationCycle=35,
+        baselineValue=10,
+        automaticThresholdQuantificationCycle=0,
+        automaticBaselineValue=0,
+        targeted_detection_method_additional="",
+        estimatedNumberOfCopies_method=PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="estimatedNumberOfCopies_method")]) -> sample_projectMetadata_pycno
+
+```
+
+
+## Check for Completeness
+```{r}
+PMEL_qPCR_bebop_list %>% 
+  filter(., category=="FAIRe terms") -> bebop_faire_qPCR_terms
+
+setdiff(bebop_faire_qPCR_terms$term,colnames(sample_projectMetadata_pycno))
+
+FAIRe_projectMetadata_checklist %>% 
+  filter(., section %in% c("Project","Data management","Sample collection","PCR","Targeted assay detection")) -> faire_projectMetadata_checklist_targeted
+
+setdiff(faire_projectMetadata_checklist_targeted$term_name,colnames(sample_projectMetadata_pycno))
+
+
+```
+
+## Make Dataframe and export TSV
+
+```{r}
+
+sample_projectMetadata_pycno %>% 
+  ungroup() %>% 
+  slice(1) %>% 
+    mutate(across(everything(), as.character)) %>% 
+  pivot_longer(everything(), names_to = "term_name", values_to = "project_level") -> projectMetadata_pycno_long
+
+faire_projectMetadata_checklist_targeted %>% 
+  add_row(requirement_level_code="O",	`section`="Targeted assay detection",	term_name = "estimatedNumberOfCopies_method", project_level = NA) %>%  # add in an older FAIRe term that we used
+dplyr::select(-project_level) %>% 
+  left_join(projectMetadata_pycno_long) -> projectMetadata_pycno
+
+write.table(projectMetadata_pycno, file=here("FAIRe","Hakai","Hakai_projectMetadata_pycno.tsv"),sep = "\t", row.names = FALSE, quote = FALSE)
+
+```
+
+# Sample Metadata
+
+```{r}
+sample_projectMetadata_pycno
+sample_projectMetadata_pycno
+
+sample_projectMetadata_pycno %>% 
+  group_by(`SampleID`) %>% 
+  mutate(., group_idx=row_number()) %>% 
+  ungroup() %>% 
+   mutate(samp_name = paste0(SampleID,"-",group_idx)) %>% 
+    ungroup() %>% 
+   mutate(., samp_category= "sample") %>% 
+  # mutate(., neg_cont_type = case_when(samp_category=="negative control" & Class=="field blank" ~ "field negative",
+  #                                     samp_category=="negative control" & Class=="extraction blank" ~ "extraction negative",
+  #                                     samp_category=="negative control" & Class=="Tissue" & Species !="Pycnopodia helianthoides" ~"process negative",
+  #                                     samp_category=="negative control" & Task=="NTC" ~"PCR negative",
+  #                                     TRUE ~"")) %>% 
+  # mutate(., pos_cont_type = case_when(samp_category=="positive control" & str_detect(Name_plotting,"Aquarium") ~ "site positive",
+  #                                     samp_category=="positive control" & Class=="Tissue" & Species =="Pycnopodia helianthoides" ~"extraction positive",
+  #                                     Task=="STANDARD" ~"synthetic DNA",
+  #                                     TRUE ~"")) %>% 
+  mutate(., materialSampleID=str_c("Hakai-Pycno-2025","_",SampleID)) -> Hakai_sampleMetadata
+  
+ Hakai_sampleMetadata %>% 
+   mutate(., Plate ="Hakai") %>% 
+  group_by(Plate) %>% 
+  summarise(rel_cont_id = paste(samp_name, collapse = "|"), .groups = "drop") -> associated_samples
+```
+
+```{r}
+Hakai_sampleMetadata %>% 
+  dplyr::select(samp_name,date) %>% 
+  filter(., !is.na(date)) %>% 
+  mutate(Collection_Date_local = as.POSIXct(date)) %>% 
+    mutate(eventDate = format(Collection_Date_local, "%Y-%m-%dT%H:%M:%S")) %>%
+  dplyr::select(samp_name,eventDate,verbatimEventDate=Collection_Date_local)-> event_date_info
+
+
+Hakai_sampleMetadata %>% 
+  mutate(., env_medium = "sea water [ENVO:00002149]",
+         habitat_natural_artificial_0_1 = 1) %>% 
+       dplyr::select(samp_name,env_medium,habitat_natural_artificial_0_1) -> env_medium_info
+
+          
+Hakai_sampleMetadata %>% 
+     mutate(., Plate ="Hakai") %>% 
+    mutate(., sample_derived_from = materialSampleID,
+           sample_composed_of =materialSampleID) %>% 
+    left_join(associated_samples) %>% 
+    rename(decimalLongitude=site_longitude,decimalLatitude=site_latitude) %>% 
+    mutate(., geo_loc_name = "North East Pacific Ocean [GAZ:00013765]") %>% 
+   left_join(event_date_info) %>% 
+    mutate(., env_broad_scale = "marine biome [ENVO:00000447]",
+          env_local_scale ="marine benthic biome [ENVO:01000024]") %>% 
+    left_join(env_medium_info) %>% 
+    mutate(., samp_collect_method = "https://dx.doi.org/10.17504/protocols.io.rm7vzjxrrlx1/v1",
+           samp_collect_device="bottle",
+           samp_size = Sample_Vol_Filtered_L*1000,
+           samp_size_unit = "mL",
+           samp_store_temp	=-80,
+           samp_store_sol="Sucrose Lysis Buffer",
+           samp_store_dur = NA,
+           samp_store_loc="Hakai",
+           dna_store_loc="Hakai",
+           samp_store_method_additional=NA) %>% 
+         mutate(.,  samp_mat_process="Seawater samples were filtered through a 0.22 µm PES Sterivex sterile filter capsule to capture eDNA and DNA-containing particulates using a peristaltic pump.") %>% 
+           mutate(., filter_passive_active_0_1= 1) %>% 
+           mutate(., stationed_sample_dur = NA,
+           pump_flow_rate = 0.2,
+           pump_flow_rate_unit="L/min",
+           prefilter_material=NA,
+           size_frac_low = NA,
+           size_frac=  0.2,
+           filter_diameter= NA,
+           filter_surface_area = 1000,
+           filter_material = "polyethersulfone",
+           filter_name = "Sterivex SVGPL10RC",
+           precip_chem_prep=NA,
+           precip_force_prep=NA,
+           precip_time_prep=NA,
+           precip_temp_prep=NA,
+           prepped_samp_store_temp=NA,
+           prepped_samp_store_sol =NA,
+           prepped_samp_store_dur = NA,
+           prep_method_additional = NA,
+           date_ext =  NA,
+           samp_vol_we_dna_ext = Sample_Vol_Filtered_L*1000,
+           samp_vol_we_dna_ext_unit = "mL",
+           nucl_acid_ext_lysis = "thermal | chemical",
+           nucl_acid_ext_sep = "column-based",
+           nucl_acid_ext = "https://dx.doi.org/10.17504/protocols.io.bp2l6223dgqe/v1",
+           nucl_acid_ext_kit = "Qiagen Blood and Tissue Kit",
+           nucl_acid_ext_modify ="This protocol is used to extract genomic DNA from 0.22μm sterivex filters using Qiagen Blood and Tissue Kit. The protocol was developed as an equivalent replacement for the Phenol Chloroform extraction protocol. An additional PCR inhibitor removal step has been added to increase reproducibility for PCR-based downstream methods. This is especially important for coastal waters influenced by land runoff of glacial debris. This protocol is developed to work across all domains of life, from viruses to prokaryotes to eukaryotes, allowing for both amplicon sequencing and shotgun sequencing.",
+           dna_cleanup_0_1=0,
+           dna_cleanup_method=NA,
+           concentration = NA,
+           concentration_unit = "ng/µL",
+           concentration_method = "Qubit 4.0 Fluorometer (Invitrogen)",
+           assay_name = PMEL_qPCR_bebop_list$value[which(PMEL_qPCR_bebop_list$term=="assay_name")],
+           detected_notDetected = if_else(copies_L <1, "Not Detected", "Detected")) -> pycno_sampleMetadata
+ 
+	
+pycno_sampleMetadata
+		
+
+```
+
+## Check for Completeness
+```{r}
+bebop_total %>% 
+  filter(., category=="FAIRe terms") -> bebop_faire_total_terms
+
+setdiff(bebop_total$term,colnames(pycno_sampleMetadata))
+
+
+setdiff(FAIRe_sampleMetadata_checklist$term,colnames(pycno_sampleMetadata))
+
+
+```
+## Make Dataframe and export TSV
+
+```{r}
+
+pycno_sampleMetadata %>% 
+  dplyr::select(any_of(FAIRe_sampleMetadata_checklist$term)) -> sampleMetadata_pycno
+
+write.table(sampleMetadata_pycno, file=here("FAIRe","Hakai","Hakai_sampleMetadata_pycno.tsv"),sep = "\t", row.names = FALSE, quote = FALSE)
+
+```
+
+# AmpData
+
+```{r}
+
+pycno_sampleMetadata %>% 
+mutate(., estimatedNumberOfCopies=copies_L,
+       pcr_plate_id="Hakai",
+        quantificationCycle=NA) %>% 
+rename(., technical_rep_id= group_idx) %>% 
+mutate(., estimatedNumberOfCopies_method= "Ct/Cq with standard curve",
+       estimatedNumberOfCopies_unit="copies/L" ) -> pycno_ampData 
+
+```
+
+
+## Check for Completeness
+```{r}
+bebop_total %>% 
+  filter(., category=="FAIRe terms") -> bebop_faire_total_terms
+
+setdiff(bebop_total$term,colnames(pycno_sampleMetadata))
+
+setdiff(FAIRe_ampData_checklist$term,colnames(pycno_ampData))
+
+```
+## Make Dataframe and export TSV
+
+```{r}
+
+pycno_ampData %>% 
+  dplyr::select(any_of(FAIRe_ampData_checklist$term)) -> ampData_pycno
+
+write.table(ampData_pycno, file=here("FAIRe","Hakai","Hakai_ampData_pycno.tsv"),sep = "\t", row.names = FALSE, quote = FALSE)
+
+```
+
+# eLowQuant LoD Filtered
+```{r}
+
+ampData_pycno %>% 
+  left_join(loblodloq_df, by=c("pcr_plate_id"="Plate")) %>% 
+  mutate(., LoDLoQLevel = case_when(estimatedNumberOfCopies > LOQ_Klymus ~ "Above LOQ_Klymus & LOQ_eLowQuant",
+         estimatedNumberOfCopies > LOD_Klymus ~ "Above LOD_Klymus & LOQ_eLowQuant",
+         estimatedNumberOfCopies > LOQ_eLowQuant ~ "Above LOQ_eLowQuant",
+              estimatedNumberOfCopies > LOD_eLowQuant ~ "Above LOD_eLowQuant",                      
+         estimatedNumberOfCopies > LOB_eLowQuant ~ "Above LOB_eLowQuant",
+                TRUE ~ "No Amplification" )) %>% 
+  mutate(., estimatedNumberOfCopies = case_when(estimatedNumberOfCopies > LOD_eLowQuant ~ estimatedNumberOfCopies,
+                         estimatedNumberOfCopies < LOD_eLowQuant ~ 0)) -> pycno_eLowQuantData
+  
+
+pycno_eLowQuantData %>% 
+  dplyr::select(any_of(c(FAIRe_ampData_checklist$term,"LoDLoQLevel"))) -> eLowQuantData_pycno
+
+write.table(eLowQuantData_pycno, file=here("FAIRe","Hakai","Hakai_eLowQuantData_pycno.tsv"),sep = "\t", row.names = FALSE, quote = FALSE)
+
+```
+
+

@@ -1,0 +1,99 @@
+samp_name	technical_rep_id	assay_name	pcr_plate_id	quantificationCycle	estimatedNumberOfCopies_method	estimatedNumberOfCopies	estimatedNumberOfCopies_unit	LoDLoQLevel
+Healthy-50-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	10.8019886	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-50-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	5.066659451	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-50-3	3	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	3.587142944	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-0-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	3.940772057	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-0-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	1.293131709	copies/reaction	Above LOQ_eLowQuant
+Healthy-0-3	3	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	3.838942528	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-100-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	3.858569622	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-100-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	7.825361252	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Healthy-100-3	3	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	6.1315732	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Wasting-0-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	1144.151245	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+Wasting-0-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	1395.663574	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+Wasting-0-3	3	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	1399.487915	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+Wasting-50-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	3.795504093	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Wasting-50-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	4.516964436	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+Wasting-50-3	3	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	1.343546152	copies/reaction	Above LOQ_eLowQuant
+gBlock 50 copies-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	203.2259827	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+NTC-1	1	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+NTC-2	2	Pycno	SonomaFieldSamples	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+L-10-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1396.03418	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1334.525635	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1903.346436	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2062.337402	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1759.149902	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1792.731201	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	29279.66406	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	30214.75781	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	394.8903198	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	421.2850342	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	488.8002319	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	530.8356934	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	31332.39063	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	31212.31641	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	132698.9688	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	125137.9531	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	124730.4063	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	123608.8281	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	32850.98828	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	31174.61914	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	24426.45703	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	24581.36914	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	182811.9063	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	216237.7188	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-B-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-B-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	2e+07	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	36865.17969	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	35278.84766	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	209878.2656	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	219819.5469	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-FB-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	1.536178827	copies/reaction	Above LOQ_eLowQuant
+LW-FB-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	4.295608521	copies/reaction	Above LOD_Klymus & LOQ_eLowQuant
+LW-1-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	462.8934326	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	475.2626038	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+EB-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+EB-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+L-1-C-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	59134.47656	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-C-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	58739.92578	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-A-1	1	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	127978.3438	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-A-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	130322.5	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+gBlock 50 copies-2	2	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	151.4940033	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+NTC-3	3	Pycno	LarvalSamples	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
+L-10-A-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	37499.13281	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-A-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	35586.91797	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-A-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1211.405151	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-A-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1158.248657	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-B-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	6148.504883	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-B-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	4673.333008	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-A-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1023.68457	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-A-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1019.336792	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-A-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	16095.125	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-A-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	16415.74414	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-A-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	6294.343262	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-A-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	6195.366211	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-B-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	39148.9375	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-B-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	37585.55469	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-C-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	6273.291504	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-1000-C-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	6239.181641	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-C-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	2399.795898	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-C-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	2277.599365	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-C-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	15616.25	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-10-C-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	16683.00586	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-C-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1582.572998	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-C-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1476.099731	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-B-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	9701.645508	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-B-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	9661.576172	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-B-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1141.651611	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+L-1-B-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1092.250488	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-C-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	11283.77832	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-10000-C-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	10637.9082	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-B-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1623.610718	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+LW-100-B-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	1554.025391	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+gBlock 50 copies-3	3	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	203.3882751	copies/reaction	Above LOQ_Klymus & LOQ_eLowQuant
+NTC-4	4	Pycno	LarvalSamplesDiluted	NA	Ct/Cq with standard curve	0	copies/reaction	No Amplification
