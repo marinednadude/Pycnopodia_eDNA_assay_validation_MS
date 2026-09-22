@@ -1,241 +1,241 @@
 samp_name	technical_rep_id	assay_name	pcr_plate_id	quantificationCycle	estimatedNumberOfCopies_method	estimatedNumberOfCopies	estimatedNumberOfCopies_unit	LoDLoQLevel
-CMIC611-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	761.1358762	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC611-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	979.8719883	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC611-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1139.01031	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC613-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	645907.6881	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC613-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	819404.5067	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC613-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	763179.8744	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC614-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3918.964863	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC614-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	2452.415466	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC614-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3013.937235	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC615-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	10141.65401	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC615-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	9144.765854	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC615-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	7555.287361	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC616-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	121261.4136	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC616-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	129768.5242	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC616-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	124770.0195	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC617-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	495456.3141	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC617-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	402143.2877	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC617-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	404045.105	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC618-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	403.2512307	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC618-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	90.83016962	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC618-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	494.8639274	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC620-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	77.77300477	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC620-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC620-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC624-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	717.2070146	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC624-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	815.9543872	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC624-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	862.4843955	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC625-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	154.1402638	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC625-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	72.57661223	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC625-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC626-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	730.5833697	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC626-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	578.9926648	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC626-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	145.1909244	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC628-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	94.26774085	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC628-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC628-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	169.1242605	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC629-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	217.8932875	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC629-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	220.6710279	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC629-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	210.1631612	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC630-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC630-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC630-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	67.68701226	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC631-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1316.749692	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC631-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1487.889409	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC631-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	883.3059669	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC632-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	15114.62593	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC632-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	14302.03629	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC632-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	16745.67032	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC633-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	99200.33264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC633-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	84184.74579	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC633-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	79249.2218	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC634-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	39300.78506	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC634-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	53128.81088	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC634-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	50560.94742	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC635-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3193.701744	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC635-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3860.979557	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC635-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3710.61635	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC636-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	793.8995361	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC636-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	827.7137876	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC636-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1145.984888	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC637-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	6594.774246	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC637-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	7058.276176	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC637-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	8382.502556	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC638-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	38113.16681	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC638-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	37864.91394	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC638-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	38167.42325	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC639-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	66.38667732	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC639-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC639-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC640-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC640-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-CMIC640-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	72.23900408	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC772-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	146.8263716	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC772-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	149.7276127	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC772-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	2185.278416	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC773-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	83404.12903	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC773-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	82073.16589	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC773-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	80433.41827	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC774-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	373527.4792	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC774-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	369026.9232	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC774-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	368227.5057	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC775-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	81556.633	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC775-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	79498.19946	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC775-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	69923.62976	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC776-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	316.0257936	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC776-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	226.5668958	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC776-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	439.9912357	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC777-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	361.2779975	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC777-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	152.8107375	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC777-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	217.6294029	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC778-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	5281.331539	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC778-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	4327.744007	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC778-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	4640.881538	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC779-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	832.9457641	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC779-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	806.6270947	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC779-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	766.9420838	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC780-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	756.2445998	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC780-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1204.704165	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC780-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1429.388285	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC781-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	11226.19343	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC781-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	12119.60602	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC781-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	13658.97369	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC784-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	6734.050751	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC784-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	8362.800598	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC784-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	6321.122169	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC785-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1753.211498	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC785-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	2302.511454	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC785-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1866.319299	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC786-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	30069.21196	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC786-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	30407.63283	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC786-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	29883.30841	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC787-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	954.2680979	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC787-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1125.162721	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC787-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1407.476425	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC788-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1688.405037	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC788-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	2342.643976	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC788-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	2650.627136	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC789-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	4528.891087	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC789-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	5098.864555	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC789-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	4157.75013	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC790-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	153.4819901	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC790-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	353.4013927	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC790-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	744.4289327	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC791-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	284.9547863	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC791-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	440.2735829	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC791-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	151.79649	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC792-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	297.3492444	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC792-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	697.8040934	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC792-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	680.5689931	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC793-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	6532.123566	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC793-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	7437.318802	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC793-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	5758.460999	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC794-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3608.686209	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC794-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	4458.925724	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC794-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3959.481478	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC795-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	415.158689	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC795-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	450.1741529	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC795-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	839.7501111	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC796-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3595.818996	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC796-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3627.744436	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC796-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3780.956745	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC797-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	184534.6527	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC797-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	165403.656	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC797-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	174710.9985	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC798-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	34895.4277	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC798-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	36116.36353	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC798-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	42489.87961	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC799-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	5081.135273	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC799-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	4539.771557	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC799-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	4330.852985	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC800-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1150.237799	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC800-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	583.2111835	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC800-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	458.956331	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC801-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	636.3370419	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC801-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	782.5443149	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC801-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	947.8988051	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC802-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	4161.155701	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC802-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3685.547829	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC802-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	5052.968979	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC806-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	64258.16345	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC806-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	64072.15881	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC806-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	60561.85913	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC807-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	10659.33609	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC807-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	11772.61066	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC807-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	13227.59914	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC808-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	27664.711	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC808-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	29462.27264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC808-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	31445.14656	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC809-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	246.0846305	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC809-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	170.4419553	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC809-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	207.4252963	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC810-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	5526.494503	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC810-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	6423.820019	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC810-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3588.983774	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC811-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3889.851093	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC811-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3133.107424	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC811-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3060.100079	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC812-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	986.8345857	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC812-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1349.849939	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC812-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1050.771952	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC814-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	5763.491154	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC814-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	6453.717232	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC814-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	5369.307518	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC817-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	7915.995121	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC817-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	7525.135517	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC817-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	7240.564823	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC818-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1891.890407	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC818-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	2301.813841	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC818-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1843.921542	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC819-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	16973.15788	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC819-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	14879.02546	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC819-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	15852.64492	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC820-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	11869.25125	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC820-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	11789.35337	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC820-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	12554.30889	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC828-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1739.881396	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC828-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1437.908411	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC828-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	862.7901077	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC829-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	227.8941125	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC829-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3543.607235	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC829-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	303.3733368	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC830-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	381.574899	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC830-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	295.0129807	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC830-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	215.8616185	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC832-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	1819.36264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC832-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	940.5114055	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC832-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	1090.338945	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC833-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3783.771753	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC833-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	3482.976437	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC833-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	3697.203159	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC834-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	55605.57175	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC834-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	52250.31662	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC834-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	52127.26593	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC835-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	3000.011921	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC835-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	1798.706174	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-CMIC835-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	2156.791925	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4330-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4330-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4330-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4331-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4331-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4331-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4332-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4332-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	84.37211066	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4332-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4333-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	424.0221083	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4333-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	370.0790405	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4333-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	143.0282146	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4334-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4334-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4334-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4335-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4335-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4335-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	142.7198797	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4737-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	221.5390056	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4737-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4737-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	214.3656015	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4738-1	1	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
-QMIC4738-2	2	Pycno	Hakai	NA	Ct/Cq with standard curve	217.7801132	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
-QMIC4738-3	3	Pycno	Hakai	NA	Ct/Cq with standard curve	0	copies/L	No Amplification
+CMIC611-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	761.1358762	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC611-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	979.8719883	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC611-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1139.01031	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC613-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	645907.6881	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC613-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	819404.5067	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC613-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	763179.8744	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC614-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3918.964863	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC614-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	2452.415466	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC614-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3013.937235	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC615-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	10141.65401	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC615-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	9144.765854	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC615-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	7555.287361	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC616-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	121261.4136	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC616-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	129768.5242	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC616-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	124770.0195	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC617-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	495456.3141	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC617-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	402143.2877	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC617-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	404045.105	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC618-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	403.2512307	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC618-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	90.83016962	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC618-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	494.8639274	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC620-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	77.77300477	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC620-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC620-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC624-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	717.2070146	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC624-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	815.9543872	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC624-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	862.4843955	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC625-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	154.1402638	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC625-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	72.57661223	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC625-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC626-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	730.5833697	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC626-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	578.9926648	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC626-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	145.1909244	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC628-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	94.26774085	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC628-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC628-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	169.1242605	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC629-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	217.8932875	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC629-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	220.6710279	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC629-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	210.1631612	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC630-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC630-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC630-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	67.68701226	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC631-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1316.749692	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC631-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1487.889409	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC631-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	883.3059669	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC632-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	15114.62593	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC632-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	14302.03629	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC632-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	16745.67032	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC633-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	99200.33264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC633-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	84184.74579	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC633-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	79249.2218	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC634-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	39300.78506	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC634-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	53128.81088	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC634-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	50560.94742	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC635-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3193.701744	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC635-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3860.979557	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC635-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3710.61635	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC636-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	793.8995361	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC636-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	827.7137876	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC636-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1145.984888	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC637-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	6594.774246	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC637-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	7058.276176	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC637-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	8382.502556	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC638-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	38113.16681	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC638-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	37864.91394	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC638-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	38167.42325	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC639-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	66.38667732	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC639-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC639-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC640-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC640-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+CMIC640-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	72.23900408	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC772-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	146.8263716	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC772-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	149.7276127	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC772-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	2185.278416	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC773-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	83404.12903	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC773-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	82073.16589	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC773-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	80433.41827	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC774-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	373527.4792	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC774-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	369026.9232	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC774-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	368227.5057	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC775-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	81556.633	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC775-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	79498.19946	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC775-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	69923.62976	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC776-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	316.0257936	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC776-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	226.5668958	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC776-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	439.9912357	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC777-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	361.2779975	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC777-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	152.8107375	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC777-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	217.6294029	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC778-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	5281.331539	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC778-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	4327.744007	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC778-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	4640.881538	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC779-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	832.9457641	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC779-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	806.6270947	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC779-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	766.9420838	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC780-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	756.2445998	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC780-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1204.704165	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC780-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1429.388285	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC781-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	11226.19343	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC781-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	12119.60602	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC781-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	13658.97369	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC784-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	6734.050751	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC784-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	8362.800598	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC784-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	6321.122169	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC785-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1753.211498	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC785-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	2302.511454	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC785-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1866.319299	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC786-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	30069.21196	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC786-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	30407.63283	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC786-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	29883.30841	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC787-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	954.2680979	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC787-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1125.162721	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC787-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1407.476425	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC788-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1688.405037	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC788-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	2342.643976	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC788-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	2650.627136	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC789-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	4528.891087	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC789-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	5098.864555	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC789-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	4157.75013	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC790-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	153.4819901	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC790-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	353.4013927	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC790-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	744.4289327	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC791-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	284.9547863	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC791-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	440.2735829	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC791-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	151.79649	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC792-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	297.3492444	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC792-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	697.8040934	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC792-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	680.5689931	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC793-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	6532.123566	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC793-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	7437.318802	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC793-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	5758.460999	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC794-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3608.686209	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC794-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	4458.925724	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC794-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3959.481478	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC795-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	415.158689	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC795-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	450.1741529	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC795-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	839.7501111	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC796-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3595.818996	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC796-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3627.744436	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC796-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3780.956745	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC797-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	184534.6527	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC797-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	165403.656	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC797-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	174710.9985	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC798-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	34895.4277	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC798-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	36116.36353	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC798-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	42489.87961	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC799-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	5081.135273	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC799-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	4539.771557	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC799-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	4330.852985	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC800-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1150.237799	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC800-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	583.2111835	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC800-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	458.956331	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC801-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	636.3370419	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC801-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	782.5443149	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC801-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	947.8988051	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC802-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	4161.155701	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC802-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3685.547829	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC802-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	5052.968979	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC806-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	64258.16345	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC806-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	64072.15881	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC806-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	60561.85913	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC807-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	10659.33609	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC807-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	11772.61066	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC807-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	13227.59914	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC808-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	27664.711	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC808-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	29462.27264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC808-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	31445.14656	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC809-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	246.0846305	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC809-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	170.4419553	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC809-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	207.4252963	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC810-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	5526.494503	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC810-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	6423.820019	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC810-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3588.983774	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC811-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3889.851093	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC811-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3133.107424	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC811-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3060.100079	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC812-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	986.8345857	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC812-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1349.849939	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC812-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1050.771952	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC814-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	5763.491154	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC814-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	6453.717232	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC814-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	5369.307518	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC817-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	7915.995121	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC817-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	7525.135517	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC817-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	7240.564823	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC818-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1891.890407	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC818-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	2301.813841	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC818-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1843.921542	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC819-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	16973.15788	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC819-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	14879.02546	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC819-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	15852.64492	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC820-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	11869.25125	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC820-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	11789.35337	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC820-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	12554.30889	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC828-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1739.881396	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC828-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1437.908411	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC828-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	862.7901077	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC829-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	227.8941125	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC829-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3543.607235	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC829-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	303.3733368	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC830-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	381.574899	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC830-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	295.0129807	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC830-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	215.8616185	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC832-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	1819.36264	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC832-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	940.5114055	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC832-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	1090.338945	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC833-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3783.771753	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC833-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	3482.976437	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC833-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	3697.203159	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC834-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	55605.57175	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC834-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	52250.31662	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC834-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	52127.26593	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC835-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	3000.011921	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC835-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	1798.706174	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+CMIC835-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	2156.791925	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4330-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4330-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4330-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4331-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4331-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4331-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4332-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4332-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	84.37211066	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4332-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4333-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	424.0221083	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4333-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	370.0790405	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4333-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	143.0282146	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4334-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4334-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4334-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4335-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4335-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4335-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	142.7198797	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4737-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	221.5390056	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4737-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4737-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	214.3656015	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4738-1	1	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
+QMIC4738-2	2	Pycno	Hakai	NA	direct output from the PCR instrument used	217.7801132	copies/L	Above LOQ_Klymus & LOQ_eLowQuant
+QMIC4738-3	3	Pycno	Hakai	NA	direct output from the PCR instrument used	0	copies/L	No Amplification
