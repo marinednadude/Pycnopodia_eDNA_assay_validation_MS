@@ -80,9 +80,9 @@ R	Targeted assay detection	pcr_assay_loq_LL	NA
 R	Targeted assay detection	std_type	synthetic double-stranded DNA
 O	Targeted assay detection	std_source	Integrated DNA Technologies
 R	Targeted assay detection	std_seq	TGATCATAATCAATCGATGACTATTCTCCACTAACCATAAAGACATTGGTACCCTGTACCTAATCTTCGGCTAACATCATTAACTTTCAGAACACGAAAAATAGACCAGGGATGAAATGAAACTGTAGGTGCCCAAGGCATAGCCTTATCCTCTACAGACTTATCTAAGACGTACCAGCTAACCCAAACAGGC
-M	Targeted assay detection	thresholdQuantificationCycle	35
-O	Targeted assay detection	baselineValue	10
-O	Targeted assay detection	automaticThresholdQuantificationCycle	0
-O	Targeted assay detection	automaticBaselineValue	0
+M	Targeted assay detection	thresholdQuantificationCycle	NA
+O	Targeted assay detection	baselineValue	NA
+O	Targeted assay detection	automaticThresholdQuantificationCycle	NA
+O	Targeted assay detection	automaticBaselineValue	NA
 O	Targeted assay detection	targeted_detection_method_additional	
-O	Targeted assay detection	estimatedNumberOfCopies_method	Ct/Cq with standard curve
+O	Targeted assay detection	estimatedNumberOfCopies_method	direct output from the PCR instrument used
